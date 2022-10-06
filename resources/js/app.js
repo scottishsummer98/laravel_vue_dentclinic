@@ -1,32 +1,38 @@
-require('./bootstrap');
+require('./bootstrap')
 
-import { createRouter, createWebHistory } from 'vue-router';
-import { createApp } from 'vue';
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import { createRouter, createWebHistory } from 'vue-router'
+import { createApp } from 'vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
 
-import FrontEnd from './layout/FrontEnd/Layout';
-import BackEnd from './layout/BackEnd/Layout';
-import Home from './pages/FrontEnd/Home';
-import Services from './pages/FrontEnd/Services';
-import Treatment from './pages/FrontEnd/Treatment';
-import DashBoard from './pages/BackEnd/DashBoard';
+import FrontEnd from './layout/FrontEnd/Layout'
+import BackEnd from './layout/BackEnd/Layout'
 
 const routes = [
-    { path: '/',  component: Home },
-    { path: '/services', component: Services },
-    { path: '/treatment', component: Treatment },
-    { path: '/admin', component: DashBoard },
+  { path: '/', component: require('./pages/FrontEnd/Home').default },
+  {
+    path: '/services',
+    component: require('./pages/FrontEnd/Services').default,
+  },
+  {
+    path: '/treatment',
+    component: require('./pages/FrontEnd/Treatment').default,
+  },
+  { path: '/admin', component: require('./pages/BackEnd/DashBoard').default },
+  {
+    path: '/admin-services',
+    component: require('./pages/BackEnd/Services').default,
+  },
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-  })
+  history: createWebHistory(),
+  routes,
+})
 
-  const app = createApp({})
-  app.component('frontend-component', FrontEnd)
-  app.component('backend-component', BackEnd)
-  app.use(router)
+const app = createApp({})
+app.component('frontend-component', FrontEnd)
+app.component('backend-component', BackEnd)
+app.use(router)
 
-  app.mount('#app')
+app.mount('#app')

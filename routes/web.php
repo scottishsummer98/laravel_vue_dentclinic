@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataProviderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+Route::get('/admin', [
+    App\Http\Controllers\HomeController::class,
+    'index',
+])->name('admin');
+
+Route::post('/save-services', [DataProviderController::class, 'saveService']);
+Route::post('/show-services', [DataProviderController::class, 'showServices']);
+Route::post('/update-service/{id}', [
+    DataProviderController::class,
+    'updateServices',
+]);

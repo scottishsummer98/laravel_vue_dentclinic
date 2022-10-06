@@ -1,3 +1,3 @@
 <template>
-    <p>Welcome</p>
+  <p>Welcome Admin</p>
 </template>
