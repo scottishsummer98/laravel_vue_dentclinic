@@ -46,13 +46,16 @@
         <td style="text-align: center;">{{ item.price }}</td>
         <td style="text-align: center;">
           <button
-            style="width: 5rem;"
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
             class="btn btn-primary"
             @click="edit(item)"
           >
             Edit
           </button>
-          <button style="width: 5rem;" class="btn btn-danger">
+          <button
+            style="width: 5rem; height: 2rem; padding: 0;"
+            class="btn btn-danger"
+          >
             Delete
           </button>
         </td>
@@ -89,7 +92,6 @@
                   <input
                     type="text"
                     class="form-control"
-                    disabled
                     v-model="editingItem.price"
                   />
                 </div>
@@ -150,7 +152,6 @@ export default {
           window.alert('Service Updated!')
           this.clear()
           this.getServicesList()
-          $('.modal').modal('toggle')
         })
         .catch((err) => {
           window.alert('Data Failed To Save!')

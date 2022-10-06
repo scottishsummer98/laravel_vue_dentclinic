@@ -1,4 +1,5 @@
 require('./bootstrap')
+require('jquery')
 
 import { createRouter, createWebHistory } from 'vue-router'
 import { createApp } from 'vue'
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/admin-services',
     component: require('./pages/BackEnd/Services').default,
+  },
+  {
+    path: '/admin-treatments',
+    component: require('./pages/BackEnd/Treatment').default,
   },
 ]
 
