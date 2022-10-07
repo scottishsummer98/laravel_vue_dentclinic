@@ -31,3 +31,15 @@ Route::post('/update-service/{id}', [
     DataProviderController::class,
     'updateServices',
 ]);
+Route::post('/save-treatments', [
+    DataProviderController::class,
+    'saveTreatment',
+]);
+Route::post('/show-treatments', [
+    DataProviderController::class,
+    'showTreatments',
+]);
+Route::post('/update-treatment/{id}', [
+    DataProviderController::class,
+    'updateTreatments',
+]);

@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      Service Entry
+      <h3>Service Entry</h3>
     </div>
     <div class="card-body">
       <div class="row">
