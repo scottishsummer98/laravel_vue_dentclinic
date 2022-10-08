@@ -10,7 +10,7 @@
           />
         </div>
         <div class="info">
-          <!-- <a href="#" class="d-block">{{ Auth::user()->name }}</a> -->
+          <a href="#" class="d-block">{{ user.name }}</a>
         </div>
       </div>
 
@@ -142,3 +142,20 @@
     </div>
   </aside>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      user: [],
+    }
+  },
+  mounted() {
+    axios.get('/api/user').then((res) => {
+      this.user = res.data
+    })
+  },
+}
+</script>

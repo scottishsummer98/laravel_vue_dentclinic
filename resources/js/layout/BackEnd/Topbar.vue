@@ -14,7 +14,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="#" @click="logout">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </a>
       </li>
@@ -30,9 +30,9 @@ export default {
   methods: {
     logout() {
       axios
-        .post(`/logout`)
+        .post(`/api/logout-user`)
         .then((response) => {
-          console.log('hello')
+          window.location.href = '/'
         })
         .catch((err) => {})
     },
