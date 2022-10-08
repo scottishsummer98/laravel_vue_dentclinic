@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Service;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
@@ -11,12 +12,12 @@ class DataProviderController extends Controller
     public function saveService(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'type' => 'required',
             'price' => 'required',
         ]);
 
         Service::create([
-            'title' => $request->title,
+            'type' => $request->type,
             'price' => $request->price,
         ]);
     }
@@ -72,5 +73,40 @@ class DataProviderController extends Controller
         $id->update($request->all());
 
         return response(['message' => 'Treatment Updated!']);
+    }
+
+    public function saveArticle(Request $request)
+    {
+        $request->validate([
+            'author' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $articleImage = null;
+        if ($request->ArticleImage) {
+            $articleImage = $request->ArticleImage->store(
+                '/article/' . date('Y') . '/' . date('m')
+            );
+        }
+
+        Article::create([
+            'author' => $request->author,
+            'title' => $request->title,
+            'description' => $request->description,
+            'articleImage' => $articleImage,
+        ]);
+    }
+
+    public function showArticles(Request $request)
+    {
+        return Article::paginate(5);
+    }
+
+    public function updateArticles(Request $request, Article $id)
+    {
+        $id->update($request->all());
+
+        return response(['message' => 'Article Updated!']);
     }
 }

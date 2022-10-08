@@ -49,9 +49,9 @@
           </div>
         </div>
         <div class="social-auth-links text-center mt-2 mb-3">
-          <router-link to="/register" class="btn btn-block btn-primary">
+          <button class="btn btn-block btn-primary" @click="redirect">
             Haven't Registered Yet?
-          </router-link>
+          </button>
           <router-link to="#" class="btn btn-block btn-danger">
             Forgot Your Password?
           </router-link>
@@ -72,6 +72,9 @@ export default {
     }
   },
   methods: {
+    redirect() {
+      window.location.href = '/register'
+    },
     loginUser() {
       axios
         .post('api/login-user', this.formData)

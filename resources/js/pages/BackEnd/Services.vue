@@ -7,14 +7,30 @@
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3">
           <div class="form-group">
-            <label for="title">Service Type</label>
-            <input class="form-control" type="text" v-model="formData.title" />
+            <label for="type">Service Type</label>
+            <input
+              class="form-control"
+              type="text"
+              :class="errors.hasOwnProperty('type') ? 'is-invalid' : ''"
+              v-model="formData.type"
+            />
+            <span v-if="errors.hasOwnProperty('type')">
+              {{ errors.type[0] }}
+            </span>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3">
           <div class="form-group">
             <label for="price">Service Price</label>
-            <input class="form-control" type="text" v-model="formData.price" />
+            <input
+              class="form-control"
+              type="text"
+              :class="errors.hasOwnProperty('price') ? 'is-invalid' : ''"
+              v-model="formData.price"
+            />
+            <span v-if="errors.hasOwnProperty('price')">
+              {{ errors.price[0] }}
+            </span>
           </div>
         </div>
       </div>
@@ -35,14 +51,14 @@
   <div class="card">
     <table class="table table-dark table-striped">
       <tr>
-        <th style="width: 10%; text-align: center;">SL No.</th>
-        <th style="width: 30%; text-align: center;">Service Title</th>
-        <th style="width: 30%; text-align: center;">Price Range</th>
-        <th style="width: 30%; text-align: center;">Action</th>
+        <th style="text-align: center;">SL No.</th>
+        <th style="text-align: center;">Service Title</th>
+        <th style="text-align: center;">Price Range</th>
+        <th style="text-align: center;">Action</th>
       </tr>
       <tr v-for="(item, index) in servicesList" :key="index">
         <td style="text-align: center;">{{ index + 1 }}</td>
-        <td style="text-align: center;">{{ item.title }}</td>
+        <td style="text-align: center;">{{ item.type }}</td>
         <td style="text-align: center;">{{ item.price }}</td>
         <td style="text-align: center;">
           <button
@@ -51,12 +67,6 @@
             @click="edit(item)"
           >
             Edit
-          </button>
-          <button
-            style="width: 5rem; height: 2rem; padding: 0;"
-            class="btn btn-danger"
-          >
-            Delete
           </button>
         </td>
       </tr>
@@ -82,7 +92,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    v-model="editingItem.title"
+                    v-model="editingItem.type"
                   />
                 </div>
               </div>
@@ -110,16 +120,18 @@
 </template>
 
 <script>
+import { showSuccess, showError } from '../../helper'
 export default {
   data() {
     return {
       formData: {
-        title: '',
+        type: '',
         price: '',
       },
+      errors: {},
       servicesList: [],
       editingItem: {
-        title: '',
+        type: '',
         price: '',
       },
     }
@@ -127,16 +139,20 @@ export default {
   computed: {},
   methods: {
     save() {
+      this.errors = {}
       axios
         .post(`/save-services`, this.formData)
         .then((res) => {
           this.clear()
-          window.alert('Data Saved!')
+          showSuccess('Service Saved')
           this.getServicesList()
         })
         .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
           this.clear()
-          window.alert('Data Failed To Save!')
         })
     },
     edit(item) {
@@ -149,12 +165,12 @@ export default {
       axios
         .post(`/update-service/${this.editingItem.id}`, this.editingItem)
         .then((res) => {
-          window.alert('Service Updated!')
+          showSuccess('Service Updated!')
           this.clear()
           this.getServicesList()
         })
         .catch((err) => {
-          window.alert('Data Failed To Save!')
+          showError('Failed To Update Service')
         })
       $('.modal').modal('hide')
     },
@@ -170,11 +186,11 @@ export default {
     },
     clear() {
       ;(this.formData = {
-        title: '',
+        type: '',
         price: '',
       }),
         (this.editingItem = {
-          title: '',
+          type: '',
           price: '',
         })
     },

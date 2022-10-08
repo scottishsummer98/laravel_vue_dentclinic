@@ -22,8 +22,12 @@ const routes = [
     component: require('./pages/FrontEnd/Services').default,
   },
   {
-    path: '/treatment',
-    component: require('./pages/FrontEnd/Treatment').default,
+    path: '/treatments',
+    component: require('./pages/FrontEnd/Treatments').default,
+  },
+  {
+    path: '/articles',
+    component: require('./pages/FrontEnd/Articles').default,
   },
   {
     path: '/login',
@@ -54,7 +58,11 @@ const routes = [
   },
   {
     path: '/admin-treatments',
-    component: require('./pages/BackEnd/Treatment').default,
+    component: require('./pages/BackEnd/Treatments').default,
+  },
+  {
+    path: '/admin-articles',
+    component: require('./pages/BackEnd/Articles').default,
   },
 ]
 

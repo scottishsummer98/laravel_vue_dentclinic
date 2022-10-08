@@ -130,12 +130,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa-solid fa-thumbtack"></i>
+            <router-link to="/admin-articles" class="nav-link">
+              <i class="nav-icon fa-solid fa-thumbtack"></i>
               <p>
                 Article
               </p>
-            </a>
+            </router-link>
           </li>
         </ul>
       </nav>

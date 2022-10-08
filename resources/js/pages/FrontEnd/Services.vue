@@ -13,8 +13,8 @@
       >
         <tbody>
           <tr v-for="(item, index) in servicesList" :key="index">
-            <th>{{ item.title }}</th>
-            <td>{{ item.price }}</td>
+            <th style="width: 5rem;">{{ item.type }}</th>
+            <td style="width: 5rem;">{{ item.price }}</td>
           </tr>
         </tbody>
       </table>
