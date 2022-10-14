@@ -117,6 +117,8 @@ class DataProviderController extends Controller
                 $articles = Article::orderBy('updated_at', 'DESC')
                     ->limit(10)
                     ->get();
+            } elseif ($request->type == 'singlearticle') {
+                $articles = Article::where('id', $request->id)->get();
             }
         }
 

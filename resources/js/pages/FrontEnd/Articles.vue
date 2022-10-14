@@ -17,9 +17,9 @@
                     class="img-fluid ArticleImage"
                   />
                   <h4>
-                    <a href="tech-single.html" title="">
+                    <router-link :to="`/articles/${item.id}`">
                       {{ item.title }}
-                    </a>
+                    </router-link>
                   </h4>
                   <h6>
                     👤 {{ item.author }} 📆
@@ -64,15 +64,15 @@
                   v-for="(item, index) in articlesListLatest"
                   :key="index"
                 >
-                  <a
-                    href="tech-single.html"
+                  <router-link
+                    :to="`/articles/${item.id}`"
                     class="list-group-item list-group-item-action flex-column align-items-start"
                   >
                     <div class="w-100 justify-content-between">
                       <h5 class="mb-1">{{ item.title }}</h5>
                       <h6>📆 {{ dateFormat(item.updated_at) }}</h6>
                     </div>
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>

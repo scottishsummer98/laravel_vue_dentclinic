@@ -30,6 +30,10 @@ const routes = [
     component: require('./pages/FrontEnd/Articles').default,
   },
   {
+    path: '/articles/:id',
+    component: require('./pages/FrontEnd/ArticleSingle').default,
+  },
+  {
     path: '/login',
     component: require('./pages/Auth/Login').default,
   },
