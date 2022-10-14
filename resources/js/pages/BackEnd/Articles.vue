@@ -322,7 +322,7 @@ export default {
     },
     getArticlesList(page = 1) {
       axios
-        .post(`/show-articles?page=${page}`)
+        .post(`/show-articles?page=${page}&type=backendmain`)
         .then((response) => {
           this.articlesList = response.data
           this.serialNumber = parseInt(response.data.from)

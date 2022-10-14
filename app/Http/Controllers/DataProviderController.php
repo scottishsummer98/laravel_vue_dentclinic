@@ -100,7 +100,27 @@ class DataProviderController extends Controller
 
     public function showArticles(Request $request)
     {
-        return Article::paginate(5);
+        if ($request->type) {
+            if ($request->type == 'frontendmain') {
+                if ($request->search) {
+                    $articles = Article::where(
+                        'title',
+                        'like',
+                        '%' . $request->search . '%'
+                    )->paginate(5);
+                } else {
+                    $articles = Article::paginate(5);
+                }
+            } elseif ($request->type == 'backendmain') {
+                $articles = Article::paginate(10);
+            } elseif ($request->type == 'frontendpartial') {
+                $articles = Article::orderBy('updated_at', 'DESC')
+                    ->limit(10)
+                    ->get();
+            }
+        }
+
+        return $articles;
     }
 
     public function updateArticles(Request $request, Article $id)
