@@ -26,6 +26,10 @@ const routes = [
     component: require('./pages/FrontEnd/Treatments').default,
   },
   {
+    path: '/contactus',
+    component: require('./pages/FrontEnd/Contacts').default,
+  },
+  {
     path: '/articles',
     component: require('./pages/FrontEnd/Articles').default,
   },
@@ -67,6 +71,10 @@ const routes = [
   {
     path: '/admin-articles',
     component: require('./pages/BackEnd/Articles').default,
+  },
+  {
+    path: '/admin-contact',
+    component: require('./pages/BackEnd/Contact').default,
   },
 ]
 

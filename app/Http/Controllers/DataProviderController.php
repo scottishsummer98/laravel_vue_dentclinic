@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Contact;
 use App\Models\Service;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
@@ -75,6 +76,37 @@ class DataProviderController extends Controller
         return response(['message' => 'Treatment Updated!']);
     }
 
+    public function saveContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'mobile' => 'required',
+            'email' => 'required',
+            'visitingtime' => 'required',
+        ]);
+
+        Contact::create([
+            'name' => $request->name,
+            'location' => $request->location,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'visitingtime' => $request->visitingtime,
+        ]);
+    }
+
+    public function showContacts(Request $request)
+    {
+        return Contact::get();
+    }
+
+    public function updateContacts(Request $request, Contact $id)
+    {
+        $id->update($request->all());
+
+        return response(['message' => 'Contact Updated!']);
+    }
+
     public function saveArticle(Request $request)
     {
         $request->validate([
@@ -101,7 +133,7 @@ class DataProviderController extends Controller
     public function showArticles(Request $request)
     {
         if ($request->type) {
-            if ($request->type == 'frontendmain') {
+            if ($request->type == 'frontendarticles') {
                 if ($request->search) {
                     $articles = Article::where(
                         'title',
@@ -111,13 +143,17 @@ class DataProviderController extends Controller
                 } else {
                     $articles = Article::paginate(5);
                 }
-            } elseif ($request->type == 'backendmain') {
+            } elseif ($request->type == 'backendarticles') {
                 $articles = Article::paginate(10);
-            } elseif ($request->type == 'frontendpartial') {
+            } elseif ($request->type == 'frontendarticlessidebar') {
                 $articles = Article::orderBy('updated_at', 'DESC')
                     ->limit(10)
                     ->get();
-            } elseif ($request->type == 'singlearticle') {
+            } elseif ($request->type == 'frontendarticleslider') {
+                $articles = Article::orderBy('title', 'ASC')
+                    ->limit(15)
+                    ->get();
+            } elseif ($request->type == 'frontendsinglearticle') {
                 $articles = Article::where('id', $request->id)->get();
             }
         }

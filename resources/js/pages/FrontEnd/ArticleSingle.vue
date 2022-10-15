@@ -33,15 +33,60 @@
       </div>
     </div>
   </div>
+
+  <div class="card p-2 mb-5 sliderBottom">
+    <h3 class="text-uppercase m-4" style="padding-left: 12%;">
+      More Articles
+    </h3>
+    <div class="container">
+      <swiper :slides-per-view="4" :space-between="10">
+        <swiper-slide v-for="(item, index) in articlesListLatest" :key="index">
+          <div class="blog-list-widget">
+            <div class="list-group">
+              <router-link
+                :to="`/articles/${item.id}`"
+                class="list-group-item list-group-item-action flex-column align-items-start"
+                style="height: 15rem;"
+              >
+                <img
+                  :src="`../storage/${item.articleImage}`"
+                  class="img-fluid ArticleImageSlider mb-1"
+                />
+                <h5 class="mb-1">{{ item.title }}</h5>
+                <h6>📆 {{ dateFormat(item.updated_at) }}</h6>
+              </router-link>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
+  </div>
 </template>
 
 <script>
 import moment from 'moment'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import 'swiper/css'
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {}
+  },
   props: ['id'],
   data() {
     return {
       article: [],
+      articlesListLatest: [],
     }
   },
   methods: {
@@ -50,9 +95,22 @@ export default {
     },
     getArticle() {
       axios
-        .post(`/show-articles?type=singlearticle&id=${this.$route.params.id}`)
+        .post(
+          `/show-articles?type=frontendsinglearticle&id=${this.$route.params.id}`,
+        )
         .then((response) => {
           this.article = response.data
+          this.getArticle()
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
+    getArticlesListSlider() {
+      axios
+        .post(`/show-articles?type=frontendarticleslider`)
+        .then((response) => {
+          this.articlesListLatest = response.data
         })
         .catch((err) => {
           // console.log(err.response);
@@ -61,6 +119,7 @@ export default {
   },
   mounted() {
     this.getArticle()
+    this.getArticlesListSlider()
   },
 }
 </script>
@@ -70,5 +129,10 @@ export default {
   padding: 2rem;
   border: 1px solid #ededed;
   width: 50rem;
+}
+.ArticleImageSlider {
+  border: 1px solid #ededed;
+  width: 16rem;
+  height: 8rem;
 }
 </style>

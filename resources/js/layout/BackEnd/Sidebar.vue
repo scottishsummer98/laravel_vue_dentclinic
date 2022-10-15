@@ -40,19 +40,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fas fa-info"></i>
+                  <i class="nav-icon fas fa-info"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fas fa-lightbulb"></i>
+                  <i class="nav-icon fas fa-lightbulb"></i>
                   <p>Mission & Vision</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-people-group"></i>
+                  <i class="nav-icon fa-solid fa-people-group"></i>
                   <p>Our Team</p>
                 </a>
               </li>
@@ -60,7 +60,7 @@
           </li>
           <li class="nav-item">
             <router-link to="/admin-services" class="nav-link">
-              <i class="nav-icon fa-solid fa-house"></i>
+              <i class="nav-icon fa-solid fa-hand-holding-heart"></i>
               <p>
                 Services
               </p>
@@ -68,7 +68,7 @@
           </li>
           <li class="nav-item">
             <router-link to="/admin-treatments" class="nav-link">
-              <i class="nav-icon fa-solid fa-house-chimney-medical"></i>
+              <i class="nav-icon fa-solid fa-suitcase-medical"></i>
               <p>
                 Treatment
               </p>
@@ -85,37 +85,37 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-newspaper"></i>
+                  <i class="nav-icon fa-solid fa-newspaper"></i>
                   <p>Publication</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-person-chalkboard"></i>
+                  <i class="nav-icon fa-solid fa-person-chalkboard"></i>
                   <p>Presentation</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-handshake-angle"></i>
+                  <i class="nav-icon fa-solid fa-handshake-angle"></i>
                   <p>Involvement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-screwdriver-wrench"></i>
+                  <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
                   <p>Specialization</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-hand-holding-medical"></i>
+                  <i class="nav-icon fa-solid fa-hand-holding-medical"></i>
                   <p>Social Work</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <i class="nav-icon fa-solid fa-wand-magic-sparkles"></i>
                   <p>Skills</p>
                 </a>
               </li>
@@ -123,11 +123,19 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="fa-regular fa-images"></i>
+              <i class="nav-icon fa-regular fa-images"></i>
               <p>
                 Gallery
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+            <router-link to="/admin-contact" class="nav-link">
+              <i class="nav-icon fa-regular fa-address-card"></i>
+              <p>
+                Contact
+              </p>
+            </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/admin-articles" class="nav-link">

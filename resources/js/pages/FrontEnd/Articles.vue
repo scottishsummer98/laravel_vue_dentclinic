@@ -105,7 +105,7 @@ export default {
     getArticlesList(page = 1, searchKey = '') {
       axios
         .post(
-          `/show-articles?page=${page}&type=frontendmain&search=${searchKey}`,
+          `/show-articles?page=${page}&type=frontendarticles&search=${searchKey}`,
         )
         .then((response) => {
           this.articlesList = response.data
@@ -116,7 +116,7 @@ export default {
     },
     getArticlesListLatest() {
       axios
-        .post(`/show-articles?type=frontendpartial`)
+        .post(`/show-articles?type=frontendarticlessidebar`)
         .then((response) => {
           this.articlesListLatest = response.data
         })

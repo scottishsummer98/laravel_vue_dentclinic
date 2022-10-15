@@ -44,7 +44,12 @@ Route::post('/update-treatment/{id}', [
     DataProviderController::class,
     'updateTreatments',
 ]);
-
+Route::post('/save-contacts', [DataProviderController::class, 'saveContact']);
+Route::post('/show-contacts', [DataProviderController::class, 'showContacts']);
+Route::post('/update-contact/{id}', [
+    DataProviderController::class,
+    'updateContacts',
+]);
 Route::post('/save-articles', [DataProviderController::class, 'saveArticle']);
 Route::post('/show-articles', [DataProviderController::class, 'showArticles']);
 Route::post('/update-article/{id}', [
