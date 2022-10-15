@@ -18,12 +18,48 @@ const routes = [
     component: require('./pages/FrontEnd/Home').default,
   },
   {
+    path: '/about/aboutus',
+    component: require('./pages/FrontEnd/About/AboutUs').default,
+  },
+  {
+    path: '/about/missionvision',
+    component: require('./pages/FrontEnd/About/Misvis').default,
+  },
+  {
+    path: '/about/ourteam',
+    component: require('./pages/FrontEnd/About/Team').default,
+  },
+  {
     path: '/services',
     component: require('./pages/FrontEnd/Services').default,
   },
   {
     path: '/treatments',
     component: require('./pages/FrontEnd/Treatments').default,
+  },
+  {
+    path: '/more/publications',
+    component: require('./pages/FrontEnd/More/Publications').default,
+  },
+  {
+    path: '/more/presentations',
+    component: require('./pages/FrontEnd/More/Presentations').default,
+  },
+  {
+    path: '/more/involvement',
+    component: require('./pages/FrontEnd/More/Involvement').default,
+  },
+  {
+    path: '/more/specialization',
+    component: require('./pages/FrontEnd/More/Specialization').default,
+  },
+  {
+    path: '/more/socialwork',
+    component: require('./pages/FrontEnd/More/Socialwork').default,
+  },
+  {
+    path: '/more/skills',
+    component: require('./pages/FrontEnd/More/Skills').default,
   },
   {
     path: '/contactus',

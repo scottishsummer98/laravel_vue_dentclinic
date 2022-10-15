@@ -131,15 +131,19 @@
         </a>
         <ul class="dropdown-menu">
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">ABOUT US</router-link>
+            <router-link to="/about/aboutus" class="dropdown-item">
+              ABOUT US
+            </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">
+            <router-link to="/about/missionvision" class="dropdown-item">
               MISSION & VISION
             </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">OUR TEAM</router-link>
+            <router-link to="/about/ourteam" class="dropdown-item">
+              OUR TEAM
+            </router-link>
           </li>
         </ul>
       </li>
@@ -177,26 +181,34 @@
         </a>
         <ul class="dropdown-menu">
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">PUBLICATIONS</router-link>
+            <router-link to="/more/publications" class="dropdown-item">
+              PUBLICATIONS
+            </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">
+            <router-link to="/more/presentations" class="dropdown-item">
               PRESENTATIONS
             </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">INVOLVEMENT</router-link>
+            <router-link to="/more/involvement" class="dropdown-item">
+              INVOLVEMENT
+            </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">
+            <router-link to="/more/specialization" class="dropdown-item">
               SPECIALIZATION
             </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">SOCIAL WORK</router-link>
+            <router-link to="/more/socialwork" class="dropdown-item">
+              SOCIAL WORK
+            </router-link>
           </li>
           <li style="color: white; font-size: 12px; font-family: Helvetica;">
-            <router-link to="#" class="dropdown-item">SKILLS</router-link>
+            <router-link to="/more/skills" class="dropdown-item">
+              SKILLS
+            </router-link>
           </li>
         </ul>
       </li>
