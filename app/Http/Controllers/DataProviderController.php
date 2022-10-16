@@ -5,11 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Contact;
 use App\Models\Service;
+use App\Models\Team;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
 
 class DataProviderController extends Controller
 {
+    public function saveTeam(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'desig' => 'required',
+            'bio' => 'required',
+            'fblink' => 'required',
+            'twitterlink' => 'required',
+            'linkedinlink' => 'required',
+            'gmaillink' => 'required',
+        ]);
+
+        $profilePicture = null;
+        if ($request->ProfilePicture) {
+            $profilePicture = $request->ProfilePicture->store(
+                '/team/' . date('Y') . '/' . date('m')
+            );
+        }
+        Team::create([
+            'name' => $request->name,
+            'desig' => $request->desig,
+            'bio' => $request->bio,
+            'profilePicture' => $profilePicture,
+            'fblink' => $request->fblink,
+            'twitterlink' => $request->twitterlink,
+            'linkedinlink' => $request->linkedinlink,
+            'gmaillink' => $request->gmaillink,
+        ]);
+    }
+
+    public function showTeams(Request $request)
+    {
+        return Team::get();
+    }
+
+    public function updateTeam(Request $request, Team $id)
+    {
+        $id->update($request->all());
+
+        return response(['message' => 'Team Member Updated!']);
+    }
+
     public function saveService(Request $request)
     {
         $request->validate([

@@ -26,6 +26,10 @@ Route::get('/admin', [
     'index',
 ])->name('admin');
 
+Route::post('/save-team', [DataProviderController::class, 'saveTeam']);
+Route::post('/show-teams', [DataProviderController::class, 'showTeams']);
+Route::post('/update-team/{id}', [DataProviderController::class, 'updateTeam']);
+
 Route::post('/save-services', [DataProviderController::class, 'saveService']);
 Route::post('/show-services', [DataProviderController::class, 'showServices']);
 Route::post('/update-service/{id}', [

@@ -39,22 +39,10 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-info"></i>
-                  <p>About Us</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-lightbulb"></i>
-                  <p>Mission & Vision</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
+                <router-link to="/admin-about/team" class="nav-link">
                   <i class="nav-icon fa-solid fa-people-group"></i>
                   <p>Our Team</p>
-                </a>
+                </router-link>
               </li>
             </ul>
           </li>

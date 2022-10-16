@@ -97,6 +97,10 @@ const routes = [
     },
   },
   {
+    path: '/admin-about/team',
+    component: require('./pages/BackEnd/About/Team').default,
+  },
+  {
     path: '/admin-services',
     component: require('./pages/BackEnd/Services').default,
   },
