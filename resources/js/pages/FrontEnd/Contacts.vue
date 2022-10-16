@@ -120,19 +120,19 @@
 
             <div style="border: 1px solid black; padding: 1rem; height: 22rem;">
               <h6>
-                <h5>🏢</h5>
+                <h5><i class="fa-solid fa-building"></i></h5>
                 {{ item.location }}
               </h6>
               <h6>
-                <h5>📞</h5>
+                <h5><i class="fa-solid fa-phone"></i></h5>
                 {{ item.mobile }}
               </h6>
               <h6>
-                <h5>✉</h5>
+                <h5><i class="fa-solid fa-envelope"></i></h5>
                 {{ item.email }}
               </h6>
               <h6>
-                <h5>🕜</h5>
+                <h5><i class="fa-solid fa-clock"></i></h5>
                 {{ item.visitingtime }}
               </h6>
             </div>
@@ -149,7 +149,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
   data() {
     return {

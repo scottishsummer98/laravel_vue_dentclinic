@@ -16,7 +16,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" style="color: white;" href="https://twitter.com/">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fa-brands fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
@@ -25,7 +25,7 @@
           style="color: white;"
           href="https://www.facebook.com/"
         >
-          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
@@ -34,7 +34,7 @@
           style="color: white;"
           href="https://www.instagram.com/"
         >
-          <i class="fa fa-instagram" aria-hidden="true"></i>
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
@@ -43,7 +43,7 @@
           style="color: white;"
           href="https://www.youtube.com/"
         >
-          <i class="fa fa-youtube-play" aria-hidden="true"></i>
+          <i class="fa-brands fa-youtube" aria-hidden="true"></i>
         </a>
       </li>
     </ul>
@@ -63,7 +63,7 @@
           style="color: RGB(47, 137, 252); font-size: 25px;"
           href="#"
         >
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item mt-2">
@@ -83,7 +83,7 @@
           style="color: RGB(47, 137, 252); font-size: 25px;"
           href="#"
         >
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item mt-2">
@@ -265,7 +265,10 @@
           data-toggle="collapse"
           active-class="active border-top border-white"
         >
-          <i class="fa fa-calendar" style="color: white; font-size: 30px;"></i>
+          <i
+            class="fa-solid fa-calendar-days"
+            style="color: white; font-size: 30px;"
+          ></i>
           <p style="float: right; padding-left: 20px;">
             <b>MAKE AN APPOINTMENT</b>
             <br />

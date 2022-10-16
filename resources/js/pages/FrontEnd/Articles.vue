@@ -22,7 +22,9 @@
                     </router-link>
                   </h4>
                   <h6>
-                    👤 {{ item.author }} 📆
+                    <i class="fa-solid fa-user"></i>
+                    {{ item.author }}
+                    <i class="fa-solid fa-clock"></i>
                     {{ dateFormat(item.created_at) }}
                   </h6>
                 </div>
@@ -70,7 +72,10 @@
                   >
                     <div class="w-100 justify-content-between">
                       <h5 class="mb-1">{{ item.title }}</h5>
-                      <h6>📆 {{ dateFormat(item.updated_at) }}</h6>
+                      <h6>
+                        <i class="fa-solid fa-clock"></i>
+                        {{ dateFormat(item.updated_at) }}
+                      </h6>
                     </div>
                   </router-link>
                 </div>

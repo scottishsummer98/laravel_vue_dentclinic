@@ -15,7 +15,9 @@
       <h3>{{ item.title }}</h3>
 
       <h5>
-        👤 {{ item.author }} 📆
+        <i class="fa-solid fa-user"></i>
+        {{ item.author }}
+        <i class="fa-solid fa-clock"></i>
         {{ dateFormat(item.created_at) }}
       </h5>
     </div>
@@ -52,8 +54,11 @@
                   :src="`../storage/${item.articleImage}`"
                   class="img-fluid ArticleImageSlider mb-1"
                 />
-                <h5 class="mb-1">{{ item.title }}</h5>
-                <h6>📆 {{ dateFormat(item.updated_at) }}</h6>
+                <h5 class="mb-1" style="height: 4rem;">{{ item.title }}</h5>
+                <h6>
+                  <i class="fa-solid fa-clock"></i>
+                  {{ dateFormat(item.updated_at) }}
+                </h6>
               </router-link>
             </div>
           </div>
