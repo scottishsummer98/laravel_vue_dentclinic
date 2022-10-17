@@ -63,51 +63,12 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa-solid fa-list"></i>
+            <router-link to="/admin-more" class="nav-link">
+              <i class="nav-icon fa-solid fa-suitcase-medical"></i>
               <p>
                 More
-                <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-newspaper"></i>
-                  <p>Publication</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-person-chalkboard"></i>
-                  <p>Presentation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-handshake-angle"></i>
-                  <p>Involvement</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
-                  <p>Specialization</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-hand-holding-medical"></i>
-                  <p>Social Work</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa-solid fa-wand-magic-sparkles"></i>
-                  <p>Skills</p>
-                </a>
-              </li>
-            </ul>
+            </router-link>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">

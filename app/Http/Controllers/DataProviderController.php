@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Contact;
+use App\Models\More;
 use App\Models\Service;
 use App\Models\Team;
 use App\Models\Treatment;
@@ -118,7 +119,45 @@ class DataProviderController extends Controller
 
         return response(['message' => 'Treatment Updated!']);
     }
+    public function saveMoreDetail(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+            'topic' => 'required',
+        ]);
 
+        More::create([
+            'type' => $request->type,
+            'topic' => $request->topic,
+        ]);
+    }
+
+    public function showMoreDetails(Request $request)
+    {
+        if ($request->topictype) {
+            if ($request->topictype == 'publications') {
+                $more = More::where('type', 'Publications')->get();
+            } elseif ($request->topictype == 'presentations') {
+                $more = More::where('type', 'Presentations')->get();
+            } elseif ($request->topictype == 'involvement') {
+                $more = More::where('type', 'Involvement')->get();
+            } elseif ($request->topictype == 'specialization') {
+                $more = More::where('type', 'Specialization')->get();
+            } elseif ($request->topictype == 'socialwork') {
+                $more = More::where('type', 'Social Work')->get();
+            }
+        } else {
+            $more = More::paginate(10);
+        }
+        return $more;
+    }
+
+    public function updateMoreDetail(Request $request, More $id)
+    {
+        $id->update($request->all());
+
+        return response(['message' => 'More Updated!']);
+    }
     public function saveContact(Request $request)
     {
         $request->validate([

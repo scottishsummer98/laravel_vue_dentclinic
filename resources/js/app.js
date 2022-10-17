@@ -113,6 +113,10 @@ const routes = [
     component: require('./pages/BackEnd/Articles').default,
   },
   {
+    path: '/admin-more',
+    component: require('./pages/BackEnd/More').default,
+  },
+  {
     path: '/admin-contact',
     component: require('./pages/BackEnd/Contact').default,
   },
