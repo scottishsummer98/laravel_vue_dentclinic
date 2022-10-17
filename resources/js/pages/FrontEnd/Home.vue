@@ -71,54 +71,22 @@
         <h3 class="text-uppercase mb-3">
           ARTICLE
         </h3>
-        <h6 class="border-bottom p-3">
-          <router-link to="#" class="text-reset" style="text-decoration: none;">
+        <h6
+          class="border-bottom p-3"
+          v-for="(item, index) in articlesListLatestLimited"
+          :key="index"
+        >
+          <router-link
+            :to="`/articles/${item.id}`"
+            class="text-reset"
+            style="text-decoration: none;"
+          >
             <i
               class="fa fa-paperclip"
               aria-hidden="true"
               style="font-size: 20px;"
             ></i>
-            স্কেলিং সম্পর্কে ৬ টি প্রচলিত ভুল ধারণা
-          </router-link>
-        </h6>
-        <h6 class="border-bottom p-3">
-          <router-link to="#" class="text-reset" style="text-decoration: none;">
-            <i
-              class="fa fa-paperclip"
-              aria-hidden="true"
-              style="font-size: 20px;"
-            ></i>
-            রুট ক্যানাল
-          </router-link>
-        </h6>
-        <h6 class="border-bottom p-3">
-          <router-link to="#" class="text-reset" style="text-decoration: none;">
-            <i
-              class="fa fa-paperclip"
-              aria-hidden="true"
-              style="font-size: 20px;"
-            ></i>
-            মুখের ক্যান্সার এর ৬ টি লক্ষণ
-          </router-link>
-        </h6>
-        <h6 class="border-bottom p-3">
-          <router-link to="#" class="text-reset" style="text-decoration: none;">
-            <i
-              class="fa fa-paperclip"
-              aria-hidden="true"
-              style="font-size: 20px;"
-            ></i>
-            দাঁত সাদা করার কার্যকরী ৩ পদ্ধতি
-          </router-link>
-        </h6>
-        <h6 class="border-bottom p-3">
-          <router-link to="#" class="text-reset" style="text-decoration: none;">
-            <i
-              class="fa fa-paperclip"
-              aria-hidden="true"
-              style="font-size: 20px;"
-            ></i>
-            দাঁত উত্তোলনের ৬ টি কারণ
+            {{ item.title }}
           </router-link>
         </h6>
       </div>
@@ -136,7 +104,7 @@
       <div class="text-center">
         <p>
           <router-link
-            to="#"
+            to="/articles"
             class="btn btn-primary p-2"
             style="text-decoration: none;"
           >
@@ -174,7 +142,7 @@
           </p>
           <p class="mt-4">
             <router-link
-              to="#"
+              to="/about/aboutus"
               class="btn btn-outline-primary"
               style="text-decoration: none;"
             >
@@ -209,45 +177,9 @@
             class="table table-bordered"
             style="background-color: RGB(47, 137, 252); color: white;"
           >
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
+            <tr v-for="(item, index) in servicesListCol1" :key="index">
+              <th>{{ item.type }}</th>
+              <td>{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -256,41 +188,9 @@
             class="table table-bordered"
             style="background-color: RGB(47, 137, 252); color: white;"
           >
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
+            <tr v-for="(item, index) in servicesListCol2" :key="index">
+              <th>{{ item.type }}</th>
+              <td>{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -299,29 +199,9 @@
             class="table table-bordered"
             style="background-color: RGB(47, 137, 252); color: white;"
           >
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
-            </tr>
-            <tr>
-              <th>Root Canal Therapy</th>
-              <td>BDT 5,000.00</td>
-            </tr>
-            <tr>
-              <th>Ultrasonic Scaling</th>
-              <td>BDT 3,000- 5,000</td>
+            <tr v-for="(item, index) in servicesListCol3" :key="index">
+              <th>{{ item.type }}</th>
+              <td>{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -392,228 +272,44 @@
   </div>
 
   <!-- Treatment -->
-  <div class="card p-5 mb-5 sliderBottom">
-    <h3 class="text-uppercase m-4" style="padding-left: 14%;">
+  <div class="card p-2 mb-5 sliderBottom">
+    <h3 class="text-uppercase m-4" style="padding-left: 12%;">
       Treatment Blog
     </h3>
     <div class="container">
-      <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            class="active"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      July 13, 2022
-                      <br />
-                      ওরাল সার্জারি
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment2.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      August 05, 2022
-                      <br />
-                      মুখের টিউমার অপারেশন
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      February 25, 2022
-                      <br />
-                      আঁকাবাঁকা দাঁতের চিকিৎসা
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment2.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      February 25, 2022
-                      <br />
-                      ম্যাক্সিলোফেসিয়াল সার্জারি
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <swiper :slides-per-view="4" :space-between="10">
+        <swiper-slide v-for="(item, index) in treatmentsList" :key="index">
+          <div class="blog-list-widget">
+            <div class="list-group">
+              <router-link
+                :to="`/treatments`"
+                class="list-group-item list-group-item-action flex-column align-items-start"
+                style="height: 20rem;"
+              >
+                <img
+                  :src="`../storage/${item.beforeOperationImage}`"
+                  class="img-fluid ImageSlider mb-1"
+                />
+                <h5 class="mb-1" style="height: 4rem;">{{ item.name }}</h5>
+                <h6>
+                  <i class="fa-solid fa-clock"></i>
+                  {{ dateFormat(item.updated_at) }}
+                </h6>
+              </router-link>
             </div>
           </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment2.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      July 13, 2022
-                      <br />
-                      ওরাল সার্জারি
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      August 05, 2022
-                      <br />
-                      মুখের টিউমার অপারেশন
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment2.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      February 25, 2022
-                      <br />
-                      আঁকাবাঁকা দাঁতের চিকিৎসা
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      February 25, 2022
-                      <br />
-                      আঁকাবাঁকা দাঁতের চিকিৎসা
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      July 13, 2022
-                      <br />
-                      ওরাল সার্জারি
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment2.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      August 05, 2022
-                      <br />
-                      মুখের টিউমার অপারেশন
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="img__wrap">
-                  <img
-                    class="img__img"
-                    src="../../../../public/images/treatment1.jpg"
-                  />
-                  <div class="img__description_layer">
-                    <p class="img__description">
-                      <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                      February 25, 2022
-                      <br />
-                      আঁকাবাঁকা দাঁতের চিকিৎসা
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </swiper-slide>
+      </swiper>
+      <div class="text-center mt-4">
+        <p>
+          <router-link
+            to="/treatments"
+            class="btn btn-primary p-2"
+            style="text-decoration: none;"
+          >
+            View All
+          </router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -672,7 +368,77 @@
 </template>
 
 <script>
-export default {}
+import moment from 'moment'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import 'swiper/css'
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  data() {
+    return {
+      articlesListLatest: [],
+      articlesListLatestLimited: [],
+      servicesList: [],
+      servicesListCol1: [],
+      servicesListCol2: [],
+      servicesListCol3: [],
+      treatmentsList: [],
+    }
+  },
+  methods: {
+    dateFormat(date) {
+      return moment(date).format('MMMM d, YYYY')
+    },
+    getArticlesListLatest() {
+      axios
+        .post(`/show-articles?type=frontendarticlessidebar`)
+        .then((response) => {
+          this.articlesListLatest = response.data
+          this.articlesListLatestLimited = this.articlesListLatest.slice(0, 5)
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
+    getServicesList() {
+      axios
+        .post(`/show-services`)
+        .then((response) => {
+          this.servicesList = response.data
+          this.servicesListCol1 = this.servicesList.slice(0, 10)
+          this.servicesListCol2 = this.servicesList.slice(10, 17)
+          this.servicesListCol3 = this.servicesList.slice(17, 21)
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
+    getTreatmentsList() {
+      axios
+        .post(`/show-treatments`)
+        .then((response) => {
+          this.treatmentsList = response.data
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
+  },
+  mounted() {
+    this.getArticlesListLatest()
+    this.getServicesList()
+    this.getTreatmentsList()
+  },
+}
 </script>
 
 <style>
@@ -699,15 +465,6 @@ export default {}
   100% {
     transform: translateY(0);
   }
-}
-.sliderLeft {
-  animation: 1s ease-out 0s 1 slideInFromLeft;
-}
-.sliderRight {
-  animation: 1s ease-out 0s 1 slideInFromRight;
-}
-.sliderBottom {
-  animation: 1s ease-out 0s 1 slideInFromBottom;
 }
 .responsive1 {
   width: 100%;
@@ -745,71 +502,9 @@ export default {}
   background-color: rgba(207, 207, 216, 0.71);
   border: none;
 }
-.card {
-  border: none;
-}
-.img__wrap {
-  position: relative;
-  height: 200px;
-  width: 220px;
-}
-
-.img__description_layer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: black;
-  color: #fff;
-  visibility: hidden;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: opacity 1s, visibility 0s;
-}
-
-.img__wrap:hover .img__description_layer {
-  animation: 0.2s ease-out 0s 1 slideInFromLeft;
-  margin-top: 75px;
-  visibility: visible;
-  opacity: 0.8;
-}
-
-.img__description {
-  transition: 0s;
-  transform: translateY(1em);
-}
-
-.img__wrap:hover {
-  transform: translateY(0);
-}
-.carousel-control-prev {
-  left: -90px;
-}
-.carousel-control-prev-icon {
-  background-color: black;
-  opacity: 0.7;
-}
-.carousel-control-next {
-  right: -90px;
-}
-.carousel-control-next-icon {
-  background-color: black;
-  opacity: 0.7;
-}
-.carousel-indicators {
-  bottom: -70px;
-}
-.carousel-inner {
-  margin-bottom: 50px;
-}
-.carousel .carousel-indicators button {
-  background-color: RGB(170, 185, 233);
-}
-.carousel .carousel-indicators button.active {
-  background-color: RGB(47, 137, 252);
+.ImageSlider {
+  border: 1px solid #ededed;
+  width: 16rem;
+  height: 12rem;
 }
 </style>
