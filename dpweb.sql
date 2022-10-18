@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 08, 2022 at 09:59 AM
+-- Generation Time: Oct 18, 2022 at 12:21 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.27
 
@@ -63,6 +63,32 @@ INSERT INTO `articles` (`id`, `author`, `title`, `description`, `articleImage`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visitingtime` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `location`, `mobile`, `email`, `visitingtime`, `created_at`, `updated_at`) VALUES
+(1, 'SHAHEED SUHRAWARDY MEDICAL COLLEGE AND HOSPITAL', 'Sher-E-Bangla Nagar, Dhaka- 1207, Bangladesh', '+8801611606095, +8801819226460, +8801944099099, +8801819208670', 'nasiruddin200@yahoo.com', '8:00 AM-2:30 PM ( Friday closed )', '2022-10-15 07:48:13', '2022-10-16 11:48:37'),
+(2, 'AVENUE DENTAL CARE, CENTRE FOR DENTAL MAXILLOFACIAL SURGERY AND RESEARCH (CDMSR)', '3A, Satmosjid Road, Dhaka - 1205 (Opposite Bank Asia, Lalmatia)', '+8801611606095, +8801944099099, +8801819208670, +8801819226460', 'nasiruddin200@yahoo.com', '4:00 PM - 9:00 PM ( Friday closed )', '2022-10-15 07:52:34', '2022-10-16 11:48:30'),
+(3, 'BANGLADESH ENT HOSPITAL LTD', '4/1/A, Sobhanbag, Mirpur Road, Dhaka 1207', '+8801717250667, +8801611606095, +8801819226460, +8801819208670', 'nasiruddin200@yahoo.com', '2:30 PM - 4:00 PM ( Friday closed )', '2022-10-15 07:53:31', '2022-10-16 11:48:54');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -99,7 +125,76 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2014_10_12_100000_create_password_resets_table', 4),
 (13, '2019_08_19_000000_create_failed_jobs_table', 4),
 (14, '2019_12_14_000001_create_personal_access_tokens_table', 4),
-(15, '2022_10_08_044339_create_articles_table', 5);
+(15, '2022_10_08_044339_create_articles_table', 5),
+(16, '2022_10_15_133831_create_contacts_table', 6),
+(18, '2022_10_16_134257_create_teams_table', 7),
+(19, '2022_10_17_143823_create_mores_table', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mores`
+--
+
+CREATE TABLE `mores` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `topic` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mores`
+--
+
+INSERT INTO `mores` (`id`, `topic`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Factors Influencing Early Recurrence and Survival of Oral Squamous Cell Carcinoma- A Study in a Tertiary level Hospital of Bangladesh. Bangladesh Journal of Dental Research & Education. Vol.08, No. 01, January 2018: 20-24. (First author).', 'Publications', '2022-10-17 08:46:07', '2022-10-17 09:32:54'),
+(2, 'Buccal Fat Pad Flap for the Reconstruction of Oral Defects. Bangladesh Journal of Dental Research & Education. Vol.08, No. 01, January 2018: 09-12. (First author)', 'Publications', '2022-10-17 08:46:17', '2022-10-17 08:46:17'),
+(3, 'Annual Clinical Audit of Indoor, Dhaka Dental College and Hospital (January 2004-December 2005). Bangladesh Journal of Dental Research & Education. Vol.05, No. 02, July 2015: 37-39. (First author)', 'Publications', '2022-10-17 08:46:25', '2022-10-17 08:46:25'),
+(4, 'Cavernous haemangioma of face- A case report.  Bangladesh Journal of Medical Science. Vol. 19, no.01, Sep. 2013, 50-52.(Co- author)', 'Publications', '2022-10-17 08:46:33', '2022-10-17 08:46:33'),
+(5, 'Clinical stage-Grading of oral cancer in a tertiary level hospital at Dhaka.  Bangladesh Journal of Medical Science. Vol. 19, no.01, Sep. 2013, 25-31.(Co- author)', 'Publications', '2022-10-17 08:46:41', '2022-10-17 08:46:41'),
+(6, 'Bilateral temporomandibular joint dislocation in a 42-year-old man. A case report. Journal of oral health. April 2013, Vol 15, no 1: 32-33. (Co-author).', 'Publications', '2022-10-17 08:46:49', '2022-10-17 08:46:49'),
+(7, 'Efficacy of CT scan for the diagnosis of bone invasion in oral squamous cell carcinoma. Bangladesh    Journal of Medical Science. Vol. 17, no.02, Sep. 2011, 153-158. (First author).', 'Publications', '2022-10-17 08:46:56', '2022-10-17 08:46:56'),
+(8, 'Evaluation of periodontal status in operated complete cleft lip and palate patients. Bangladesh Dental Journal. Vol. 21, 2011, 1-4 (First author).', 'Publications', '2022-10-17 08:47:03', '2022-10-17 08:47:03'),
+(9, 'Benign fibrous histiocytoma may be a life threatening condition in maxillofacial region- A case report. Bangladesh Journal of Medical Science. Vol. 17, no.02, Sep. 2011, 183-186. (Co-author).', 'Publications', '2022-10-17 08:47:09', '2022-10-17 08:47:09'),
+(10, 'A study on detection of neck metastasis of oral squamous cell carcinoma by palpation and CT scan.  Bangladesh Dental Journal. 2010. Vol.26, 22-24. (Co-author).', 'Publications', '2022-10-17 08:47:16', '2022-10-17 08:47:16'),
+(11, 'Upper lip reconstruction by using Abbe Flap. Bangladesh Dental Journal. Vol. 10, no. 1, 1993-94, 25-30. (First author).', 'Publications', '2022-10-17 08:47:24', '2022-10-17 08:47:24'),
+(12, 'Epidermoid cyst occurring in the preauricular region. The Journal of Osaka University Dental School, Japan. Vol. 31, Dec 1991, 111-115.  ( First author).', 'Publications', '2022-10-17 08:47:32', '2022-10-17 08:47:32'),
+(13, 'Surgical Approaches to Midface. AOCMF seminar 2019 May. BSMMU, Dhaka.', 'Presentations', '2022-10-17 08:47:49', '2022-10-17 08:47:49'),
+(14, 'Survival and Recurrence status of Oral Squamous Cell Carcinoma. A Report of 186 Cases. International Dental Conference 2019 April, Chittagong. Academy of Creative Dentistry. 8th International Dental Congress. Feb. 2018, KIB Auditorium, Dhaka.', 'Presentations', '2022-10-17 08:47:56', '2022-10-17 08:47:56'),
+(15, 'Control and Management of Oral Cancer in Bangladesh. A proposal for National Program of Comprehensive Management of Oral Cancer Patients. Bangladesh International Cancer Congress 2018 October, Army Golf Club, Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:48:03', '2022-10-17 08:48:03'),
+(16, 'Maxillofacial Surgery Overview, Dhaka Dental College and Hospital, Bangladesh. Mizan Complex Auditorium, Toronto, Canada. Feb 03, 2018.', 'Presentations', '2022-10-17 08:48:10', '2022-10-17 08:48:10'),
+(17, 'Factors Influencing Early Recurrence and Survival of Oral Squamous Cell Carcinoma. A Report of 171 Cases. 6th International Dental Congress. (21-22 Jan 2016), KIB Auditorium, Dhaka. Head-Neck Surgery Conference 2016 (Feb 17-18, 2016), MAG Osmani Medical College and Hospital, Sylhet.', 'Presentations', '2022-10-17 08:48:17', '2022-10-17 08:48:17'),
+(18, 'Mortality and Morbidity in Oral Cancer- How it is related with Management System. Bangladesh Cancer Congress ( 16-17 Nov. 2015). Army Golf Club, Dhaka.', 'Presentations', '2022-10-17 08:48:25', '2022-10-17 08:48:25'),
+(19, 'Maxillofacial Surgical Pathology in Dhaka Dental College and Hospital, Bangladesh. Department of Plastic and Re-constructive Surgery, The Hospital for Sick Children, University of Toronto, Canada.(27 March 2015).', 'Presentations', '2022-10-17 08:48:33', '2022-10-17 08:48:33'),
+(20, 'Distraction osteogenesis in mandibular deficiency due to bilateral temporomandibular joint ankylosis. 5th International Dental Congress, (23-24 Jan 2015). KIB Auditorium, Dhaka.', 'Presentations', '2022-10-17 08:48:39', '2022-10-17 08:48:39'),
+(21, 'Mortality and Morbidity in Oral Cancer- How it is related with management system. July 2014. Marriott Marquis, New York, NY, USA.', 'Presentations', '2022-10-17 08:48:46', '2022-10-17 08:48:46'),
+(22, 'Anatomical Subunit Surgical Technique in unilateral Cleft Lip Repair. 3th International Dental Congress. (25-26 Jan 2013). Ruposhi Bangla Hotel, Dhaka', 'Presentations', '2022-10-17 08:48:52', '2022-10-17 08:48:52'),
+(23, 'Modern Concept and Innovation in Oral and Maxillofacial Surgery in Bangladesh. South Asian Dental Congress. Jan.2012. Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:48:59', '2022-10-17 08:48:59'),
+(24, 'Evaluation of periodontal status and micro-organisms in unilateral complete cleft lip and palate patients. 18th International Conference (International Association of Oral and Maxillofacial Surgeons) on Oral and Maxillofacial Surgery, Nov. 2007. Bangalore, India.', 'Presentations', '2022-10-17 08:49:06', '2022-10-17 08:49:06'),
+(25, 'Correction of unilateral cleft lip nasal deformity. 9th International Surgical Congress. Dec. 2004. Society of Surgeons of Bangladesh. 2004. Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:49:15', '2022-10-17 08:49:15'),
+(26, 'Correction of unilateral cleft lip nasal deformity. Conference of Asian Association of Oral and Maxillofacial Surgeons. Nov. 2004, Tokyo, Japan.', 'Presentations', '2022-10-17 08:49:22', '2022-10-17 08:49:22'),
+(27, 'Correction of unilateral cleft lip nasal deformity. 2nd national and 1st international conference, Bangladesh Association of Oral and Maxillofacial Surgeons. Sep. 2004 Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:49:27', '2022-10-17 08:49:27'),
+(28, 'Annual clinical audit of indoor, Dhaka Dental College and Hospital. 2nd national and 1st international conference, Bangladesh Association of Oral and Maxillofacial Surgeons. Sep. 2004. Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:49:35', '2022-10-17 08:49:35'),
+(29, 'Inferior alveolar nerve disturbances following mandibular third molar surgery. 26th Annual Conference of Association of Oral and Maxillofacial Surgeons of India. Dec. 2000. Bangalore, India.', 'Presentations', '2022-10-17 08:49:41', '2022-10-17 08:49:41'),
+(30, 'Upper lip reconstruction by using Abbe Flap. 13th Asia Pacific Federation Congress, International College of Surgeons. Nov. 1999, Dhaka, Bangladesh.', 'Presentations', '2022-10-17 08:49:48', '2022-10-17 08:49:48'),
+(31, 'Vice President, Bangladesh Association of Oral and Maxillofacial Surgeons (BAMOS).', 'Involvement', '2022-10-17 08:50:02', '2022-10-17 08:50:02'),
+(32, 'Treasurer, Bangladesh Oral Cancer Foundation (BOCF).', 'Involvement', '2022-10-17 08:50:08', '2022-10-17 08:50:08'),
+(33, 'Fellow, International Association of Oral and Maxillofacial Surgeons (IAOMS).', 'Involvement', '2022-10-17 08:50:15', '2022-10-17 08:50:15'),
+(34, 'Facial injury, facial bone fracture', 'Specialization', '2022-10-17 08:50:26', '2022-10-17 08:50:26'),
+(35, 'Dental Implant', 'Specialization', '2022-10-17 08:50:32', '2022-10-17 08:50:32'),
+(36, 'Oral and facial tumor/ cancer surgery', 'Specialization', '2022-10-17 08:50:38', '2022-10-17 08:50:38'),
+(37, 'Reconstructive facial surgery', 'Specialization', '2022-10-17 08:50:44', '2022-10-17 08:50:44'),
+(38, 'Lengthening of jaw bone by distraction osteogenesis', 'Specialization', '2022-10-17 08:50:51', '2022-10-17 08:50:51'),
+(39, 'Cleft lip and palate operation', 'Specialization', '2022-10-17 08:50:57', '2022-10-17 08:50:57'),
+(40, 'Orthognathic surgery', 'Specialization', '2022-10-17 08:51:03', '2022-10-17 08:51:03'),
+(41, 'Surgical removal of wisdom tooth', 'Specialization', '2022-10-17 08:51:09', '2022-10-17 08:51:09'),
+(42, 'Office Secretary, Bangladesh Association of Oral and Maxillofacial Surgeons.', 'Social Work', '2022-10-17 08:51:19', '2022-10-17 08:51:19'),
+(43, 'Treasurer, Bangladesh Oral Cancer Foundation.', 'Social Work', '2022-10-17 08:51:25', '2022-10-17 08:51:25'),
+(44, 'Fellow, International Association of Oral and Maxillofacial Surgeons.', 'Social Work', '2022-10-17 08:51:31', '2022-10-17 08:51:31'),
+(45, 'Health Secretary, Dhagonbhuyan Samity, Dhaka.', 'Social Work', '2022-10-17 08:51:38', '2022-10-17 08:51:38'),
+(46, 'Chief Adviser, Barahi Gobinda Forum.', 'Social Work', '2022-10-17 08:51:45', '2022-10-17 08:51:45');
 
 -- --------------------------------------------------------
 
@@ -176,6 +271,38 @@ INSERT INTO `services` (`id`, `type`, `price`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `teams`
+--
+
+CREATE TABLE `teams` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desig` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bio` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profilePicture` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fblink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `twitterlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gmaillink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`id`, `name`, `desig`, `bio`, `profilePicture`, `fblink`, `twitterlink`, `linkedinlink`, `gmaillink`, `created_at`, `updated_at`) VALUES
+(1, 'Prof. Dr. Nasir Uddin', 'FACIAL PLASTIC & RECONSTRUCTIVE SURGEON', 'He completed Bachelor of Dental Surgery (BDS) course from Dhaka Dental College in 1985. Obtaining the Fellowship award from Japan Dental Association in 1990 he got admission in Advanced Surgical Study Program in the Department of Oral and Maxillofacial Surgery at Osaka University, Japan and awarded Diploma in Oral and Maxillofacial Surgery. He joined in Government service in 1995. In Sept. 2010, he joined as an Assistant Professor (CC) in the Dept. of Oral and Maxillofacial Surgery, Dhaka Dental College and Hospital. He got promotion as Asst. Professor of Oral and Maxillofacial Surgery (Regular) by Departmental Promotion Committee, Ministry of Health and Family Welfare in May 2013.', 'team/2022/10/hWIr0HTrKa9h0KvRovvUtuVSbsrcetlF9qDPEQaB.png', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:03:41', '2022-10-16 10:16:21'),
+(2, 'Dr. Rokeya Rahman Tani', 'CONSULTANT ORTHODONTIST', 'CONSULTANT ORTHODONTIST', 'team/2022/10/Z2mw6i9bGKz2RrYRZaHcqtBM0T896QM9R2sWQPWY.jpg', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:08:37', '2022-10-16 10:08:37'),
+(3, 'Dr. Mohsin Munir Khan Nabil', 'ORAL & DENTAL SURGEON', 'ORAL & DENTAL SURGEON', 'team/2022/10/bbMoH3yUO3ttqheyOjv6peI47VH22doSaSXMKUnQ.jpg', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:09:10', '2022-10-16 10:09:10'),
+(4, 'Dr.Maliha Ishaque Purnata', 'DENTAL SURGEON', 'Dr.Maliha graduated from Holy Family Red Crescent Medical College and Hospital Dental Unit in 2019.After that she completed six months post graduation training (PGT) in the department of Oral and Maxillofacial Surgery in Shaheed Suhrawardy Medical College and Hospital in 2021.She is currently doing masters in Public Health in North South University.She has been working as consultant dental surgeon in Avenue Dental Care, Dhaka since 2021.She is specially skilled in Root Canal Therapy (RCT), Filling, Implantation of missing tooth.She specializes herself in clinical management of both pediatric and adult patients.She performs minor oral and maxillofacial surgery and participates in major surgeries.', 'team/2022/10/KfJMRuIKkp8uomzdO9zHRqmWQoKgjkvri94KoTcI.jpg', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:10:17', '2022-10-16 10:10:17'),
+(5, 'Dr. Tahmina Akter Tonny', 'DENTAL SURGEON', 'Dr. Tonny graduated from Holy Family Red Crescent Medical College and Hospital Dental Unit in 2018.After that,she completed six months post graduation training (PGT)in department of Oral and Maxillofacial Surgery in Shaheed Suhrawardy Medical College and Hospital in 2021.She has been working as consultant dental surgeon in Avenue Dental Care.She performs minor oral and maxillofacial surgery and participates in major surgeries.She is specially skilled in Root Canal Therapy(RCT),Filling, Implantation of missing tooth.Besides all these,Dr.Tonny participated in various community dental camps. Dr.Tahmina Akter Tonny ,Dental Surgeon,BDS(DU),PGT(Oral and Maxillofacial Surgery, Shaheed Suhrawardy Medical College and Hospital)', 'team/2022/10/4uS8P0JyaQ0dpF3cBSO3gXULdo3wDeLiq92BVgk0.jpg', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:10:50', '2022-10-16 10:10:50'),
+(6, 'Ishrat Jahan Sweety', 'DENTAL HYGIENIST & TECHNOLOGIST', 'Diploma in Medical Technology (Dental)\r\nGovt. Institute of Health Technology, Bogura.', 'team/2022/10/au4yKpHQrtrd361T6oTsRCJaghkoLJR5HXRUKI9E.jpg', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.linkedin.com/', 'https://mail.google.com/', '2022-10-16 10:11:26', '2022-10-16 10:11:26');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `treatments`
 --
 
@@ -237,6 +364,12 @@ ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -247,6 +380,12 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mores`
+--
+ALTER TABLE `mores`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -267,6 +406,12 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teams`
+--
+ALTER TABLE `teams`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -293,6 +438,12 @@ ALTER TABLE `articles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -302,7 +453,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `mores`
+--
+ALTER TABLE `mores`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -315,6 +472,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `services`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `teams`
+--
+ALTER TABLE `teams`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `treatments`
