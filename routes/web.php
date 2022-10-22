@@ -74,3 +74,8 @@ Route::post('/update-article/{id}', [
     DataProviderController::class,
     'updateArticles',
 ]);
+
+Route::get('/{vue_capture?}', function () {
+    return redirect('/');
+})->where('vue_capture', '[\/\w\.-]*');
+
