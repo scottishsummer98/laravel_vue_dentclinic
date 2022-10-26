@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 18, 2022 at 12:21 PM
+-- Generation Time: Oct 26, 2022 at 12:52 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.27
 
@@ -128,7 +128,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2022_10_08_044339_create_articles_table', 5),
 (16, '2022_10_15_133831_create_contacts_table', 6),
 (18, '2022_10_16_134257_create_teams_table', 7),
-(19, '2022_10_17_143823_create_mores_table', 8);
+(19, '2022_10_17_143823_create_mores_table', 8),
+(20, '2022_10_25_172231_create_homes_table', 9),
+(21, '2022_10_25_172839_create_sliders_table', 10);
 
 -- --------------------------------------------------------
 
@@ -271,6 +273,30 @@ INSERT INTO `services` (`id`, `type`, `price`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sliderPicture` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `sliderPicture`, `created_at`, `updated_at`) VALUES
+(2, 'sliders/2022/10/vtv3PhpVQ2rbzTWUuhF0qxbnwneINRfhaNurfqr6.png', '2022-10-25 11:39:57', '2022-10-25 11:39:57'),
+(3, 'sliders/2022/10/zn5aK8N35CRYzdVAspGrjvUDcZdijygZVYHLtr7x.png', '2022-10-25 11:42:18', '2022-10-25 11:42:18'),
+(4, 'sliders/2022/10/iK1N6HLOMALIPMMdr5IEQxEyGBWJMgq813mKg5ue.png', '2022-10-25 11:45:29', '2022-10-25 11:45:29'),
+(5, 'sliders/2022/10/FXZKk2kocFnzBRmSuoNStT1qo5UkPJ4xms9NXmdB.png', '2022-10-25 11:55:44', '2022-10-25 11:55:44'),
+(6, 'sliders/2022/10/M6A3VFMRNUUQYwH0kGe5qtKBriJT6EbjQu6ZhjlD.png', '2022-10-25 11:57:36', '2022-10-25 11:57:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teams`
 --
 
@@ -409,6 +435,12 @@ ALTER TABLE `services`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `teams`
 --
 ALTER TABLE `teams`
@@ -453,7 +485,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `mores`
@@ -472,6 +504,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `services`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `teams`
