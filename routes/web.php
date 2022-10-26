@@ -74,8 +74,15 @@ Route::post('/update-article/{id}', [
     DataProviderController::class,
     'updateArticles',
 ]);
+Route::post('/save-slider-image', [
+    DataProviderController::class,
+    'saveSliderImage',
+]);
+Route::post('/show-slider-images', [
+    DataProviderController::class,
+    'showSliderImages',
+]);
 
 Route::get('/{vue_capture?}', function () {
     return redirect('/');
 })->where('vue_capture', '[\/\w\.-]*');
-

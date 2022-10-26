@@ -1,66 +1,20 @@
 <template>
-  <!-- Slider -->
-  <div
-    id="carouselExampleFade"
-    class="carousel slide carousel-fade"
-    data-bs-ride="carousel"
-    data-interval="1000"
-  >
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img
-          src="../../../../public/images/Slider1.png"
-          class="d-block w-100"
-          alt=""
-        />
-      </div>
-      <div class="carousel-item">
-        <img
-          src="../../../../public/images/Slider2.png"
-          class="d-block w-100"
-          alt=""
-        />
-      </div>
-      <div class="carousel-item">
-        <img
-          src="../../../../public/images/Slider3.png"
-          class="d-block w-100"
-          alt=""
-        />
-      </div>
-      <div class="carousel-item">
-        <img
-          src="../../../../public/images/Slider4.png"
-          class="d-block w-100"
-          alt=""
-        />
-      </div>
-      <div class="carousel-item">
-        <img
-          src="../../../../public/images/Slider5.png"
-          class="d-block w-100"
-          alt=""
-        />
-      </div>
-    </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleFade"
-      data-bs-slide="prev"
+  <div>
+    <swiper
+      :slides-per-view="1"
+      :navigation="true"
+      :modules="modules"
+      :autoplay="{
+        delay: 5000,
+        disableOnInteraction: false,
+      }"
+      :effect="'fade'"
+      :loop="true"
     >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleFade"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+      <swiper-slide v-for="(item, index) in sliderList" :key="index">
+        <img :src="`../storage/${item.sliderPicture}`" />
+      </swiper-slide>
+    </swiper>
   </div>
 
   <!-- Article -->
@@ -371,6 +325,7 @@
 import moment from 'moment'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { EffectFade, Autoplay, Navigation } from 'swiper'
 // Import Swiper styles
 // Import Swiper styles
 import 'swiper/css'
@@ -378,13 +333,20 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css'
+import 'swiper/css/effect-fade'
 export default {
   components: {
     Swiper,
     SwiperSlide,
   },
+  setup() {
+    return {
+      modules: [EffectFade, Autoplay, Navigation],
+    }
+  },
   data() {
     return {
+      sliderList: [],
       articlesListLatest: [],
       articlesListLatestLimited: [],
       servicesList: [],
@@ -397,6 +359,16 @@ export default {
   methods: {
     dateFormat(date) {
       return moment(date).format('MMMM d, YYYY')
+    },
+    getSlidersList() {
+      axios
+        .post(`/show-slider-images`)
+        .then((response) => {
+          this.sliderList = response.data
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
     },
     getArticlesListLatest() {
       axios
@@ -434,6 +406,7 @@ export default {
     },
   },
   mounted() {
+    this.getSlidersList()
     this.getArticlesListLatest()
     this.getServicesList()
     this.getTreatmentsList()

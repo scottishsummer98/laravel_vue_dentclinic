@@ -369,7 +369,7 @@ export default {
         .post(`/save-team`, formData)
         .then((response) => {
           this.clear()
-          showSuccess('Team Mmeber Saved')
+          showSuccess('Team Member Saved')
           this.isSubmitted = 0
           for (let key in this.formData) {
             if (key == 'ProfilePicture') {

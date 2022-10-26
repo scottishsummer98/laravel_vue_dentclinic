@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Contact;
 use App\Models\More;
 use App\Models\Service;
+use App\Models\Slider;
 use App\Models\Team;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
@@ -248,5 +249,22 @@ class DataProviderController extends Controller
         $id->update($request->all());
 
         return response(['message' => 'Article Updated!']);
+    }
+    public function saveSliderImage(Request $request)
+    {
+        $sliderPicture = null;
+        if ($request->SliderPicture) {
+            $sliderPicture = $request->SliderPicture->store(
+                '/sliders/' . date('Y') . '/' . date('m')
+            );
+        }
+        Slider::create([
+            'sliderPicture' => $sliderPicture,
+        ]);
+    }
+
+    public function showSliderImages(Request $request)
+    {
+        return Slider::get();
     }
 }
