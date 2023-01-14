@@ -76,7 +76,6 @@
           <button
             style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
             class="btn btn-danger"
-            @click="edit(item)"
           >
             Delete
           </button>
@@ -112,11 +111,7 @@
                 class="SliderPictureEdit"
                 :class="!imageSelectedEdit ? 'hidden' : ''"
               >
-                <img
-                  :src="`/${editingItem.sliderPictureEdit}`"
-                  id="target1"
-                  class="img-fluid"
-                />
+                <img id="target1" class="img-fluid" />
               </div>
               <div class="form-group mt-5">
                 <input
@@ -201,7 +196,7 @@ export default {
       axios
         .post(`/update-slider-image`, formData)
         .then((response) => {
-          window.location.reload()
+          // window.location.reload()
           for (let key in this.formData) {
             if (key == 'sliderPicture') {
               this.formData[key] = 'images/image-icon.jpg'
@@ -220,6 +215,7 @@ export default {
           }
           showError(err.response.data.message)
           this.imageSelected = 0
+          this.getSlidersList()
         })
       $('#modal').modal('hide')
     },

@@ -82,9 +82,9 @@ Route::post('/show-slider-images', [
     DataProviderController::class,
     'showSliderImages',
 ]);
-Route::post('/update-slider-image/{id}', [
+Route::post('/update-slider-image', [
     DataProviderController::class,
-    'updateSliderImages',
+    'updateSliderImage',
 ]);
 
 Route::get('/{vue_capture?}', function () {

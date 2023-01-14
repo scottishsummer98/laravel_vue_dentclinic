@@ -10,6 +10,7 @@ use App\Models\Slider;
 use App\Models\Team;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DataProviderController extends Controller
 {
@@ -268,7 +269,15 @@ class DataProviderController extends Controller
         return Slider::get();
     }
 
-    // public function updateSliderImages(Request $request, Slider $id)
-    // {
-    // }
+    public function updateSliderImage(Request $request)
+    {
+        $sliderimageid = Slider::where('id', $request->id)->first();
+        $newSliderImage = null;
+        if ($request->SliderPictureEdit) {
+            Storage::delete($sliderimageid->sliderPicture);
+            $newSliderImage = $request->SliderPictureEdit->store(
+                '/sliders/' . date('Y') . '/' . date('m')
+            );
+        }
+    }
 }
