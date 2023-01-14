@@ -278,6 +278,9 @@ class DataProviderController extends Controller
             $newSliderImage = $request->SliderPictureEdit->store(
                 '/sliders/' . date('Y') . '/' . date('m')
             );
+            Slider::where('id', $sliderimageid->id)->update([
+                'sliderPicture' => $newSliderImage,
+            ]);
         }
     }
 }

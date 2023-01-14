@@ -65,7 +65,7 @@
             class="img-fluid SliderPictureTable"
           />
         </td>
-        <td>
+        <td style="text-align: center;">
           <button
             style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
             class="btn btn-primary"
@@ -128,7 +128,10 @@
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm" @click="updateSliderImage">
+            <button
+              class="btn btn-primary btn-sm"
+              @click="updateSliderImage(editingItem.id)"
+            >
               Update
             </button>
           </div>
@@ -188,15 +191,15 @@ export default {
         fr.readAsDataURL(src.files[0])
       })
     },
-    updateSliderImage() {
+    updateSliderImage(item) {
       this.errors = {}
       let myForm = document.getElementById('myEditForm')
       let formData = new FormData(myForm)
-      formData.append('id', this.formData.id)
+      formData.append('id', item)
       axios
         .post(`/update-slider-image`, formData)
         .then((response) => {
-          // window.location.reload()
+          window.location.reload()
           for (let key in this.formData) {
             if (key == 'sliderPicture') {
               this.formData[key] = 'images/image-icon.jpg'
@@ -226,9 +229,7 @@ export default {
       axios
         .post(`/save-slider-image`, formData)
         .then((response) => {
-          this.clear()
-          showSuccess('Slider Image Saved')
-          this.isSubmitted = 0
+          window.location.reload()
           for (let key in this.formData) {
             if (key == 'SliderPicture') {
               this.formData[key] = '../../images/image-icon.jpg'
