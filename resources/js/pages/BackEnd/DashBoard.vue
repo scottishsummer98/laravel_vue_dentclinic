@@ -55,6 +55,7 @@
       <tr>
         <th style="text-align: center;">SL No.</th>
         <th style="text-align: center;">Slider Image</th>
+        <th style="text-align: center;">Action</th>
       </tr>
       <tr v-for="(item, index) in sliderList" :key="index">
         <td style="text-align: center;">{{ index + 1 }}</td>
@@ -64,8 +65,81 @@
             class="img-fluid SliderPictureTable"
           />
         </td>
+        <td>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-primary"
+            @click="edit(item)"
+          >
+            Edit
+          </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="edit(item)"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </table>
+  </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="myEditForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Edit Slider Image</h4>
+            <div class="card-body">
+              <div v-if="!imageSelectedEdit">
+                <img
+                  :src="`storage/${editingItem.sliderPicture}`"
+                  class="img-fluid SliderPictureEdit"
+                />
+              </div>
+              <div
+                class="SliderPictureEdit"
+                :class="!imageSelectedEdit ? 'hidden' : ''"
+              >
+                <img
+                  :src="`/${editingItem.sliderPictureEdit}`"
+                  id="target1"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="form-group mt-5">
+                <input
+                  type="file"
+                  class="form-control"
+                  name="SliderPictureEdit"
+                  id="src1"
+                  @input="showSliderImage"
+                />
+              </div>
+              <label for="SliderPictureEdit">
+                Slider Image
+              </label>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary btn-sm" @click="updateSliderImage">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -80,10 +154,31 @@ export default {
       errors: {},
       sliderList: [],
       imageSelected: 0,
+      imageSelectedEdit: 0,
+      editingItem: {},
     }
   },
   computed: {},
   methods: {
+    edit(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+        this.imageSelectedEdit = 0
+      }
+      $('.modal').modal('toggle')
+    },
+    showSliderImage() {
+      this.imageSelectedEdit = 1
+      var src = document.getElementById('src1')
+      var target = document.getElementById('target1')
+      var fr = new FileReader()
+      fr.onload = function (e) {
+        target.src = this.result
+      }
+      src.addEventListener('change', function () {
+        fr.readAsDataURL(src.files[0])
+      })
+    },
     showImage() {
       this.imageSelected = 1
       var src = document.getElementById('src')
@@ -97,6 +192,36 @@ export default {
       src.addEventListener('change', function () {
         fr.readAsDataURL(src.files[0])
       })
+    },
+    updateSliderImage() {
+      this.errors = {}
+      let myForm = document.getElementById('myEditForm')
+      let formData = new FormData(myForm)
+      formData.append('id', this.formData.id)
+      axios
+        .post(`/update-slider-image`, formData)
+        .then((response) => {
+          window.location.reload()
+          for (let key in this.formData) {
+            if (key == 'sliderPicture') {
+              this.formData[key] = 'images/image-icon.jpg'
+              this.imageSelected = 0
+            } else {
+              this.formData[key] = ''
+            }
+          }
+          var src = document.getElementById('src1')
+          src.value = ''
+          this.imageSelected = 0
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+          this.imageSelected = 0
+        })
+      $('#modal').modal('hide')
     },
     submit() {
       this.errors = {}
@@ -152,13 +277,17 @@ export default {
   border: 1px solid #ededed;
   margin-bottom: 15px;
   width: 20rem;
-  width: 20rem;
+}
+.SliderPictureEdit {
+  padding: 15px;
+  border: 1px solid #ededed;
+  margin-bottom: 15px;
+  width: 40rem;
 }
 .SliderPictureTable {
   padding: 10px;
   border: 1px solid #ededed;
   margin-bottom: 15px;
-  width: 10rem;
   width: 10rem;
 }
 .hidden {

@@ -267,4 +267,8 @@ class DataProviderController extends Controller
     {
         return Slider::get();
     }
+
+    // public function updateSliderImages(Request $request, Slider $id)
+    // {
+    // }
 }
