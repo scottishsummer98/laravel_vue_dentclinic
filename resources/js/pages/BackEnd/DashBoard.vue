@@ -76,6 +76,7 @@
           <button
             style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
             class="btn btn-danger"
+            @click="destroy(item)"
           >
             Delete
           </button>
@@ -89,13 +90,14 @@
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <form
           @submit.prevent
           method="post"
-          id="myEditForm"
+          id="editForm"
           enctype="multipart/form-data"
         >
           <div class="card">
@@ -122,9 +124,6 @@
                   @input="showSliderImage"
                 />
               </div>
-              <label for="SliderPictureEdit">
-                Slider Image
-              </label>
             </div>
           </div>
           <div class="card-footer">
@@ -133,6 +132,48 @@
               @click="updateSliderImage(editingItem.id)"
             >
               Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Delete Slider Image?</h4>
+            <div class="card-body">
+              <div>
+                <img
+                  :src="`storage/${editingItem.sliderPicture}`"
+                  class="img-fluid SliderPictureEdit"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-success" data-dismiss="modal">
+              No
+            </button>
+            <button
+              class="btn btn-danger"
+              @click="deleteSliderImage(editingItem.id)"
+            >
+              Yes
             </button>
           </div>
         </form>
@@ -163,7 +204,13 @@ export default {
         this.editingItem[index] = item[index]
         this.imageSelectedEdit = 0
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
+    },
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
     },
     showSliderImage() {
       this.imageSelectedEdit = 1
@@ -193,7 +240,7 @@ export default {
     },
     updateSliderImage(item) {
       this.errors = {}
-      let myForm = document.getElementById('myEditForm')
+      let myForm = document.getElementById('editForm')
       let formData = new FormData(myForm)
       formData.append('id', item)
       axios
@@ -220,7 +267,26 @@ export default {
           this.imageSelected = 0
           this.getSlidersList()
         })
-      $('#modal').modal('hide')
+      $('#editModal').modal('hide')
+    },
+    deleteSliderImage(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-slider-image`, formData)
+        .then((response) => {
+          window.location.reload()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+          this.getSlidersList()
+        })
+      $('#deleteModal').modal('hide')
     },
     submit() {
       this.errors = {}
