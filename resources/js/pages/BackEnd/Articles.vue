@@ -233,6 +233,48 @@
       </div>
     </div>
   </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Delete Article?</h4>
+            <div class="card-body">
+              <div>
+                <img
+                  :src="`storage/${editingItem.articleImage}`"
+                  class="img-fluid SliderPictureEdit"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-success" data-dismiss="modal">
+              No
+            </button>
+            <button
+              class="btn btn-danger"
+              @click="deleteArticle(editingItem.id)"
+            >
+              Yes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -334,6 +376,12 @@ export default {
       }
       $('#editModal').modal('toggle')
     },
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
+    },
     updateArticle(item) {
       this.errors = {}
       let myForm = document.getElementById('editForm')
@@ -368,6 +416,24 @@ export default {
           this.imageSelectedEdit = 0
         })
       $('#editModal').modal('hide')
+    },
+    deleteArticle(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-article`, formData)
+        .then((response) => {
+          this.getArticlesList()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+        })
+      $('#deleteModal').modal('hide')
     },
     getArticlesList(page = 1) {
       axios

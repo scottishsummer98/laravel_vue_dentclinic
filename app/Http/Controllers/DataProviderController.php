@@ -269,6 +269,12 @@ class DataProviderController extends Controller
         }
         return response(['message' => 'Article Updated!']);
     }
+    public function deleteArticle(Request $request)
+    {
+        $articleid = Article::where('id', $request->id)->first();
+        Storage::delete($articleid->articleImage);
+        Article::destroy('id', $articleid->id);
+    }
     public function saveSliderImage(Request $request)
     {
         $sliderPicture = null;

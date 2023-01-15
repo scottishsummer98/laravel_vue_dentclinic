@@ -74,6 +74,10 @@ Route::post('/update-article', [
     DataProviderController::class,
     'updateArticle',
 ]);
+Route::post('/delete-article', [
+    DataProviderController::class,
+    'deleteArticle',
+]);
 Route::post('/save-slider-image', [
     DataProviderController::class,
     'saveSliderImage',
