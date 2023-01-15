@@ -113,7 +113,7 @@
                 class="SliderPictureEdit"
                 :class="!imageSelectedEdit ? 'hidden' : ''"
               >
-                <img id="target1" class="img-fluid" />
+                <img src id="target1" class="img-fluid" />
               </div>
               <div class="form-group mt-5">
                 <input
@@ -246,7 +246,7 @@ export default {
       axios
         .post(`/update-slider-image`, formData)
         .then((response) => {
-          window.location.reload()
+          showSuccess('Slider Image Updated')
           for (let key in this.formData) {
             if (key == 'sliderPicture') {
               this.formData[key] = 'images/image-icon.jpg'
@@ -258,6 +258,7 @@ export default {
           var src = document.getElementById('src1')
           src.value = ''
           this.imageSelected = 0
+          this.getSlidersList()
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -265,7 +266,6 @@ export default {
           }
           showError(err.response.data.message)
           this.imageSelected = 0
-          this.getSlidersList()
         })
       $('#editModal').modal('hide')
     },

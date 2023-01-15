@@ -70,9 +70,9 @@ Route::post('/update-contact/{id}', [
 ]);
 Route::post('/save-articles', [DataProviderController::class, 'saveArticle']);
 Route::post('/show-articles', [DataProviderController::class, 'showArticles']);
-Route::post('/update-article/{id}', [
+Route::post('/update-article', [
     DataProviderController::class,
-    'updateArticles',
+    'updateArticle',
 ]);
 Route::post('/save-slider-image', [
     DataProviderController::class,

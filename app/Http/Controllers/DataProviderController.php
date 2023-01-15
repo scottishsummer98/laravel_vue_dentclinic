@@ -245,10 +245,28 @@ class DataProviderController extends Controller
         return $articles;
     }
 
-    public function updateArticles(Request $request, Article $id)
+    public function updateArticle(Request $request)
     {
-        $id->update($request->all());
-
+        $articleid = Article::where('id', $request->id)->first();
+        $articleImage = null;
+        if ($request->ArticleImage) {
+            Storage::delete($articleid->articleImage);
+            $articleImage = $request->ArticleImage->store(
+                '/article/' . date('Y') . '/' . date('m')
+            );
+            Article::where('id', $articleid->id)->update([
+                'author' => $request->author,
+                'title' => $request->title,
+                'description' => $request->description,
+                'articleImage' => $articleImage,
+            ]);
+        } else {
+            Article::where('id', $articleid->id)->update([
+                'author' => $request->author,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+        }
         return response(['message' => 'Article Updated!']);
     }
     public function saveSliderImage(Request $request)

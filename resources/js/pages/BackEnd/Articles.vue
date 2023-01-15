@@ -126,6 +126,13 @@
           >
             Edit
           </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="destroy(item)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>
@@ -149,13 +156,14 @@
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <form
           @submit.prevent
           method="post"
-          id="myEditForm"
+          id="editForm"
           enctype="multipart/form-data"
         >
           <div class="card">
@@ -197,22 +205,27 @@
                       class="ArticleImage"
                       :class="!imageSelectedEdit ? 'hidden' : ''"
                     >
-                      <img
-                        :src="`/${editingItem.ArticleImage}`"
-                        id="target3"
-                        class="img-fluid"
+                      <img src id="target1" class="img-fluid" />
+                    </div>
+                    <div class="form-group mt-5">
+                      <input
+                        type="file"
+                        class="form-control"
+                        name="ArticleImage"
+                        id="src1"
+                        @input="showImageEdit"
                       />
                     </div>
-                    <label for="BeforeOperationImage">
-                      Article Image
-                    </label>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm" @click="update">
+            <button
+              class="btn btn-primary btn-sm"
+              @click="updateArticle(editingItem.id)"
+            >
               Update
             </button>
           </div>
@@ -265,6 +278,20 @@ export default {
         fr.readAsDataURL(src.files[0])
       })
     },
+    showImageEdit() {
+      this.imageSelectedEdit = 1
+      var src = document.getElementById('src1')
+      var target = document.getElementById('target1')
+
+      var fr = new FileReader()
+
+      fr.onload = function (e) {
+        target.src = this.result
+      }
+      src.addEventListener('change', function () {
+        fr.readAsDataURL(src.files[0])
+      })
+    },
     submit() {
       this.errors = {}
       let myForm = document.getElementById('myForm')
@@ -305,20 +332,42 @@ export default {
         this.editingItem[index] = item[index]
         this.imageSelectedEdit = 0
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
     },
-    update() {
+    updateArticle(item) {
+      this.errors = {}
+      let myForm = document.getElementById('editForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      formData.append('author', this.editingItem.author)
+      formData.append('title', this.editingItem.title)
+      formData.append('description', this.editingItem.description)
+
       axios
-        .post(`/update-article/${this.editingItem.id}`, this.editingItem)
-        .then((res) => {
+        .post(`/update-article`, formData)
+        .then((response) => {
           showSuccess('Article Updated')
-          this.clear()
+          for (let key in this.formData) {
+            if (key == 'ArticleImage') {
+              this.formData[key] = '../../images/image-icon.jpg'
+              this.imageSelectedEdit = 0
+            } else {
+              this.formData[key] = ''
+            }
+          }
+          var src = document.getElementById('src1')
+          src.value = ''
+          this.imageSelectedEdit = 0
           this.getArticlesList()
         })
         .catch((err) => {
-          showError('Failed To Update Article')
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+          this.imageSelectedEdit = 0
         })
-      $('.modal').modal('hide')
+      $('#editModal').modal('hide')
     },
     getArticlesList(page = 1) {
       axios
