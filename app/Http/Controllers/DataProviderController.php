@@ -283,4 +283,10 @@ class DataProviderController extends Controller
             ]);
         }
     }
+    public function deleteSliderImage(Request $request)
+    {
+        $sliderimageid = Slider::where('id', $request->id)->first();
+        Storage::delete($sliderimageid->sliderPicture);
+        Slider::destroy('id', $sliderimageid->id);
+    }
 }

@@ -86,6 +86,10 @@ Route::post('/update-slider-image', [
     DataProviderController::class,
     'updateSliderImage',
 ]);
+Route::post('/delete-slider-image', [
+    DataProviderController::class,
+    'deleteSliderImage',
+]);
 
 Route::get('/{vue_capture?}', function () {
     return redirect('/');
