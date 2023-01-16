@@ -26,65 +26,9 @@ Route::get('/admin', [
     'index',
 ])->name('admin');
 
-Route::post('/save-team', [DataProviderController::class, 'saveTeam']);
-Route::post('/show-teams', [DataProviderController::class, 'showTeams']);
-Route::post('/update-team/{id}', [DataProviderController::class, 'updateTeam']);
-
-Route::post('/save-services', [DataProviderController::class, 'saveService']);
-Route::post('/show-services', [DataProviderController::class, 'showServices']);
-Route::post('/update-service/{id}', [
-    DataProviderController::class,
-    'updateServices',
-]);
-Route::post('/save-treatments', [
-    DataProviderController::class,
-    'saveTreatment',
-]);
-Route::post('/show-treatments', [
-    DataProviderController::class,
-    'showTreatments',
-]);
-Route::post('/update-treatment/{id}', [
-    DataProviderController::class,
-    'updateTreatments',
-]);
-
-Route::post('/save-moreDetail', [
-    DataProviderController::class,
-    'saveMoreDetail',
-]);
-Route::post('/show-moreDetails', [
-    DataProviderController::class,
-    'showMoreDetails',
-]);
-Route::post('/update-moreDetail/{id}', [
-    DataProviderController::class,
-    'updateMoreDetail',
-]);
-
-Route::post('/save-contacts', [DataProviderController::class, 'saveContact']);
-Route::post('/show-contacts', [DataProviderController::class, 'showContacts']);
-Route::post('/update-contact/{id}', [
-    DataProviderController::class,
-    'updateContacts',
-]);
-Route::post('/save-articles', [DataProviderController::class, 'saveArticle']);
-Route::post('/show-articles', [DataProviderController::class, 'showArticles']);
-Route::post('/update-article', [
-    DataProviderController::class,
-    'updateArticle',
-]);
-Route::post('/delete-article', [
-    DataProviderController::class,
-    'deleteArticle',
-]);
 Route::post('/save-slider-image', [
     DataProviderController::class,
     'saveSliderImage',
-]);
-Route::post('/show-slider-images', [
-    DataProviderController::class,
-    'showSliderImages',
 ]);
 Route::post('/update-slider-image', [
     DataProviderController::class,
@@ -94,6 +38,66 @@ Route::post('/delete-slider-image', [
     DataProviderController::class,
     'deleteSliderImage',
 ]);
+Route::post('/show-slider-images', [
+    DataProviderController::class,
+    'showSliderImages',
+]);
+
+Route::post('/save-team', [DataProviderController::class, 'saveTeam']);
+// Route::post('/update-team', [DataProviderController::class, 'updateTeam']);
+// Route::post('/delete-team', [DataProviderController::class, 'deleteTeam']);
+Route::post('/show-teams', [DataProviderController::class, 'showTeams']);
+
+Route::post('/save-services', [DataProviderController::class, 'saveService']);
+Route::post('/update-service/{id}', [
+    DataProviderController::class,
+    'updateServices',
+]);
+Route::post('/show-services', [DataProviderController::class, 'showServices']);
+
+Route::post('/save-treatments', [
+    DataProviderController::class,
+    'saveTreatment',
+]);
+Route::post('/update-treatment/{id}', [
+    DataProviderController::class,
+    'updateTreatments',
+]);
+Route::post('/show-treatments', [
+    DataProviderController::class,
+    'showTreatments',
+]);
+
+Route::post('/save-moreDetail', [
+    DataProviderController::class,
+    'saveMoreDetail',
+]);
+Route::post('/update-moreDetail/{id}', [
+    DataProviderController::class,
+    'updateMoreDetail',
+]);
+Route::post('/show-moreDetails', [
+    DataProviderController::class,
+    'showMoreDetails',
+]);
+
+Route::post('/save-contacts', [DataProviderController::class, 'saveContact']);
+Route::post('/update-contact/{id}', [
+    DataProviderController::class,
+    'updateContacts',
+]);
+Route::post('/show-contacts', [DataProviderController::class, 'showContacts']);
+
+Route::post('/save-articles', [DataProviderController::class, 'saveArticle']);
+Route::post('/update-article', [
+    DataProviderController::class,
+    'updateArticle',
+]);
+Route::post('/delete-article', [
+    DataProviderController::class,
+    'deleteArticle',
+]);
+Route::post('/show-articles', [DataProviderController::class, 'showArticles']);
 
 Route::get('/{vue_capture?}', function () {
     return redirect('/');

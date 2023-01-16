@@ -220,14 +220,14 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <button
-              class="btn btn-primary btn-sm"
-              @click="updateArticle(editingItem.id)"
-            >
-              Update
-            </button>
+            <div class="card-footer">
+              <button
+                class="btn btn-primary btn-sm"
+                @click="updateArticle(editingItem.id)"
+              >
+                Update
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -451,6 +451,7 @@ export default {
         author: '',
         title: '',
         description: '',
+        ArticleImage: 'images/image-icon.jpg',
       }),
         (this.editingItem = {
           author: '',

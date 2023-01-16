@@ -14,6 +14,43 @@ use Illuminate\Support\Facades\Storage;
 
 class DataProviderController extends Controller
 {
+    public function saveSliderImage(Request $request)
+    {
+        $sliderPicture = null;
+        if ($request->SliderPicture) {
+            $sliderPicture = $request->SliderPicture->store(
+                '/sliders/' . date('Y') . '/' . date('m')
+            );
+        }
+        Slider::create([
+            'sliderPicture' => $sliderPicture,
+        ]);
+    }
+    public function updateSliderImage(Request $request)
+    {
+        $sliderimageid = Slider::where('id', $request->id)->first();
+        $newSliderImage = null;
+        if ($request->SliderPictureEdit) {
+            Storage::delete($sliderimageid->sliderPicture);
+            $newSliderImage = $request->SliderPictureEdit->store(
+                '/sliders/' . date('Y') . '/' . date('m')
+            );
+            Slider::where('id', $sliderimageid->id)->update([
+                'sliderPicture' => $newSliderImage,
+            ]);
+        }
+    }
+    public function deleteSliderImage(Request $request)
+    {
+        $sliderimageid = Slider::where('id', $request->id)->first();
+        Storage::delete($sliderimageid->sliderPicture);
+        Slider::destroy('id', $sliderimageid->id);
+    }
+    public function showSliderImages(Request $request)
+    {
+        return Slider::get();
+    }
+
     public function saveTeam(Request $request)
     {
         $request->validate([
@@ -43,17 +80,46 @@ class DataProviderController extends Controller
             'gmaillink' => $request->gmaillink,
         ]);
     }
-
+    // public function updateTeam(Request $request)
+    // {
+    //     $teamid = Team::where('id', $request->id)->first();
+    //     $profilePicture = null;
+    //     if ($request->ProfilePicture) {
+    //         Storage::delete($teamid->profilePicture);
+    //         $profilePicture = $request->ProfilePicture->store(
+    //             '/team/' . date('Y') . '/' . date('m')
+    //         );
+    //         Team::where('id', $teamid->id)->update([
+    //             'name' => $request->name,
+    //             'desig' => $request->desig,
+    //             'bio' => $request->bio,
+    //             'profilePicture' => $profilePicture,
+    //             'fblink' => $request->fblink,
+    //             'twitterlink' => $request->twitterlink,
+    //             'linkedinlink' => $request->linkedinlink,
+    //             'gmaillink' => $request->gmaillink,
+    //         ]);
+    //     } else {
+    //         Team::where('id', $teamid->id)->update([
+    //             'name' => $request->name,
+    //             'desig' => $request->desig,
+    //             'bio' => $request->bio,
+    //             'fblink' => $request->fblink,
+    //             'twitterlink' => $request->twitterlink,
+    //             'linkedinlink' => $request->linkedinlink,
+    //             'gmaillink' => $request->gmaillink,
+    //         ]);
+    //     }
+    // }
+    // public function deleteTeam(Request $request)
+    // {
+    //     $teamid = Team::where('id', $request->id)->first();
+    //     Storage::delete($teamid->profilePicture);
+    //     Team::destroy('id', $teamid->id);
+    // }
     public function showTeams(Request $request)
     {
         return Team::get();
-    }
-
-    public function updateTeam(Request $request, Team $id)
-    {
-        $id->update($request->all());
-
-        return response(['message' => 'Team Member Updated!']);
     }
 
     public function saveService(Request $request)
@@ -68,17 +134,15 @@ class DataProviderController extends Controller
             'price' => $request->price,
         ]);
     }
-
-    public function showServices(Request $request)
-    {
-        return Service::get();
-    }
-
     public function updateServices(Request $request, Service $id)
     {
         $id->update($request->all());
 
         return response(['message' => 'Service Updated!']);
+    }
+    public function showServices(Request $request)
+    {
+        return Service::get();
     }
 
     public function saveTreatment(Request $request)
@@ -109,18 +173,17 @@ class DataProviderController extends Controller
             'afterOperationImage' => $afterOperationImage,
         ]);
     }
-
-    public function showTreatments(Request $request)
-    {
-        return Treatment::get();
-    }
-
     public function updateTreatments(Request $request, Treatment $id)
     {
         $id->update($request->all());
 
         return response(['message' => 'Treatment Updated!']);
     }
+    public function showTreatments(Request $request)
+    {
+        return Treatment::get();
+    }
+
     public function saveMoreDetail(Request $request)
     {
         $request->validate([
@@ -133,7 +196,12 @@ class DataProviderController extends Controller
             'topic' => $request->topic,
         ]);
     }
+    public function updateMoreDetail(Request $request, More $id)
+    {
+        $id->update($request->all());
 
+        return response(['message' => 'More Updated!']);
+    }
     public function showMoreDetails(Request $request)
     {
         if ($request->topictype) {
@@ -154,12 +222,6 @@ class DataProviderController extends Controller
         return $more;
     }
 
-    public function updateMoreDetail(Request $request, More $id)
-    {
-        $id->update($request->all());
-
-        return response(['message' => 'More Updated!']);
-    }
     public function saveContact(Request $request)
     {
         $request->validate([
@@ -178,17 +240,15 @@ class DataProviderController extends Controller
             'visitingtime' => $request->visitingtime,
         ]);
     }
-
-    public function showContacts(Request $request)
-    {
-        return Contact::get();
-    }
-
     public function updateContacts(Request $request, Contact $id)
     {
         $id->update($request->all());
 
         return response(['message' => 'Contact Updated!']);
+    }
+    public function showContacts(Request $request)
+    {
+        return Contact::get();
     }
 
     public function saveArticle(Request $request)
@@ -213,7 +273,35 @@ class DataProviderController extends Controller
             'articleImage' => $articleImage,
         ]);
     }
-
+    public function updateArticle(Request $request)
+    {
+        $articleid = Article::where('id', $request->id)->first();
+        $articleImage = null;
+        if ($request->ArticleImage) {
+            Storage::delete($articleid->articleImage);
+            $articleImage = $request->ArticleImage->store(
+                '/article/' . date('Y') . '/' . date('m')
+            );
+            Article::where('id', $articleid->id)->update([
+                'author' => $request->author,
+                'title' => $request->title,
+                'description' => $request->description,
+                'articleImage' => $articleImage,
+            ]);
+        } else {
+            Article::where('id', $articleid->id)->update([
+                'author' => $request->author,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+        }
+    }
+    public function deleteArticle(Request $request)
+    {
+        $articleid = Article::where('id', $request->id)->first();
+        Storage::delete($articleid->articleImage);
+        Article::destroy('id', $articleid->id);
+    }
     public function showArticles(Request $request)
     {
         if ($request->type) {
@@ -243,74 +331,5 @@ class DataProviderController extends Controller
         }
 
         return $articles;
-    }
-
-    public function updateArticle(Request $request)
-    {
-        $articleid = Article::where('id', $request->id)->first();
-        $articleImage = null;
-        if ($request->ArticleImage) {
-            Storage::delete($articleid->articleImage);
-            $articleImage = $request->ArticleImage->store(
-                '/article/' . date('Y') . '/' . date('m')
-            );
-            Article::where('id', $articleid->id)->update([
-                'author' => $request->author,
-                'title' => $request->title,
-                'description' => $request->description,
-                'articleImage' => $articleImage,
-            ]);
-        } else {
-            Article::where('id', $articleid->id)->update([
-                'author' => $request->author,
-                'title' => $request->title,
-                'description' => $request->description,
-            ]);
-        }
-        return response(['message' => 'Article Updated!']);
-    }
-    public function deleteArticle(Request $request)
-    {
-        $articleid = Article::where('id', $request->id)->first();
-        Storage::delete($articleid->articleImage);
-        Article::destroy('id', $articleid->id);
-    }
-    public function saveSliderImage(Request $request)
-    {
-        $sliderPicture = null;
-        if ($request->SliderPicture) {
-            $sliderPicture = $request->SliderPicture->store(
-                '/sliders/' . date('Y') . '/' . date('m')
-            );
-        }
-        Slider::create([
-            'sliderPicture' => $sliderPicture,
-        ]);
-    }
-
-    public function showSliderImages(Request $request)
-    {
-        return Slider::get();
-    }
-
-    public function updateSliderImage(Request $request)
-    {
-        $sliderimageid = Slider::where('id', $request->id)->first();
-        $newSliderImage = null;
-        if ($request->SliderPictureEdit) {
-            Storage::delete($sliderimageid->sliderPicture);
-            $newSliderImage = $request->SliderPictureEdit->store(
-                '/sliders/' . date('Y') . '/' . date('m')
-            );
-            Slider::where('id', $sliderimageid->id)->update([
-                'sliderPicture' => $newSliderImage,
-            ]);
-        }
-    }
-    public function deleteSliderImage(Request $request)
-    {
-        $sliderimageid = Slider::where('id', $request->id)->first();
-        Storage::delete($sliderimageid->sliderPicture);
-        Slider::destroy('id', $sliderimageid->id);
     }
 }

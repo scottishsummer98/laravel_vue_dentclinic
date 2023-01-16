@@ -187,123 +187,181 @@
           >
             Edit
           </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="destroy(item)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>
   </div>
-
   <div
     class="modal fade bd-example-modal-lg"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="card">
-          <h4 class="card-header">Edit Team Member</h4>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                  <label for="name">Doctor Name</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="editingItem.name"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="desig">Doctor Designation</label>
-                  <textarea
-                    class="form-control"
-                    type="text"
-                    rows="7"
-                    v-model="editingItem.desig"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div>
-                  <div v-if="!imageSelectedEdit">
-                    <img
-                      :src="`../storage/${editingItem.profilePicture}`"
-                      class="img-fluid PrpfilePicture"
+        <form
+          @submit.prevent
+          method="post"
+          id="editForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Edit Team Member</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="name">Doctor Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.name"
                     />
                   </div>
-                  <div
-                    class="PrpfilePicture"
-                    :class="!imageSelectedEdit ? 'hidden' : ''"
-                  >
-                    <img
-                      :src="`/${editingItem.profilePicture}`"
-                      id="target"
-                      class="img-fluid"
-                    />
+                  <div class="form-group">
+                    <label for="desig">Doctor Designation</label>
+                    <textarea
+                      class="form-control"
+                      type="text"
+                      rows="7"
+                      v-model="editingItem.desig"
+                    ></textarea>
                   </div>
-                  <label for="ProfilePicture">
-                    Profile Picture
-                  </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div>
+                    <div v-if="!imageSelectedEdit">
+                      <img
+                        :src="`../storage/${editingItem.profilePicture}`"
+                        class="img-fluid ProfilePicture"
+                      />
+                    </div>
+                    <div
+                      class="ProfilePicture"
+                      :class="!imageSelectedEdit ? 'hidden' : ''"
+                    >
+                      <img src id="target1" class="img-fluid" />
+                    </div>
+                    <div class="form-group mt-5">
+                      <input
+                        type="file"
+                        class="form-control"
+                        name="ProfilePicture"
+                        id="src1"
+                        @input="showImageEdit"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="bio">Short Bio</label>
+                    <textarea
+                      class="form-control"
+                      type="text"
+                      rows="6"
+                      v-model="editingItem.bio"
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label for="bio">Short Bio</label>
-                  <textarea
-                    class="form-control"
-                    type="text"
-                    rows="6"
-                    v-model="editingItem.bio"
-                  ></textarea>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="fblink">Facebook Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.fblink"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="linkedinlink">Linkedin Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.linkedinlink"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="twitterlink">Twitter Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.twitterlink"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="gmaillink">Gmail Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.gmaillink"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                  <label for="fblink">Facebook Link</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="editingItem.fblink"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="linkedinlink">Linkedin Link</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="editingItem.linkedinlink"
-                  />
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                  <label for="twitterlink">Twitter Link</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="editingItem.twitterlink"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="gmaillink">Gmail Link</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="editingItem.gmaillink"
-                  />
-                </div>
+            <div class="card-footer">
+              <button
+                class="btn btn-primary btn-sm"
+                @click="updateTeam(editingItem.id)"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Delete Team?</h4>
+            <div class="card-body">
+              <div>
+                <img
+                  :src="`../storage/${editingItem.profilePicture}`"
+                  class="img-fluid ProfilePicture"
+                />
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm" @click="update">
-              Update
+            <button class="btn btn-success" data-dismiss="modal">
+              No
+            </button>
+            <button class="btn btn-danger" @click="deleteTeam(editingItem.id)">
+              Yes
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -327,6 +385,7 @@ export default {
       errors: {},
       teamList: [],
       imageSelected: 0,
+      imageSelectedEdit: 0,
       editingItem: {
         name: '',
         desig: '',
@@ -344,6 +403,20 @@ export default {
       this.imageSelected = 1
       var src = document.getElementById('src')
       var target = document.getElementById('target')
+
+      var fr = new FileReader()
+
+      fr.onload = function (e) {
+        target.src = this.result
+      }
+      src.addEventListener('change', function () {
+        fr.readAsDataURL(src.files[0])
+      })
+    },
+    showImageEdit() {
+      this.imageSelectedEdit = 1
+      var src = document.getElementById('src1')
+      var target = document.getElementById('target1')
 
       var fr = new FileReader()
 
@@ -397,20 +470,70 @@ export default {
         this.editingItem[index] = item[index]
         this.imageSelectedEdit = 0
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
     },
-    update() {
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
+    },
+    updateTeam(item) {
+      this.errors = {}
+      let myForm = document.getElementById('editForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      formData.append('name', this.editingItem.name)
+      formData.append('desig', this.editingItem.desig)
+      formData.append('bio', this.editingItem.bio)
+      formData.append('fblink', this.editingItem.fblink)
+      formData.append('linkedinlink', this.editingItem.linkedinlink)
+      formData.append('twitterlink', this.editingItem.twitterlink)
+      formData.append('gmaillink', this.editingItem.gmaillink)
+
       axios
-        .post(`/update-team/${this.editingItem.id}`, this.editingItem)
-        .then((res) => {
-          showSuccess('Team Member Updated!')
-          this.clear()
+        .post(`/update-team`, formData)
+        .then((response) => {
+          showSuccess('Team Updated')
+          for (let key in this.formData) {
+            if (key == 'ProfilePicture') {
+              this.formData[key] = '../../images/image-icon.jpg'
+              this.imageSelectedEdit = 0
+            } else {
+              this.formData[key] = ''
+            }
+          }
+          var src = document.getElementById('src1')
+          src.value = ''
+          this.imageSelectedEdit = 0
           this.getTeamsList()
         })
         .catch((err) => {
-          showError('Failed To Update Team Member')
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+          this.imageSelectedEdit = 0
         })
-      $('.modal').modal('hide')
+      $('#editModal').modal('hide')
+    },
+    deleteTeam(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-team`, formData)
+        .then((response) => {
+          this.getTeamsList()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+        })
+      $('#deleteModal').modal('hide')
     },
     getTeamsList() {
       axios
@@ -431,6 +554,7 @@ export default {
         twitterlink: '',
         linkedinlink: '',
         gmaillink: '',
+        ProfilePicture: 'images/image-icon.jpg',
       }),
         (this.editingItem = {
           name: '',
