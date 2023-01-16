@@ -59,13 +59,17 @@ Route::post('/delete-service', [
 ]);
 Route::post('/show-services', [DataProviderController::class, 'showServices']);
 
-Route::post('/save-treatments', [
+Route::post('/save-treatment', [
     DataProviderController::class,
     'saveTreatment',
 ]);
-Route::post('/update-treatment/{id}', [
+Route::post('/update-treatment', [
     DataProviderController::class,
-    'updateTreatments',
+    'updateTreatment',
+]);
+Route::post('/delete-treatment', [
+    DataProviderController::class,
+    'deleteTreatment',
 ]);
 Route::post('/show-treatments', [
     DataProviderController::class,
@@ -100,7 +104,7 @@ Route::post('/delete-contact', [
 ]);
 Route::post('/show-contacts', [DataProviderController::class, 'showContacts']);
 
-Route::post('/save-articles', [DataProviderController::class, 'saveArticle']);
+Route::post('/save-article', [DataProviderController::class, 'saveArticle']);
 Route::post('/update-article', [
     DataProviderController::class,
     'updateArticle',

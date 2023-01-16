@@ -525,7 +525,7 @@ export default {
       axios
         .post(`/delete-team`, formData)
         .then((response) => {
-          showError('Team Member Deleted!')
+          showSuccess('Team Member Deleted!')
           this.getTeamsList()
         })
         .catch((err) => {

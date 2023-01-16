@@ -258,7 +258,7 @@ export default {
       axios
         .post(`/delete-moreDetail`, formData)
         .then((response) => {
-          showError('Details Deleted!')
+          showSuccess('Details Deleted!')
           this.getmoreTopicList()
         })
         .catch((err) => {

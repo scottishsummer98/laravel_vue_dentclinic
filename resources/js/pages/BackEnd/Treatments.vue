@@ -151,6 +151,13 @@
           >
             Edit
           </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="destroy(item)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>
@@ -161,13 +168,14 @@
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <form
           @submit.prevent
           method="post"
-          id="myEditForm"
+          id="editForm"
           enctype="multipart/form-data"
         >
           <div class="card">
@@ -201,15 +209,15 @@
                       class="BeforeOperationImage"
                       :class="!bimageSelectedEdit ? 'hidden' : ''"
                     >
-                      <img
-                        :src="`/${editingItem.BeforeOperationImageEdit}`"
-                        id="target3"
-                        class="img-fluid"
-                      />
+                      <img src id="target3" class="img-fluid" />
                     </div>
-                    <label for="BeforeOperationImage">
-                      Before Operation Image
-                    </label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="BeforeOperationImage"
+                      id="src3"
+                      @input="showBeforeOpImageEdit"
+                    />
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -224,24 +232,63 @@
                       class="AfterOperationImage"
                       :class="!aimageSelectedEdit ? 'hidden' : ''"
                     >
-                      <img
-                        :src="`/${editingItem.AfterOperationImageEdit}`"
-                        id="target4"
-                        class="img-fluid"
-                      />
+                      <img src id="target4" class="img-fluid" />
                     </div>
-                    <label for="AfterOperationImage">
-                      After Operation Image
-                    </label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="AfterOperationImage"
+                      id="src4"
+                      @input="showAfterOpImageEdit"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm" @click="update">
+            <button
+              class="btn btn-primary btn-sm"
+              @click="updateTreatment(editingItem.id)"
+            >
               Update
             </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">
+              Delete Treatment {{ editingItem.name }}?
+            </h4>
+            <div class="card-footer">
+              <button class="btn btn-success" data-dismiss="modal">
+                No
+              </button>
+              <button
+                class="btn btn-danger"
+                @click="deleteTreatment(editingItem.id)"
+              >
+                Yes
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -302,6 +349,34 @@ export default {
         fr.readAsDataURL(src.files[0])
       })
     },
+    showBeforeOpImageEdit() {
+      this.bimageSelectedEdit = 1
+      var src = document.getElementById('src3')
+      var target = document.getElementById('target3')
+
+      var fr = new FileReader()
+
+      fr.onload = function (e) {
+        target.src = this.result
+      }
+      src.addEventListener('change', function () {
+        fr.readAsDataURL(src.files[0])
+      })
+    },
+    showAfterOpImageEdit() {
+      this.aimageSelectedEdit = 1
+      var src = document.getElementById('src4')
+      var target = document.getElementById('target4')
+
+      var fr = new FileReader()
+
+      fr.onload = function (e) {
+        target.src = this.result
+      }
+      src.addEventListener('change', function () {
+        fr.readAsDataURL(src.files[0])
+      })
+    },
     submit() {
       this.errors = {}
       let myForm = document.getElementById('myForm')
@@ -310,7 +385,7 @@ export default {
       formData.append('description', this.formData.description)
 
       axios
-        .post(`/save-treatments`, formData)
+        .post(`/save-treatment`, formData)
         .then((response) => {
           this.clear()
           showSuccess('Treatment Saved')
@@ -331,8 +406,8 @@ export default {
           }
           var src1 = document.getElementById('src1')
           var src2 = document.getElementById('src2')
-          src1.value = ''
-          src2.value = ''
+          src1.value = 'images/image-icon.jpg'
+          src2.value = 'images/image-icon.jpg'
           this.bimageSelected = 0
           this.aimageSelected = 0
           this.getTreatmentsList()
@@ -352,20 +427,73 @@ export default {
         this.bimageSelectedEdit = 0
         this.aimageSelectedEdit = 0
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
     },
-    update() {
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
+    },
+    updateTreatment(item) {
+      this.errors = {}
+      let myForm = document.getElementById('editForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      formData.append('name', this.editingItem.name)
+      formData.append('description', this.editingItem.description)
+
       axios
-        .post(`/update-treatment/${this.editingItem.id}`, this.editingItem)
-        .then((res) => {
+        .post(`/update-treatment`, formData)
+        .then((response) => {
           showSuccess('Treatment Updated')
-          this.clear()
+          for (let key in this.formData) {
+            if (key == 'BeforeOperationImage') {
+              this.formData[key] = '../../images/image-icon.jpg'
+              this.bimageSelectedEdit = 0
+            } else if (key == 'AfterOperationImage') {
+              this.formData[key] = '../../images/image-icon.jpg'
+              this.aimageSelectedEdit = 0
+            } else {
+              this.formData[key] = ''
+            }
+          }
+          var src1 = document.getElementById('src3')
+          var src2 = document.getElementById('src4')
+          src1.value = ''
+          src2.value = ''
+          this.bimageSelectedEdit = 0
+          this.aimageSelectedEdit = 0
           this.getTreatmentsList()
         })
         .catch((err) => {
-          showError('Failed To Update Treatment')
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+          this.bimageSelectedEdit = 0
+          this.aimageSelectedEdit = 0
         })
-      $('.modal').modal('hide')
+      $('#editModal').modal('hide')
+    },
+    deleteTreatment(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-treatment`, formData)
+        .then((response) => {
+          showSuccess('Treatment Deleted!')
+          this.getTreatmentsList()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+        })
+      $('#deleteModal').modal('hide')
     },
     getTreatmentsList() {
       axios

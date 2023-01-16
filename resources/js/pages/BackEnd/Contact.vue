@@ -322,7 +322,7 @@ export default {
       axios
         .post(`/delete-contact`, formData)
         .then((response) => {
-          showError('Contact Deleted!')
+          showSuccess('Contact Deleted!')
           this.getContactsList()
         })
         .catch((err) => {

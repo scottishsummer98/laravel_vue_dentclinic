@@ -343,7 +343,7 @@ export default {
       formData.append('description', this.formData.description)
 
       axios
-        .post(`/save-articles`, formData)
+        .post(`/save-article`, formData)
         .then((response) => {
           this.clear()
           showSuccess('Article Saved')
@@ -425,7 +425,7 @@ export default {
       axios
         .post(`/delete-article`, formData)
         .then((response) => {
-          showError('Article Deleted!')
+          showSuccess('Article Deleted!')
           this.getArticlesList()
         })
         .catch((err) => {

@@ -229,7 +229,7 @@ export default {
       axios
         .post(`/delete-service`, formData)
         .then((response) => {
-          showError('Service Deleted!')
+          showSuccess('Service Deleted!')
           this.getServicesList()
         })
         .catch((err) => {

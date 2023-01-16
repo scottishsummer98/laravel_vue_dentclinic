@@ -176,11 +176,44 @@ class DataProviderController extends Controller
             'afterOperationImage' => $afterOperationImage,
         ]);
     }
-    public function updateTreatments(Request $request, Treatment $id)
+    public function updateTreatment(Request $request)
     {
-        $id->update($request->all());
-
-        return response(['message' => 'Treatment Updated!']);
+        $treatmentid = Treatment::where('id', $request->id)->first();
+        $beforeOperationImage = null;
+        $afterOperationImage = null;
+        if ($request->BeforeOperationImage) {
+            Storage::delete($treatmentid->beforeOperationImage);
+            $beforeOperationImage = $request->BeforeOperationImage->store(
+                '/treatment/beforeop/' . date('Y') . '/' . date('m')
+            );
+            Treatment::where('id', $treatmentid->id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'beforeOperationImage' => $beforeOperationImage,
+            ]);
+        } elseif ($request->AfterOperationImage) {
+            Storage::delete($treatmentid->afterOperationImage);
+            $afterOperationImage = $request->AfterOperationImage->store(
+                '/treatment/afterop/' . date('Y') . '/' . date('m')
+            );
+            Treatment::where('id', $treatmentid->id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'afterOperationImage' => $afterOperationImage,
+            ]);
+        } else {
+            Treatment::where('id', $treatmentid->id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
+        }
+    }
+    public function deleteTreatment(Request $request)
+    {
+        $treatmentid = Treatment::where('id', $request->id)->first();
+        Storage::delete($treatmentid->beforeOperationImage);
+        Storage::delete($treatmentid->afterOperationImage);
+        Treatment::destroy('id', $treatmentid->id);
     }
     public function showTreatments(Request $request)
     {
