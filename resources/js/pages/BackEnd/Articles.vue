@@ -425,6 +425,7 @@ export default {
       axios
         .post(`/delete-article`, formData)
         .then((response) => {
+          showError('Article Deleted!')
           this.getArticlesList()
         })
         .catch((err) => {

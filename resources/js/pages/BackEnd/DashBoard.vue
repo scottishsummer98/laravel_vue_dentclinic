@@ -277,6 +277,7 @@ export default {
       axios
         .post(`/delete-slider-image`, formData)
         .then((response) => {
+          showError('Slider Image Deleted!')
           window.location.reload()
         })
         .catch((err) => {

@@ -68,17 +68,24 @@
           >
             Edit
           </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="destroy(item)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>
   </div>
-
   <div
     class="modal fade bd-example-modal-lg"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -117,6 +124,40 @@
       </div>
     </div>
   </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Delete {{ editingItem.type }} Service?</h4>
+            <div class="card-footer">
+              <button class="btn btn-success" data-dismiss="modal">
+                No
+              </button>
+              <button
+                class="btn btn-danger"
+                @click="deleteService(editingItem.id)"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -141,7 +182,7 @@ export default {
     save() {
       this.errors = {}
       axios
-        .post(`/save-services`, this.formData)
+        .post(`/save-service`, this.formData)
         .then((res) => {
           this.clear()
           showSuccess('Service Saved')
@@ -159,7 +200,13 @@ export default {
       for (let index in item) {
         this.editingItem[index] = item[index]
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
+    },
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
     },
     update() {
       axios
@@ -172,7 +219,26 @@ export default {
         .catch((err) => {
           showError('Failed To Update Service')
         })
-      $('.modal').modal('hide')
+      $('#editModal').modal('hide')
+    },
+    deleteService(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-service`, formData)
+        .then((response) => {
+          showError('Service Deleted!')
+          this.getServicesList()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+        })
+      $('#deleteModal').modal('hide')
     },
     getServicesList() {
       axios

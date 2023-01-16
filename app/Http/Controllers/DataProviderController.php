@@ -137,8 +137,11 @@ class DataProviderController extends Controller
     public function updateServices(Request $request, Service $id)
     {
         $id->update($request->all());
-
-        return response(['message' => 'Service Updated!']);
+    }
+    public function deleteService(Request $request)
+    {
+        $serviceid = Service::where('id', $request->id)->first();
+        Service::destroy('id', $serviceid->id);
     }
     public function showServices(Request $request)
     {
@@ -202,6 +205,11 @@ class DataProviderController extends Controller
 
         return response(['message' => 'More Updated!']);
     }
+    public function deleteMoreDetail(Request $request)
+    {
+        $moredetailid = More::where('id', $request->id)->first();
+        More::destroy('id', $moredetailid->id);
+    }
     public function showMoreDetails(Request $request)
     {
         if ($request->topictype) {
@@ -240,11 +248,16 @@ class DataProviderController extends Controller
             'visitingtime' => $request->visitingtime,
         ]);
     }
-    public function updateContacts(Request $request, Contact $id)
+    public function updateContact(Request $request, Contact $id)
     {
         $id->update($request->all());
 
         return response(['message' => 'Contact Updated!']);
+    }
+    public function deleteContact(Request $request)
+    {
+        $contactid = Contact::where('id', $request->id)->first();
+        Contact::destroy('id', $contactid->id);
     }
     public function showContacts(Request $request)
     {

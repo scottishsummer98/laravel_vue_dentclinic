@@ -72,6 +72,13 @@
           >
             Edit
           </button>
+          <button
+            style="width: 5rem; height: 2rem; padding: 0; margin-right: 0.5rem;"
+            class="btn btn-danger"
+            @click="destroy(item)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>
@@ -89,13 +96,13 @@
       </template>
     </pagination>
   </div>
-
   <div
     class="modal fade bd-example-modal-lg"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myLargeModalLabel"
     aria-hidden="true"
+    id="editModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -138,6 +145,40 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+    id="deleteModal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form
+          @submit.prevent
+          method="post"
+          id="deleteForm"
+          enctype="multipart/form-data"
+        >
+          <div class="card">
+            <h4 class="card-header">Delete this {{ editingItem.type }}?</h4>
+            <div class="card-footer">
+              <button class="btn btn-success" data-dismiss="modal">
+                No
+              </button>
+              <button
+                class="btn btn-danger"
+                @click="deleteMoreDetail(editingItem.id)"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -188,7 +229,13 @@ export default {
       for (let index in item) {
         this.editingItem[index] = item[index]
       }
-      $('.modal').modal('toggle')
+      $('#editModal').modal('toggle')
+    },
+    destroy(item) {
+      for (let index in item) {
+        this.editingItem[index] = item[index]
+      }
+      $('#deleteModal').modal('toggle')
     },
     update() {
       axios
@@ -201,7 +248,26 @@ export default {
         .catch((err) => {
           showError('Failed To Update Detail Topic')
         })
-      $('.modal').modal('hide')
+      $('#editModal').modal('hide')
+    },
+    deleteMoreDetail(item) {
+      this.errors = {}
+      let myForm = document.getElementById('deleteForm')
+      let formData = new FormData(myForm)
+      formData.append('id', item)
+      axios
+        .post(`/delete-moreDetail`, formData)
+        .then((response) => {
+          showError('Details Deleted!')
+          this.getmoreTopicList()
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            this.errors = err.response.data.errors
+          }
+          showError(err.response.data.message)
+        })
+      $('#deleteModal').modal('hide')
     },
     getmoreTopicList(page = 1) {
       axios

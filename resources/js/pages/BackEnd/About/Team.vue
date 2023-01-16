@@ -494,7 +494,7 @@ export default {
       axios
         .post(`/update-team`, formData)
         .then((response) => {
-          showSuccess('Team Updated')
+          showSuccess('Team Member Updated')
           for (let key in this.formData) {
             if (key == 'ProfilePicture') {
               this.formData[key] = '../../images/image-icon.jpg'
@@ -525,6 +525,7 @@ export default {
       axios
         .post(`/delete-team`, formData)
         .then((response) => {
+          showError('Team Member Deleted!')
           this.getTeamsList()
         })
         .catch((err) => {

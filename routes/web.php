@@ -48,10 +48,14 @@ Route::post('/update-team', [DataProviderController::class, 'updateTeam']);
 Route::post('/delete-team', [DataProviderController::class, 'deleteTeam']);
 Route::post('/show-teams', [DataProviderController::class, 'showTeams']);
 
-Route::post('/save-services', [DataProviderController::class, 'saveService']);
+Route::post('/save-service', [DataProviderController::class, 'saveService']);
 Route::post('/update-service/{id}', [
     DataProviderController::class,
     'updateServices',
+]);
+Route::post('/delete-service', [
+    DataProviderController::class,
+    'deleteService',
 ]);
 Route::post('/show-services', [DataProviderController::class, 'showServices']);
 
@@ -76,15 +80,23 @@ Route::post('/update-moreDetail/{id}', [
     DataProviderController::class,
     'updateMoreDetail',
 ]);
+Route::post('/delete-moreDetail', [
+    DataProviderController::class,
+    'deleteMoreDetail',
+]);
 Route::post('/show-moreDetails', [
     DataProviderController::class,
     'showMoreDetails',
 ]);
 
-Route::post('/save-contacts', [DataProviderController::class, 'saveContact']);
+Route::post('/save-contact', [DataProviderController::class, 'saveContact']);
 Route::post('/update-contact/{id}', [
     DataProviderController::class,
-    'updateContacts',
+    'updateContact',
+]);
+Route::post('/delete-contact', [
+    DataProviderController::class,
+    'deleteContact',
 ]);
 Route::post('/show-contacts', [DataProviderController::class, 'showContacts']);
 
