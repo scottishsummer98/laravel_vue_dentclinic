@@ -44,8 +44,8 @@ Route::post('/show-slider-images', [
 ]);
 
 Route::post('/save-team', [DataProviderController::class, 'saveTeam']);
-// Route::post('/update-team', [DataProviderController::class, 'updateTeam']);
-// Route::post('/delete-team', [DataProviderController::class, 'deleteTeam']);
+Route::post('/update-team', [DataProviderController::class, 'updateTeam']);
+Route::post('/delete-team', [DataProviderController::class, 'deleteTeam']);
 Route::post('/show-teams', [DataProviderController::class, 'showTeams']);
 
 Route::post('/save-services', [DataProviderController::class, 'saveService']);

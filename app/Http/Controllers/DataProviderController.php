@@ -80,43 +80,43 @@ class DataProviderController extends Controller
             'gmaillink' => $request->gmaillink,
         ]);
     }
-    // public function updateTeam(Request $request)
-    // {
-    //     $teamid = Team::where('id', $request->id)->first();
-    //     $profilePicture = null;
-    //     if ($request->ProfilePicture) {
-    //         Storage::delete($teamid->profilePicture);
-    //         $profilePicture = $request->ProfilePicture->store(
-    //             '/team/' . date('Y') . '/' . date('m')
-    //         );
-    //         Team::where('id', $teamid->id)->update([
-    //             'name' => $request->name,
-    //             'desig' => $request->desig,
-    //             'bio' => $request->bio,
-    //             'profilePicture' => $profilePicture,
-    //             'fblink' => $request->fblink,
-    //             'twitterlink' => $request->twitterlink,
-    //             'linkedinlink' => $request->linkedinlink,
-    //             'gmaillink' => $request->gmaillink,
-    //         ]);
-    //     } else {
-    //         Team::where('id', $teamid->id)->update([
-    //             'name' => $request->name,
-    //             'desig' => $request->desig,
-    //             'bio' => $request->bio,
-    //             'fblink' => $request->fblink,
-    //             'twitterlink' => $request->twitterlink,
-    //             'linkedinlink' => $request->linkedinlink,
-    //             'gmaillink' => $request->gmaillink,
-    //         ]);
-    //     }
-    // }
-    // public function deleteTeam(Request $request)
-    // {
-    //     $teamid = Team::where('id', $request->id)->first();
-    //     Storage::delete($teamid->profilePicture);
-    //     Team::destroy('id', $teamid->id);
-    // }
+    public function updateTeam(Request $request)
+    {
+        $teamid = Team::where('id', $request->id)->first();
+        $profilePicture = null;
+        if ($request->ProfilePicture) {
+            Storage::delete($teamid->profilePicture);
+            $profilePicture = $request->ProfilePicture->store(
+                '/team/' . date('Y') . '/' . date('m')
+            );
+            Team::where('id', $teamid->id)->update([
+                'name' => $request->name,
+                'desig' => $request->desig,
+                'bio' => $request->bio,
+                'profilePicture' => $profilePicture,
+                'fblink' => $request->fblink,
+                'twitterlink' => $request->twitterlink,
+                'linkedinlink' => $request->linkedinlink,
+                'gmaillink' => $request->gmaillink,
+            ]);
+        } else {
+            Team::where('id', $teamid->id)->update([
+                'name' => $request->name,
+                'desig' => $request->desig,
+                'bio' => $request->bio,
+                'fblink' => $request->fblink,
+                'twitterlink' => $request->twitterlink,
+                'linkedinlink' => $request->linkedinlink,
+                'gmaillink' => $request->gmaillink,
+            ]);
+        }
+    }
+    public function deleteTeam(Request $request)
+    {
+        $teamid = Team::where('id', $request->id)->first();
+        Storage::delete($teamid->profilePicture);
+        Team::destroy('id', $teamid->id);
+    }
     public function showTeams(Request $request)
     {
         return Team::get();
