@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 16, 2023 at 04:29 PM
+-- Generation Time: Jan 21, 2023 at 03:13 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.27
 
@@ -521,7 +521,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `treatments`
 --
 ALTER TABLE `treatments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
