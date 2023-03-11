@@ -115,6 +115,17 @@ Route::post('/delete-article', [
 ]);
 Route::post('/show-articles', [DataProviderController::class, 'showArticles']);
 
+Route::post('/save-settings', [DataProviderController::class, 'savesettings']);
+Route::post('/update-settings', [
+    DataProviderController::class,
+    'updatesettings',
+]);
+Route::post('/delete-settings', [
+    DataProviderController::class,
+    'deletesettings',
+]);
+Route::post('/show-settings', [DataProviderController::class, 'showsettings']);
+
 Route::get('/{vue_capture?}', function () {
     return redirect('/');
 })->where('vue_capture', '[\/\w\.-]*');

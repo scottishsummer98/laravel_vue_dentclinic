@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Contact;
 use App\Models\More;
 use App\Models\Service;
+use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\Team;
 use App\Models\Treatment;
@@ -377,5 +378,85 @@ class DataProviderController extends Controller
         }
 
         return $articles;
+    }
+
+    public function savesettings(Request $request)
+    {
+        $request->validate([
+            'contactno1' => 'required',
+            'email1' => 'required',
+            'address1' => 'required',
+            'twitterlink' => 'required',
+            'fblink' => 'required',
+            'instagramlink' => 'required',
+            'youtubelink' => 'required',
+        ]);
+
+        $logoPicture = null;
+        if ($request->LogoPicture) {
+            $logoPicture = $request->LogoPicture->store(
+                '/settings/' . date('Y') . '/' . date('m')
+            );
+        }
+        Settings::create([
+            'logo' => $logoPicture,
+            'contactno1' => $request->contactno1,
+            'contactno2' => $request->contactno2,
+            'email1' => $request->email1,
+            'email2' => $request->email2,
+            'address1' => $request->address1,
+            'address2' => $request->address2,
+            'twitterlink' => $request->twitterlink,
+            'fblink' => $request->fblink,
+            'instagramlink' => $request->instagramlink,
+            'youtubelink' => $request->youtubelink,
+        ]);
+    }
+    public function updatesettings(Request $request)
+    {
+        $settingsid = Settings::where('id', $request->id)->first();
+        $logoPicture = null;
+        if ($request->LogoPicture) {
+            Storage::delete($settingsid->logo);
+            $logoPicture = $request->LogoPicture->store(
+                '/settings/' . date('Y') . '/' . date('m')
+            );
+            Settings::where('id', $settingsid->id)->update([
+                'logo' => $logoPicture,
+                'contactno1' => $request->contactno1,
+                'contactno2' => $request->contactno2,
+                'email1' => $request->email1,
+                'email2' => $request->email2,
+                'address1' => $request->address1,
+                'address2' => $request->address2,
+                'twitterlink' => $request->twitterlink,
+                'fblink' => $request->fblink,
+                'instagramlink' => $request->instagramlink,
+                'youtubelink' => $request->youtubelink,
+            ]);
+        } else {
+            Settings::where('id', $settingsid->id)->update([
+                'contactno1' => $request->contactno1,
+                'contactno2' => $request->contactno2,
+                'email1' => $request->email1,
+                'email2' => $request->email2,
+                'address1' => $request->address1,
+                'address2' => $request->address2,
+                'twitterlink' => $request->twitterlink,
+                'fblink' => $request->fblink,
+                'instagramlink' => $request->instagramlink,
+                'youtubelink' => $request->youtubelink,
+            ]);
+        }
+    }
+    public function deletesettings(Request $request)
+    {
+        $settingsid = Settings::where('id', $request->id)->first();
+        Storage::delete($settingsid->logo);
+        Settings::destroy('id', $settingsid->id);
+    }
+    public function showsettings(Request $request)
+    {
+        return Settings::get();
     }
 }

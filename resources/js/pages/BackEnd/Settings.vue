@@ -374,7 +374,7 @@
             <div class="card-footer">
               <button
                 class="btn btn-primary btn-sm"
-                @click="updateTeam(editingItem.id)"
+                @click="updateSettings(editingItem.id)"
               >
                 Update
               </button>
@@ -415,7 +415,10 @@
             <button class="btn btn-success" data-dismiss="modal">
               No
             </button>
-            <button class="btn btn-danger" @click="deleteTeam(editingItem.id)">
+            <button
+              class="btn btn-danger"
+              @click="deleteSettings(editingItem.id)"
+            >
               Yes
             </button>
           </div>
@@ -587,7 +590,7 @@ export default {
         })
       $('#editModal').modal('hide')
     },
-    deleteTeam(item) {
+    deleteSettings(item) {
       this.errors = {}
       let myForm = document.getElementById('deleteForm')
       let formData = new FormData(myForm)
