@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h3>Team Entry</h3>
+      <h3>Settings</h3>
     </div>
     <form
       @submit.prevent
@@ -13,41 +13,79 @@
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-3">
             <div class="form-group">
-              <label for="name">Doctor Name</label>
+              <label for="contactno1">Contact No 1</label>
               <input
                 class="form-control"
                 type="text"
-                :class="errors.hasOwnProperty('name') ? 'is-invalid' : ''"
-                v-model="formData.name"
+                :class="errors.hasOwnProperty('contactno1') ? 'is-invalid' : ''"
+                v-model="formData.contactno1"
               />
-              <span v-if="errors.hasOwnProperty('name')">
-                {{ errors.name[0] }}
+              <span v-if="errors.hasOwnProperty('contactno1')">
+                {{ errors.contactno1[0] }}
               </span>
             </div>
             <div class="form-group">
-              <label for="fblink">Facebook Link</label>
+              <label for="contactno2">Contact No 2 (Optional)</label>
               <input
                 class="form-control"
                 type="text"
-                :class="errors.hasOwnProperty('fblink') ? 'is-invalid' : ''"
-                v-model="formData.fblink"
+                :class="errors.hasOwnProperty('contactno2') ? 'is-invalid' : ''"
+                v-model="formData.contactno2"
               />
-              <span v-if="errors.hasOwnProperty('fblink')">
-                {{ errors.fblink[0] }}
+              <span v-if="errors.hasOwnProperty('contactno2')">
+                {{ errors.contactno2[0] }}
               </span>
             </div>
             <div class="form-group">
-              <label for="linkedinlink">Linkedin Link</label>
+              <label for="address1">Address 1</label>
+              <textarea
+                class="form-control"
+                type="text"
+                rows="3"
+                :class="errors.hasOwnProperty('address1') ? 'is-invalid' : ''"
+                v-model="formData.address1"
+              ></textarea>
+              <span v-if="errors.hasOwnProperty('address1')">
+                {{ errors.address1[0] }}
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="address2">Address 2 (Optional)</label>
+              <textarea
+                class="form-control"
+                type="text"
+                rows="3"
+                :class="errors.hasOwnProperty('address2') ? 'is-invalid' : ''"
+                v-model="formData.address2"
+              ></textarea>
+              <span v-if="errors.hasOwnProperty('address2')">
+                {{ errors.address2[0] }}
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <label for="email1">Email Address 1</label>
               <input
                 class="form-control"
                 type="text"
-                :class="
-                  errors.hasOwnProperty('linkedinlink') ? 'is-invalid' : ''
-                "
-                v-model="formData.linkedinlink"
+                :class="errors.hasOwnProperty('email1') ? 'is-invalid' : ''"
+                v-model="formData.email1"
               />
-              <span v-if="errors.hasOwnProperty('linkedinlink')">
-                {{ errors.linkedinlink[0] }}
+              <span v-if="errors.hasOwnProperty('email1')">
+                {{ errors.email1[0] }}
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="email2">Email Address 2 (Optional)</label>
+              <input
+                class="form-control"
+                type="text"
+                :class="errors.hasOwnProperty('email2') ? 'is-invalid' : ''"
+                v-model="formData.email2"
+              />
+              <span v-if="errors.hasOwnProperty('email2')">
+                {{ errors.email2[0] }}
               </span>
             </div>
             <div class="form-group">
@@ -65,43 +103,43 @@
               </span>
             </div>
             <div class="form-group">
-              <label for="gmaillink">Gmail Link</label>
+              <label for="fblink">Facebook Link</label>
               <input
                 class="form-control"
                 type="text"
-                :class="errors.hasOwnProperty('gmaillink') ? 'is-invalid' : ''"
-                v-model="formData.gmaillink"
+                :class="errors.hasOwnProperty('fblink') ? 'is-invalid' : ''"
+                v-model="formData.fblink"
               />
-              <span v-if="errors.hasOwnProperty('gmaillink')">
-                {{ errors.gmaillink[0] }}
-              </span>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <div class="form-group">
-              <label for="desig">Doctor Designation</label>
-              <textarea
-                class="form-control"
-                type="text"
-                rows="3"
-                :class="errors.hasOwnProperty('desig') ? 'is-invalid' : ''"
-                v-model="formData.desig"
-              ></textarea>
-              <span v-if="errors.hasOwnProperty('desig')">
-                {{ errors.desig[0] }}
+              <span v-if="errors.hasOwnProperty('fblink')">
+                {{ errors.fblink[0] }}
               </span>
             </div>
             <div class="form-group">
-              <label for="bio">Short Bio</label>
-              <textarea
+              <label for="instagramlink">Instagram Link</label>
+              <input
                 class="form-control"
                 type="text"
-                rows="10"
-                :class="errors.hasOwnProperty('bio') ? 'is-invalid' : ''"
-                v-model="formData.bio"
-              ></textarea>
-              <span v-if="errors.hasOwnProperty('bio')">
-                {{ errors.bio[0] }}
+                :class="
+                  errors.hasOwnProperty('instagramlink') ? 'is-invalid' : ''
+                "
+                v-model="formData.instagramlink"
+              />
+              <span v-if="errors.hasOwnProperty('instagramlink')">
+                {{ errors.instagramlink[0] }}
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="youtubelink">Youtube Link</label>
+              <input
+                class="form-control"
+                type="text"
+                :class="
+                  errors.hasOwnProperty('youtubelink') ? 'is-invalid' : ''
+                "
+                v-model="formData.youtubelink"
+              />
+              <span v-if="errors.hasOwnProperty('youtubelink')">
+                {{ errors.youtubelink[0] }}
               </span>
             </div>
           </div>
@@ -109,26 +147,23 @@
             <div>
               <div v-if="!imageSelected">
                 <img
-                  :src="`/${formData.ProfilePicture}`"
-                  class="img-fluid ProfilePicture"
+                  :src="`/${formData.LogoPicture}`"
+                  class="img-fluid LogoPicture"
                 />
               </div>
-              <div
-                class="ProfilePicture"
-                :class="!imageSelected ? 'hidden' : ''"
-              >
+              <div class="LogoPicture" :class="!imageSelected ? 'hidden' : ''">
                 <img src id="target" class="img-fluid" />
               </div>
             </div>
             <div class="form-group">
               <div class="form-group">
-                <label for="ProfilePicture">
-                  Profile Picture
+                <label for="LogoPicture">
+                  Logo
                 </label>
                 <input
                   type="file"
                   class="form-control"
-                  name="ProfilePicture"
+                  name="LogoPicture"
                   id="src"
                   @input="showImage"
                 />
@@ -155,29 +190,34 @@
     <table class="table table-dark table-striped">
       <tr>
         <th style="text-align: center;">SL No.</th>
-        <th style="text-align: center;">Doctor Name</th>
-        <th style="text-align: center;">Doctor Designation</th>
-        <th style="text-align: center;">Image</th>
-        <th style="text-align: center;">Short Bio</th>
+        <th style="text-align: center;">Logo</th>
+        <th style="text-align: center;">Contact No</th>
+        <th style="text-align: center;">Email</th>
+        <th style="text-align: center;">Address</th>
         <th style="text-align: center;">Social Links</th>
         <th style="text-align: center;">Action</th>
       </tr>
-      <tr v-for="(item, index) in teamList" :key="index">
+      <tr v-for="(item, index) in settingsList" :key="index">
         <td style="text-align: center;">{{ index + 1 }}</td>
-        <td style="text-align: center;">{{ item.name }}</td>
-        <td style="text-align: center;">{{ item.desig }}</td>
         <td style="text-align: center;">
           <img
-            :src="`../storage/${item.profilePicture}`"
-            class="img-fluid ProfilePictureTable"
+            :src="`../storage/${item.logo}`"
+            class="img-fluid LogoPicturePictureTable"
           />
         </td>
         <td style="text-align: center;">
-          {{ item.bio.substring(0, 100) + '......' }}
+          {{ item.contactno1 }} , {{ item.contactno2 }}
         </td>
         <td style="text-align: center;">
-          {{ item.fblink }} - {{ item.twitterlink }} - {{ item.linkedinlink }} -
-          {{ item.gmaillink }}
+          {{ item.email1 }} , {{ item.email2 }}
+        </td>
+        <td style="text-align: center;">
+          {{ item.address1 }} , {{ item.address2 }}
+        </td>
+        <td style="text-align: center;">
+          {{ item.twitterlink }} - {{ item.fblink }} -
+          {{ item.instagramlink }} -
+          {{ item.youtubelink }}
         </td>
         <td style="text-align: center;">
           <button
@@ -215,85 +255,62 @@
           enctype="multipart/form-data"
         >
           <div class="card">
-            <h4 class="card-header">Edit Team Member</h4>
+            <h4 class="card-header">Edit Settings</h4>
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-3">
                   <div class="form-group">
-                    <label for="name">Doctor Name</label>
+                    <label for="contactno1">Contact No 1</label>
                     <input
                       class="form-control"
                       type="text"
-                      v-model="editingItem.name"
+                      v-model="editingItem.contactno1"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="desig">Doctor Designation</label>
+                    <label for="contactno2">Contact No 2 (Optional)</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.contactno2"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="address1">Address 1</label>
                     <textarea
                       class="form-control"
                       type="text"
-                      rows="7"
-                      v-model="editingItem.desig"
+                      rows="3"
+                      v-model="editingItem.address1"
                     ></textarea>
                   </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div>
-                    <div v-if="!imageSelectedEdit">
-                      <img
-                        :src="`../storage/${editingItem.profilePicture}`"
-                        class="img-fluid ProfilePicture"
-                      />
-                    </div>
-                    <div
-                      class="ProfilePicture"
-                      :class="!imageSelectedEdit ? 'hidden' : ''"
-                    >
-                      <img src id="target1" class="img-fluid" />
-                    </div>
-                    <div class="form-group mt-5">
-                      <input
-                        type="file"
-                        class="form-control"
-                        name="ProfilePicture"
-                        id="src1"
-                        @input="showImageEdit"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
-                    <label for="bio">Short Bio</label>
+                    <label for="address2">Address 2 (Optional)</label>
                     <textarea
                       class="form-control"
                       type="text"
-                      rows="6"
-                      v-model="editingItem.bio"
+                      rows="3"
+                      v-model="editingItem.address2"
                     ></textarea>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                   <div class="form-group">
-                    <label for="fblink">Facebook Link</label>
+                    <label for="email1">Email Address 1</label>
                     <input
                       class="form-control"
                       type="text"
-                      v-model="editingItem.fblink"
+                      v-model="editingItem.email1"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="linkedinlink">Linkedin Link</label>
+                    <label for="email2">Email Address 2 (Optional)</label>
                     <input
                       class="form-control"
                       type="text"
-                      v-model="editingItem.linkedinlink"
+                      v-model="editingItem.email2"
                     />
                   </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                     <label for="twitterlink">Twitter Link</label>
                     <input
@@ -303,12 +320,53 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label for="gmaillink">Gmail Link</label>
+                    <label for="fblink">Facebook Link</label>
                     <input
                       class="form-control"
                       type="text"
-                      v-model="editingItem.gmaillink"
+                      v-model="editingItem.fblink"
                     />
+                  </div>
+                  <div class="form-group">
+                    <label for="instagramlink">Instagram Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.instagramlink"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="youtubelink">Youtube Link</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="editingItem.youtubelink"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div>
+                    <div v-if="!imageSelectedEdit">
+                      <img
+                        :src="`../storage/${editingItem.logo}`"
+                        class="img-fluid LogoPicture"
+                      />
+                    </div>
+                    <div
+                      class="LogoPicture"
+                      :class="!imageSelectedEdit ? 'hidden' : ''"
+                    >
+                      <img src id="target1" class="img-fluid" />
+                    </div>
+                    <div class="form-group mt-5">
+                      <input
+                        type="file"
+                        class="form-control"
+                        name="LogoPicture"
+                        id="src1"
+                        @input="showImageEdit"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -343,12 +401,12 @@
           enctype="multipart/form-data"
         >
           <div class="card">
-            <h4 class="card-header">Delete Team?</h4>
+            <h4 class="card-header">Delete Settings?</h4>
             <div class="card-body">
               <div>
                 <img
-                  :src="`../storage/${editingItem.profilePicture}`"
-                  class="img-fluid ProfilePicture"
+                  :src="`../storage/${editingItem.logo}`"
+                  class="img-fluid LogoPicture"
                 />
               </div>
             </div>
@@ -373,27 +431,33 @@ export default {
   data() {
     return {
       formData: {
-        name: '',
-        desig: '',
-        ProfilePicture: 'images/image-icon.jpg',
-        bio: '',
-        fblink: '',
+        LogoPicture: 'images/image-icon.jpg',
+        contactno1: '',
+        contactno2: '',
+        email1: '',
+        email2: '',
+        address1: '',
+        address2: '',
         twitterlink: '',
-        linkedinlink: '',
-        gmaillink: '',
+        fblink: '',
+        instagramlink: '',
+        youtubelink: '',
       },
       errors: {},
-      teamList: [],
+      settingsList: [],
       imageSelected: 0,
       imageSelectedEdit: 0,
       editingItem: {
-        name: '',
-        desig: '',
-        bio: '',
-        fblink: '',
+        contactno1: '',
+        contactno2: '',
+        email1: '',
+        email2: '',
+        address1: '',
+        address2: '',
         twitterlink: '',
-        linkedinlink: '',
-        gmaillink: '',
+        fblink: '',
+        instagramlink: '',
+        youtubelink: '',
       },
     }
   },
@@ -431,21 +495,24 @@ export default {
       this.errors = {}
       let myForm = document.getElementById('myForm')
       let formData = new FormData(myForm)
-      formData.append('name', this.formData.name)
-      formData.append('desig', this.formData.desig)
-      formData.append('bio', this.formData.bio)
-      formData.append('fblink', this.formData.fblink)
+      formData.append('contactno1', this.formData.contactno1)
+      formData.append('contactno2', this.formData.contactno2)
+      formData.append('email1', this.formData.email1)
+      formData.append('email2', this.formData.email2)
+      formData.append('address1', this.formData.address1)
+      formData.append('address2', this.formData.address2)
       formData.append('twitterlink', this.formData.twitterlink)
-      formData.append('linkedinlink', this.formData.linkedinlink)
-      formData.append('gmaillink', this.formData.gmaillink)
+      formData.append('fblink', this.formData.fblink)
+      formData.append('instagramlink', this.formData.instagramlink)
+      formData.append('youtubelink', this.formData.youtubelink)
       axios
-        .post(`/save-team`, formData)
+        .post(`/save-settings`, formData)
         .then((response) => {
           this.clear()
-          showSuccess('Team Member Saved')
+          showSuccess('Settings Saved')
           this.isSubmitted = 0
           for (let key in this.formData) {
-            if (key == 'ProfilePicture') {
+            if (key == 'LogoPicture') {
               this.formData[key] = '../../images/image-icon.jpg'
               this.imageSelected = 0
             } else {
@@ -455,7 +522,7 @@ export default {
           var src = document.getElementById('src')
           src.value = ''
           this.imageSelected = 0
-          this.getTeamsList()
+          this.getSettingsList()
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -478,25 +545,28 @@ export default {
       }
       $('#deleteModal').modal('toggle')
     },
-    updateTeam(item) {
+    updateSettings(item) {
       this.errors = {}
       let myForm = document.getElementById('editForm')
       let formData = new FormData(myForm)
       formData.append('id', item)
-      formData.append('name', this.editingItem.name)
-      formData.append('desig', this.editingItem.desig)
-      formData.append('bio', this.editingItem.bio)
-      formData.append('fblink', this.editingItem.fblink)
-      formData.append('linkedinlink', this.editingItem.linkedinlink)
+      formData.append('contactno1', this.editingItem.contactno1)
+      formData.append('contactno2', this.editingItem.contactno2)
+      formData.append('email1', this.editingItem.email1)
+      formData.append('email2', this.editingItem.email2)
+      formData.append('address1', this.editingItem.address1)
+      formData.append('address2', this.editingItem.address2)
       formData.append('twitterlink', this.editingItem.twitterlink)
-      formData.append('gmaillink', this.editingItem.gmaillink)
+      formData.append('fblink', this.editingItem.fblink)
+      formData.append('instagramlink', this.editingItem.instagramlink)
+      formData.append('youtubelink', this.editingItem.youtubelink)
 
       axios
-        .post(`/update-team`, formData)
+        .post(`/update-settings`, formData)
         .then((response) => {
-          showSuccess('Team Member Updated')
+          showSuccess('Settings Updated')
           for (let key in this.formData) {
-            if (key == 'ProfilePicture') {
+            if (key == 'LogoPicture') {
               this.formData[key] = '../../images/image-icon.jpg'
               this.imageSelectedEdit = 0
             } else {
@@ -506,7 +576,7 @@ export default {
           var src = document.getElementById('src1')
           src.value = ''
           this.imageSelectedEdit = 0
-          this.getTeamsList()
+          this.getSettingsList()
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -523,10 +593,10 @@ export default {
       let formData = new FormData(myForm)
       formData.append('id', item)
       axios
-        .post(`/delete-team`, formData)
+        .post(`/delete-settings`, formData)
         .then((response) => {
-          showSuccess('Team Member Deleted!')
-          this.getTeamsList()
+          showSuccess('Settings Deleted!')
+          this.getSettingsList()
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -536,11 +606,11 @@ export default {
         })
       $('#deleteModal').modal('hide')
     },
-    getTeamsList() {
+    getSettingsList() {
       axios
-        .post(`/show-teams`)
+        .post(`/show-settings`)
         .then((response) => {
-          this.teamList = response.data
+          this.settingsList = response.data
         })
         .catch((err) => {
           // console.log(err.response);
@@ -548,41 +618,47 @@ export default {
     },
     clear() {
       ;(this.formData = {
-        name: '',
-        desig: '',
-        bio: '',
-        fblink: '',
+        LogoPicture: 'images/image-icon.jpg',
+        contactno1: '',
+        contactno2: '',
+        email1: '',
+        email2: '',
+        address1: '',
+        address2: '',
         twitterlink: '',
-        linkedinlink: '',
-        gmaillink: '',
-        ProfilePicture: 'images/image-icon.jpg',
+        fblink: '',
+        instagramlink: '',
+        youtubelink: '',
       }),
         (this.editingItem = {
-          name: '',
-          desig: '',
-          bio: '',
-          fblink: '',
+          contactno1: '',
+          contactno2: '',
+          email1: '',
+          email2: '',
+          address1: '',
+          address2: '',
           twitterlink: '',
-          linkedinlink: '',
-          gmaillink: '',
+          fblink: '',
+          instagramlink: '',
+          youtubelink: '',
         })
     },
   },
   mounted() {
-    this.getTeamsList()
+    this.getSettingsList()
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.ProfilePicture {
+.LogoPicture {
   padding: 15px;
   border: 1px solid #ededed;
   margin-bottom: 15px;
   width: 20rem;
   width: 20rem;
 }
-.ProfilePictureTable {
+.LogoPictureTable {
   padding: 10px;
   border: 1px solid #ededed;
   margin-bottom: 15px;
