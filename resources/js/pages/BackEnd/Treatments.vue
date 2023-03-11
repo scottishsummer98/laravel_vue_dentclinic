@@ -297,229 +297,229 @@
 </template>
 
 <script>
-import { showSuccess, showError } from '../../helper'
-export default {
-  data() {
-    return {
-      formData: {
-        name: '',
-        description: '',
-        BeforeOperationImage: 'images/image-icon.jpg',
-        AfterOperationImage: 'images/image-icon.jpg',
-      },
-      errors: {},
-      treatmentsList: [],
-      bimageSelected: 0,
-      bimageSelectedEdit: 0,
-      aimageSelected: 0,
-      aimageSelectedEdit: 0,
-      editingItem: {
-        name: '',
-        description: '',
-      },
-    }
-  },
-  computed: {},
-  methods: {
-    showBeforeOpImage() {
-      this.bimageSelected = 1
-      var src = document.getElementById('src1')
-      var target = document.getElementById('target1')
-
-      var fr = new FileReader()
-
-      fr.onload = function (e) {
-        target.src = this.result
-      }
-      src.addEventListener('change', function () {
-        fr.readAsDataURL(src.files[0])
-      })
-    },
-    showAfterOpImage() {
-      this.aimageSelected = 1
-      var src = document.getElementById('src2')
-      var target = document.getElementById('target2')
-
-      var fr = new FileReader()
-
-      fr.onload = function (e) {
-        target.src = this.result
-      }
-      src.addEventListener('change', function () {
-        fr.readAsDataURL(src.files[0])
-      })
-    },
-    showBeforeOpImageEdit() {
-      this.bimageSelectedEdit = 1
-      var src = document.getElementById('src3')
-      var target = document.getElementById('target3')
-
-      var fr = new FileReader()
-
-      fr.onload = function (e) {
-        target.src = this.result
-      }
-      src.addEventListener('change', function () {
-        fr.readAsDataURL(src.files[0])
-      })
-    },
-    showAfterOpImageEdit() {
-      this.aimageSelectedEdit = 1
-      var src = document.getElementById('src4')
-      var target = document.getElementById('target4')
-
-      var fr = new FileReader()
-
-      fr.onload = function (e) {
-        target.src = this.result
-      }
-      src.addEventListener('change', function () {
-        fr.readAsDataURL(src.files[0])
-      })
-    },
-    submit() {
-      this.errors = {}
-      let myForm = document.getElementById('myForm')
-      let formData = new FormData(myForm)
-      formData.append('name', this.formData.name)
-      formData.append('description', this.formData.description)
-
-      axios
-        .post(`/save-treatment`, formData)
-        .then((response) => {
-          this.clear()
-          showSuccess('Treatment Saved')
-          this.isSubmitted = 0
-          for (let key in this.formData) {
-            if (key == 'BeforeOperationImage') {
-              this.formData[key] = '../../images/image-icon.jpg'
-              this.bimageSelected = 0
-            } else {
-              this.formData[key] = ''
-            }
-            if (key == 'AfterOperationImage') {
-              this.formData[key] = '../../images/image-icon.jpg'
-              this.aimageSelected = 0
-            } else {
-              this.formData[key] = ''
-            }
-          }
-          var src1 = document.getElementById('src1')
-          var src2 = document.getElementById('src2')
-          src1.value = 'images/image-icon.jpg'
-          src2.value = 'images/image-icon.jpg'
-          this.bimageSelected = 0
-          this.aimageSelected = 0
-          this.getTreatmentsList()
-        })
-        .catch((err) => {
-          if (err.response.status == 422) {
-            this.errors = err.response.data.errors
-          }
-          showError(err.response.data.message)
-          this.bimageSelected = 0
-          this.aimageSelected = 0
-        })
-    },
-    edit(item) {
-      for (let index in item) {
-        this.editingItem[index] = item[index]
-        this.bimageSelectedEdit = 0
-        this.aimageSelectedEdit = 0
-      }
-      $('#editModal').modal('toggle')
-    },
-    destroy(item) {
-      for (let index in item) {
-        this.editingItem[index] = item[index]
-      }
-      $('#deleteModal').modal('toggle')
-    },
-    updateTreatment(item) {
-      this.errors = {}
-      let myForm = document.getElementById('editForm')
-      let formData = new FormData(myForm)
-      formData.append('id', item)
-      formData.append('name', this.editingItem.name)
-      formData.append('description', this.editingItem.description)
-
-      axios
-        .post(`/update-treatment`, formData)
-        .then((response) => {
-          showSuccess('Treatment Updated')
-          for (let key in this.formData) {
-            if (key == 'BeforeOperationImage') {
-              this.formData[key] = '../../images/image-icon.jpg'
-              this.bimageSelectedEdit = 0
-            } else if (key == 'AfterOperationImage') {
-              this.formData[key] = '../../images/image-icon.jpg'
-              this.aimageSelectedEdit = 0
-            } else {
-              this.formData[key] = ''
-            }
-          }
-          var src1 = document.getElementById('src3')
-          var src2 = document.getElementById('src4')
-          src1.value = ''
-          src2.value = ''
-          this.bimageSelectedEdit = 0
-          this.aimageSelectedEdit = 0
-          this.getTreatmentsList()
-        })
-        .catch((err) => {
-          if (err.response.status == 422) {
-            this.errors = err.response.data.errors
-          }
-          showError(err.response.data.message)
-          this.bimageSelectedEdit = 0
-          this.aimageSelectedEdit = 0
-        })
-      $('#editModal').modal('hide')
-    },
-    deleteTreatment(item) {
-      this.errors = {}
-      let myForm = document.getElementById('deleteForm')
-      let formData = new FormData(myForm)
-      formData.append('id', item)
-      axios
-        .post(`/delete-treatment`, formData)
-        .then((response) => {
-          showSuccess('Treatment Deleted!')
-          this.getTreatmentsList()
-        })
-        .catch((err) => {
-          if (err.response.status == 422) {
-            this.errors = err.response.data.errors
-          }
-          showError(err.response.data.message)
-        })
-      $('#deleteModal').modal('hide')
-    },
-    getTreatmentsList() {
-      axios
-        .post(`/show-treatments`)
-        .then((response) => {
-          this.treatmentsList = response.data
-        })
-        .catch((err) => {
-          // console.log(err.response);
-        })
-    },
-    clear() {
-      ;(this.formData = {
-        name: '',
-        description: '',
-      }),
-        (this.editingItem = {
+  import { showSuccess, showError } from '../../helper'
+  export default {
+    data() {
+      return {
+        formData: {
           name: '',
           description: '',
-        })
+          BeforeOperationImage: 'images/image-icon.jpg',
+          AfterOperationImage: 'images/image-icon.jpg',
+        },
+        errors: {},
+        treatmentsList: [],
+        bimageSelected: 0,
+        bimageSelectedEdit: 0,
+        aimageSelected: 0,
+        aimageSelectedEdit: 0,
+        editingItem: {
+          name: '',
+          description: '',
+        },
+      }
     },
-  },
-  mounted() {
-    this.getTreatmentsList()
-  },
-}
+    computed: {},
+    methods: {
+      showBeforeOpImage() {
+        this.bimageSelected = 1
+        var src = document.getElementById('src1')
+        var target = document.getElementById('target1')
+
+        var fr = new FileReader()
+
+        fr.onload = function (e) {
+          target.src = this.result
+        }
+        src.addEventListener('change', function () {
+          fr.readAsDataURL(src.files[0])
+        })
+      },
+      showAfterOpImage() {
+        this.aimageSelected = 1
+        var src = document.getElementById('src2')
+        var target = document.getElementById('target2')
+
+        var fr = new FileReader()
+
+        fr.onload = function (e) {
+          target.src = this.result
+        }
+        src.addEventListener('change', function () {
+          fr.readAsDataURL(src.files[0])
+        })
+      },
+      showBeforeOpImageEdit() {
+        this.bimageSelectedEdit = 1
+        var src = document.getElementById('src3')
+        var target = document.getElementById('target3')
+
+        var fr = new FileReader()
+
+        fr.onload = function (e) {
+          target.src = this.result
+        }
+        src.addEventListener('change', function () {
+          fr.readAsDataURL(src.files[0])
+        })
+      },
+      showAfterOpImageEdit() {
+        this.aimageSelectedEdit = 1
+        var src = document.getElementById('src4')
+        var target = document.getElementById('target4')
+
+        var fr = new FileReader()
+
+        fr.onload = function (e) {
+          target.src = this.result
+        }
+        src.addEventListener('change', function () {
+          fr.readAsDataURL(src.files[0])
+        })
+      },
+      submit() {
+        this.errors = {}
+        let myForm = document.getElementById('myForm')
+        let formData = new FormData(myForm)
+        formData.append('name', this.formData.name)
+        formData.append('description', this.formData.description)
+
+        axios
+          .post(`/save-treatment`, formData)
+          .then((response) => {
+            this.clear()
+            showSuccess('Treatment Saved')
+            this.isSubmitted = 0
+            for (let key in this.formData) {
+              if (key == 'BeforeOperationImage') {
+                this.formData[key] = '../../images/image-icon.jpg'
+                this.bimageSelected = 0
+              } else {
+                this.formData[key] = ''
+              }
+              if (key == 'AfterOperationImage') {
+                this.formData[key] = '../../images/image-icon.jpg'
+                this.aimageSelected = 0
+              } else {
+                this.formData[key] = ''
+              }
+            }
+            var src1 = document.getElementById('src1')
+            var src2 = document.getElementById('src2')
+            src1.value = 'images/image-icon.jpg'
+            src2.value = 'images/image-icon.jpg'
+            this.bimageSelected = 0
+            this.aimageSelected = 0
+            this.getTreatmentsList()
+          })
+          .catch((err) => {
+            if (err.response.status == 422) {
+              this.errors = err.response.data.errors
+            }
+            showError(err.response.data.message)
+            this.bimageSelected = 0
+            this.aimageSelected = 0
+          })
+      },
+      edit(item) {
+        for (let index in item) {
+          this.editingItem[index] = item[index]
+          this.bimageSelectedEdit = 0
+          this.aimageSelectedEdit = 0
+        }
+        $('#editModal').modal('toggle')
+      },
+      destroy(item) {
+        for (let index in item) {
+          this.editingItem[index] = item[index]
+        }
+        $('#deleteModal').modal('toggle')
+      },
+      updateTreatment(item) {
+        this.errors = {}
+        let myForm = document.getElementById('editForm')
+        let formData = new FormData(myForm)
+        formData.append('id', item)
+        formData.append('name', this.editingItem.name)
+        formData.append('description', this.editingItem.description)
+
+        axios
+          .post(`/update-treatment`, formData)
+          .then((response) => {
+            showSuccess('Treatment Updated')
+            for (let key in this.formData) {
+              if (key == 'BeforeOperationImage') {
+                this.formData[key] = '../../images/image-icon.jpg'
+                this.bimageSelectedEdit = 0
+              } else if (key == 'AfterOperationImage') {
+                this.formData[key] = '../../images/image-icon.jpg'
+                this.aimageSelectedEdit = 0
+              } else {
+                this.formData[key] = ''
+              }
+            }
+            var src1 = document.getElementById('src3')
+            var src2 = document.getElementById('src4')
+            src1.value = ''
+            src2.value = ''
+            this.bimageSelectedEdit = 0
+            this.aimageSelectedEdit = 0
+            this.getTreatmentsList()
+          })
+          .catch((err) => {
+            if (err.response.status == 422) {
+              this.errors = err.response.data.errors
+            }
+            showError(err.response.data.message)
+            this.bimageSelectedEdit = 0
+            this.aimageSelectedEdit = 0
+          })
+        $('#editModal').modal('hide')
+      },
+      deleteTreatment(item) {
+        this.errors = {}
+        let myForm = document.getElementById('deleteForm')
+        let formData = new FormData(myForm)
+        formData.append('id', item)
+        axios
+          .post(`/delete-treatment`, formData)
+          .then((response) => {
+            showSuccess('Treatment Deleted!')
+            this.getTreatmentsList()
+          })
+          .catch((err) => {
+            if (err.response.status == 422) {
+              this.errors = err.response.data.errors
+            }
+            showError(err.response.data.message)
+          })
+        $('#deleteModal').modal('hide')
+      },
+      getTreatmentsList() {
+        axios
+          .post(`/show-treatments`)
+          .then((response) => {
+            this.treatmentsList = response.data
+          })
+          .catch((err) => {
+            // console.log(err.response);
+          })
+      },
+      clear() {
+        ;(this.formData = {
+          name: '',
+          description: '',
+        }),
+          (this.editingItem = {
+            name: '',
+            description: '',
+          })
+      },
+    },
+    mounted() {
+      this.getTreatmentsList()
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

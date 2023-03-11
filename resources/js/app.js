@@ -120,6 +120,10 @@ const routes = [
     path: '/admin-contact',
     component: require('./pages/BackEnd/Contact').default,
   },
+  {
+    path: '/admin-settings',
+    component: require('./pages/BackEnd/Settings').default,
+  },
 ]
 
 const router = createRouter({

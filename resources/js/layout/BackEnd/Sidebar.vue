@@ -94,6 +94,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/admin-settings" class="nav-link">
+              <i class="nav-icon fa-solid fa-gear"></i>
+              <p>
+                Settings
+              </p>
+            </router-link>
+          </li>
         </ul>
       </nav>
     </div>
