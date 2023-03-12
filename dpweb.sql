@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 21, 2023 at 03:13 PM
+-- Generation Time: Mar 12, 2023 at 02:55 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.27
 
@@ -130,7 +130,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2022_10_16_134257_create_teams_table', 7),
 (19, '2022_10_17_143823_create_mores_table', 8),
 (20, '2022_10_25_172231_create_homes_table', 9),
-(21, '2022_10_25_172839_create_sliders_table', 10);
+(21, '2022_10_25_172839_create_sliders_table', 10),
+(22, '2023_03_11_030109_create_settings_table', 11);
 
 -- --------------------------------------------------------
 
@@ -269,6 +270,36 @@ INSERT INTO `services` (`id`, `type`, `price`, `created_at`, `updated_at`) VALUE
 (23, 'Amalgam Filling', 'BDT 3,000.00', '2022-10-08 03:29:48', '2022-10-08 03:29:48'),
 (24, 'Abscess Drainage', 'BDT 3,000.00', '2022-10-08 03:29:58', '2022-10-08 03:29:58'),
 (25, 'Glass Ionomer Filling', 'BDT 4,000.00', '2022-10-08 03:30:13', '2022-10-08 03:30:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `logo` text COLLATE utf8mb4_unicode_ci,
+  `contactno1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contactno2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address2` text COLLATE utf8mb4_unicode_ci,
+  `twitterlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fblink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagramlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtubelink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `logo`, `contactno1`, `contactno2`, `email1`, `email2`, `address1`, `address2`, `twitterlink`, `fblink`, `instagramlink`, `youtubelink`, `created_at`, `updated_at`) VALUES
+(2, 'settings/2023/03/1lbZBW3Lb3rt2ryq6I3pS9MNT41zvJ0nYAfNCllC.png', '+8801611606095', NULL, 'nasiruddin200@yahoo.com', 'info@drnasiruddin.com', 'Avenue Dental Care 3A, Satmasjid Road (Opposite Bank Asia, Lalmatia) Dhaka 1205', 'Bangladesh ENT Hospital Ltd. 4/1-A , Sobhanbag, Mirpur Road, Dhaka 1207', 'https://twitter.com/', 'https://www.facebook.com/', 'https://www.instagram.com/', 'https://www.youtube.com/', '2023-03-10 23:20:01', '2023-03-11 20:40:30');
 
 -- --------------------------------------------------------
 
@@ -435,6 +466,12 @@ ALTER TABLE `services`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -485,7 +522,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `mores`
@@ -504,6 +541,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `services`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sliders`
