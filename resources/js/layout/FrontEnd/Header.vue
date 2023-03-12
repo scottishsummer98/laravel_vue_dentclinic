@@ -1,5 +1,7 @@
 <template>
   <div
+    v-for="(item, index) in settingsList"
+    :key="index"
     class="col-lg-12 col-md-12 col-sm-12 p-2"
     style="background-color: RGB(47, 137, 252);"
   >
@@ -9,22 +11,28 @@
           class="nav-link"
           style="color: white; font-size: 17px; font-family: Helvetica;"
           href="#"
+          v-if="item.contactno2 === null || item.contactno2 === ''"
         >
           <i class="fa fa-phone" aria-hidden="true"></i>
-          +8801611606095
+          {{ item.contactno1 }}
+        </a>
+        <a
+          class="nav-link"
+          style="color: white; font-size: 17px; font-family: Helvetica;"
+          href="#"
+          v-else
+        >
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          {{ item.contactno1 }},{{ item.contactno2 }}
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: white;" href="https://twitter.com/">
+        <a class="nav-link" style="color: white;" :href="`${item.twitterlink}`">
           <i class="fa-brands fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          style="color: white;"
-          href="https://www.facebook.com/"
-        >
+        <a class="nav-link" style="color: white;" :href="`${item.fblink}`">
           <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </a>
       </li>
@@ -32,27 +40,27 @@
         <a
           class="nav-link"
           style="color: white;"
-          href="https://www.instagram.com/"
+          :href="`${item.instagramlink}`"
         >
           <i class="fa-brands fa-instagram" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          style="color: white;"
-          href="https://www.youtube.com/"
-        >
+        <a class="nav-link" style="color: white;" :href="`${item.youtubelink}`">
           <i class="fa-brands fa-youtube" aria-hidden="true"></i>
         </a>
       </li>
     </ul>
   </div>
-  <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+  <div
+    class="col-lg-12 col-md-12 col-sm-12 p-2"
+    v-for="(item, index) in settingsList"
+    :key="index"
+  >
     <ul class="nav justify-content-center">
       <li class="nav-item">
         <img
-          src="../../../../public/images/nasir-logo.png"
+          :src="`storage/${item.logo}`"
           alt=""
           style="width: 120px; height: 80px;"
         />
@@ -66,15 +74,19 @@
           <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
         </a>
       </li>
-      <li class="nav-item mt-2">
+      <li
+        class="nav-item mt-2"
+        v-if="item.address2 === null || item.address2 === ''"
+      >
         <p style="color: RGB(47, 137, 252); font-size: 13px;">
-          <b>
-            Address : Avenue Dental Care 3A, Satmasjid Road (Opposite Bank Asia,
-            Lalmatia) Dhaka 1205
-          </b>
+          <b>Address : {{ item.address1 }}</b>
+        </p>
+      </li>
+      <li class="nav-item mt-2" v-else>
+        <p style="color: RGB(47, 137, 252); font-size: 13px;">
+          <b>Address : {{ item.address1 }}</b>
           <br />
-          Bangladesh ENT Hospital Ltd. 4/1-A , Sobhanbag, Mirpur Road, Dhaka
-          1207
+          {{ item.address2 }}
         </p>
       </li>
       <li class="nav-item">
@@ -86,12 +98,22 @@
           <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         </a>
       </li>
-      <li class="nav-item mt-2">
+      <li
+        class="nav-item mt-2"
+        v-if="item.address2 === null || item.address2 === ''"
+      >
         <p style="color: RGB(47, 137, 252); font-size: 13px;">
           <b>
-            nasiruddin200@yahoo.com
+            {{ item.email1 }}
+          </b>
+        </p>
+      </li>
+      <li class="nav-item mt-2" v-else>
+        <p style="color: RGB(47, 137, 252); font-size: 13px;">
+          <b>
+            {{ item.email1 }}
             <br />
-            info@drnasiruddin.com
+            {{ item.email2 }}
           </b>
         </p>
       </li>
@@ -282,6 +304,23 @@
 
 <script>
 export default {
+  data() {
+    return {
+      settingsList: [],
+    }
+  },
+  methods: {
+    getSettingsList() {
+      axios
+        .post(`/show-settings`)
+        .then((response) => {
+          this.settingsList = response.data
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
+  },
   mounted() {
     document.addEventListener('DOMContentLoaded', function () {
       // make it as accordion for smaller screens
@@ -311,6 +350,7 @@ export default {
       }
       // end if innerWidth
     })
+    this.getSettingsList()
   },
 }
 </script>

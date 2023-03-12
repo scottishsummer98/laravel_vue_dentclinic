@@ -45,11 +45,12 @@
                 <h6 class="text-center text-uppercase fw-bold mb-4 border-bottom pb-3">
                   FOLLOW US
                 </h6>
-                <div class="text-center">
-                  <a href="https://twitter.com/"><i class="fa-brands fa-twitter me-3" style="font-size:35px;color: RGB(29, 161, 242);"></i></a>
-                  <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook me-3" style="font-size:35px;color: RGB(29, 78, 155);"></i></a>
-                  <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram me-3" style="font-size:35px;color: RGB(180, 53, 144);"></i></a>
-                  <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube me-3" style="font-size:35px;color: RGB(242, 0, 0);"></i></a>
+                <div class="text-center"  v-for="(item, index) in settingsList"
+    :key="index">
+                  <a :href="`${item.twitterlink}`"><i class="fa-brands fa-twitter me-3" style="font-size:35px;color: RGB(29, 161, 242);"></i></a>
+                  <a :href="`${item.fblink}`"><i class="fa-brands fa-facebook me-3" style="font-size:35px;color: RGB(29, 78, 155);"></i></a>
+                  <a :href="`${item.instagramlink}`"><i class="fa-brands fa-instagram me-3" style="font-size:35px;color: RGB(180, 53, 144);"></i></a>
+                  <a :href="`${item.youtubelink}`"><i class="fa-brands fa-youtube me-3" style="font-size:35px;color: RGB(242, 0, 0);"></i></a>
                 </div>
                 
               </div>
@@ -103,6 +104,7 @@ export default {
   data() {
     return {
       contactsList: [],
+      settingsList: [],
     }
   },
   computed: {},
@@ -117,9 +119,20 @@ export default {
           // console.log(err.response);
         })
     },
+    getSettingsList() {
+      axios
+        .post(`/show-settings`)
+        .then((response) => {
+          this.settingsList = response.data
+        })
+        .catch((err) => {
+          // console.log(err.response);
+        })
+    },
   },
   mounted() {
     this.getContactsList()
+    this.getSettingsList()
   },
 }
 </script>
