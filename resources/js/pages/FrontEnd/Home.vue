@@ -12,16 +12,15 @@
       :loop="true"
     >
       <swiper-slide v-for="(item, index) in sliderList" :key="index">
-        <img :src="`../storage/${item.sliderPicture}`" />
+        <img class="MainSlider" :src="`../storage/${item.sliderPicture}`" />
       </swiper-slide>
     </swiper>
   </div>
 
   <!-- Article -->
   <div class="card">
-    <div class="row m-5 p-0">
-      <div class="col-lg-2 col-md-2 col-sm-2"></div>
-      <div class="col-lg-4 col-md-4 col-sm-4 sliderLeft">
+    <div class="articleSection">
+      <div>
         <h3 class="text-uppercase mb-3">
           ARTICLE
         </h3>
@@ -44,36 +43,31 @@
           </router-link>
         </h6>
       </div>
-      <div
-        class="col-lg-4 col-md-4 col-sm-4 mt-5 sliderRight"
-        style="display: flex;"
-      >
+      <div>
         <img
           class="responsive1"
           src="../../../../public/images/Article_img.jpeg"
           alt=""
         />
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 m-2"></div>
-      <div class="text-center">
-        <p>
-          <router-link
-            to="/articles"
-            class="btn btn-primary p-2"
-            style="text-decoration: none;"
-          >
-            View All
-          </router-link>
-        </p>
-      </div>
+    </div>
+    <div class="text-center">
+      <p>
+        <router-link
+          to="/articles"
+          class="btn btn-primary"
+          style="text-decoration: none;"
+        >
+          View All
+        </router-link>
+      </p>
     </div>
   </div>
 
   <!-- Intro -->
   <div class="card">
-    <div class="row m-5 p-0">
-      <div class="col-lg-2 col-md-2 col-sm-2"></div>
-      <div class="col-lg-4 col-md-4 col-sm-4 sliderLeft">
+    <div class="introSection">
+      <div class="introSectioncol1">
         <h3 class="text-uppercase mb-5">
           Welcome to Prof. Dr Nasir Uddin
         </h3>
@@ -105,17 +99,13 @@
           </p>
         </div>
       </div>
-      <div
-        class="col-lg-4 col-md-4 col-sm-4 mt-3 sliderRight view overlay zoom"
-        style="display: flex;"
-      >
+      <div>
         <img
-          class="img-fluid"
+          class="responsive1"
           src="../../../../public/images/Dr-Nasir_uddin.png"
           alt=""
         />
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 m-2"></div>
     </div>
   </div>
 
@@ -479,5 +469,72 @@ export default {
   border: 1px solid #ededed;
   width: 16rem;
   height: 12rem;
+}
+.MainSlider {
+  width: 100%;
+}
+.articleSection {
+  padding: 3rem;
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  justify-content: center;
+}
+.introSection {
+  padding: 3rem;
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  justify-content: center;
+}
+.introSectioncol1 {
+  width: 30%;
+}
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+  .MainSlider {
+    width: 100%;
+  }
+  .articleSection {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .introSection {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .introSectioncol1 {
+    width: 100%;
+  }
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .MainSlider {
+    width: 100%;
+  }
+  .articleSection {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .introSection {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .introSectioncol1 {
+    width: 100%;
+  }
 }
 </style>
