@@ -150,4 +150,11 @@ export default {
   width: 30rem;
   width: 30rem;
 }
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+}
 </style>
