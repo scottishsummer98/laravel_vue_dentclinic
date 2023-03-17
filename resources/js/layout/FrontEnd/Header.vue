@@ -1,123 +1,96 @@
 <template>
   <div
+    class="nav1"
     v-for="(item, index) in settingsList"
     :key="index"
-    class="col-lg-12 col-md-12 col-sm-12 p-2"
     style="background-color: RGB(47, 137, 252);"
   >
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          style="color: white; font-size: 17px; font-family: Helvetica;"
-          href="#"
-          v-if="item.contactno2 === null || item.contactno2 === ''"
-        >
-          <i class="fa fa-phone" aria-hidden="true"></i>
-          {{ item.contactno1 }}
-        </a>
-        <a
-          class="nav-link"
-          style="color: white; font-size: 17px; font-family: Helvetica;"
-          href="#"
-          v-else
-        >
-          <i class="fa fa-phone" aria-hidden="true"></i>
-          {{ item.contactno1 }},{{ item.contactno2 }}
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: white;" :href="`${item.twitterlink}`">
-          <i class="fa-brands fa-twitter" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: white;" :href="`${item.fblink}`">
-          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          style="color: white;"
-          :href="`${item.instagramlink}`"
-        >
-          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: white;" :href="`${item.youtubelink}`">
-          <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-        </a>
-      </li>
-    </ul>
+    <img class="nav1logo" :src="`storage/${item.logo}`" alt="" />
+    <a
+      style="
+        color: white;
+        font-size: 15px;
+        font-family: Helvetica;
+        text-decoration: none;
+      "
+      href="#"
+      v-if="item.contactno2 === null || item.contactno2 === ''"
+    >
+      <i class="fa fa-phone" aria-hidden="true"></i>
+      {{ item.contactno1 }}
+    </a>
+    <a
+      style="color: white; font-size: 17px; font-family: Helvetica;"
+      href="#"
+      v-else
+    >
+      <i class="fa fa-phone" aria-hidden="true"></i>
+      {{ item.contactno1 }},{{ item.contactno2 }}
+    </a>
+    <a style="color: white;" :href="`${item.twitterlink}`">
+      <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+    </a>
+    <a style="color: white;" :href="`${item.fblink}`">
+      <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+    </a>
+    <a style="color: white;" :href="`${item.instagramlink}`">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+    </a>
+    <a style="color: white;" :href="`${item.youtubelink}`">
+      <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+    </a>
   </div>
-  <div
-    class="col-lg-12 col-md-12 col-sm-12 p-2"
-    v-for="(item, index) in settingsList"
-    :key="index"
-  >
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <img
-          :src="`storage/${item.logo}`"
-          alt=""
-          style="width: 120px; height: 80px;"
-        />
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          style="color: RGB(47, 137, 252); font-size: 25px;"
-          href="#"
-        >
-          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li
-        class="nav-item mt-2"
-        v-if="item.address2 === null || item.address2 === ''"
-      >
-        <p style="color: RGB(47, 137, 252); font-size: 13px;">
-          <b>Address : {{ item.address1 }}</b>
-        </p>
-      </li>
-      <li class="nav-item mt-2" v-else>
-        <p style="color: RGB(47, 137, 252); font-size: 13px;">
-          <b>Address : {{ item.address1 }}</b>
-          <br />
-          {{ item.address2 }}
-        </p>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          style="color: RGB(47, 137, 252); font-size: 25px;"
-          href="#"
-        >
-          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li
-        class="nav-item mt-2"
-        v-if="item.address2 === null || item.address2 === ''"
-      >
-        <p style="color: RGB(47, 137, 252); font-size: 13px;">
-          <b>
-            {{ item.email1 }}
-          </b>
-        </p>
-      </li>
-      <li class="nav-item mt-2" v-else>
-        <p style="color: RGB(47, 137, 252); font-size: 13px;">
-          <b>
-            {{ item.email1 }}
-            <br />
-            {{ item.email2 }}
-          </b>
-        </p>
-      </li>
-    </ul>
+  <div class="nav2" v-for="(item, index) in settingsList" :key="index">
+    <img
+      class="nav2logo"
+      :src="`storage/${item.logo}`"
+      alt=""
+      style="width: 120px; height: 80px;"
+    />
+    <a
+      class="nav2addressicon"
+      style="color: RGB(47, 137, 252); font-size: 30px;"
+    >
+      <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+    </a>
+    <a
+      style="color: RGB(47, 137, 252); font-size: 15px;"
+      v-if="item.address2 === null || item.address2 === ''"
+    >
+      <b>
+        Address :
+        <span>{{ item.address1 }}</span>
+      </b>
+    </a>
+    <a style="color: RGB(47, 137, 252); font-size: 15px;" v-else>
+      <b>
+        Address :
+        <span>{{ item.address1 }}</span>
+      </b>
+      <br />
+      <span>{{ item.address2 }}</span>
+    </a>
+    <a
+      class="nav2envelopeicon"
+      style="color: RGB(47, 137, 252); font-size: 30px;"
+    >
+      <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+    </a>
+    <a
+      style="color: RGB(47, 137, 252); font-size: 15px;"
+      v-if="item.address2 === null || item.address2 === ''"
+    >
+      <b>
+        <span>{{ item.email1 }}</span>
+      </b>
+    </a>
+    <a style="color: RGB(47, 137, 252); font-size: 15px;" v-else>
+      <b>
+        <span>{{ item.email1 }}</span>
+      </b>
+      <br />
+      <span>{{ item.email2 }}</span>
+    </a>
   </div>
   <div
     class="col-lg-12 col-md-12 col-sm-12 p-2"
@@ -287,15 +260,7 @@
           data-toggle="collapse"
           active-class="active border-top border-white"
         >
-          <i
-            class="fa-solid fa-calendar-days"
-            style="color: white; font-size: 30px;"
-          ></i>
-          <p style="float: right; padding-left: 20px;">
-            <b>MAKE AN APPOINTMENT</b>
-            <br />
-            IT'S SO FAST
-          </p>
+          MAKE APPOINTMENT
         </router-link>
       </li>
     </ul>
@@ -378,5 +343,73 @@ export default {
 .hover-underline-animation:hover:after {
   transform: scaleX(1);
   transform-origin: bottom top;
+}
+
+.nav1 {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: center;
+  padding: 1rem;
+  align-items: center;
+}
+.nav1logo {
+  width: 3rem;
+  height: 2rem;
+  display: none;
+}
+.nav2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+.nav2addressicon {
+  margin-left: 5rem;
+}
+.nav2envelopeicon {
+  margin-left: 5rem;
+}
+
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+  .nav1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1rem;
+  }
+  .nav2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav2addressicon {
+    margin-left: 1rem;
+  }
+  .nav2envelopeicon {
+    margin-left: 1rem;
+  }
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .nav1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .nav1logo {
+    display: block;
+  }
+  .nav2 {
+    display: none;
+  }
 }
 </style>
