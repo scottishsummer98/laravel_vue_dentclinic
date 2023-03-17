@@ -1,31 +1,16 @@
 <template>
-  <div
-    class="card"
-    style="
-      width: 51%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    "
-    v-for="(item, index) in treatmentsList"
-    :key="index"
-  >
-    <div class="card-header fa-2x text-primary border-bottom">
-      <h3>{{ item.name }}</h3>
-    </div>
-    <div class="card-body text-center">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+  <div class="card" v-for="(item, index) in treatmentsList" :key="index">
+    <div class="treatment_front">
+      <h3 class="text-primary">{{ item.name }}</h3>
+      <div class="row_treatment_front">
+        <div class="col1_treatment_front">
           <p style="text-align: justify;">{{ item.description }}</p>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col2_treatment_front">
           <img
             :src="`storage/${item.beforeOperationImage}`"
             class="img-fluid BeforeOperationImage"
           />
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
           <img
             :src="`storage/${item.afterOperationImage}`"
             class="img-fluid AfterOperationImage"
@@ -70,11 +55,64 @@ export default {
   width: 20rem;
   width: 20rem;
 }
+.treatment_front {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 25rem;
+}
+.row_treatment_front {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.col1_treatment_front,
+.col2_treatment_front {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
 /* Media Queries Medium Devices*/
 @media screen and (max-width: 1024px) {
+  .BeforeOperationImage,
+  .AfterOperationImage {
+    padding: 15px;
+    border: 1px solid #ededed;
+    width: 24rem;
+    width: 24rem;
+  }
+  .treatment_front {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .row_treatment_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .col1_treatment_front,
+  .col2_treatment_front {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
 }
 
 /* Media Queries Small Devices*/
 @media screen and (max-width: 600px) {
+  .BeforeOperationImage,
+  .AfterOperationImage {
+    padding: 15px;
+    border: 1px solid #ededed;
+    width: 24rem;
+    width: 24rem;
+  }
+  .col2_treatment_front {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 </style>
