@@ -1,20 +1,15 @@
 <template>
-  <div class="card text-center">
-    <div class="card-header fa-2x">
-      OUR SERVICES
-    </div>
-    <div
-      class="card-body"
-      style="width: 50%; margin-left: auto; margin-right: auto;"
-    >
+  <div class="card">
+    <div class="services_front">
+      <h3 class="text-center">OUR SERVICES</h3>
       <table
-        class="table table-bordered"
+        class="table table-bordered mt-2"
         style="background-color: RGB(47, 137, 252); color: white;"
       >
         <tbody>
           <tr v-for="(item, index) in servicesList" :key="index">
-            <th style="width: 5rem;">{{ item.type }}</th>
-            <td style="width: 5rem;">{{ item.price }}</td>
+            <th>{{ item.type }}</th>
+            <td>{{ item.price }}</td>
           </tr>
         </tbody>
       </table>
@@ -56,5 +51,28 @@ export default {
 .table-bordered td:hover {
   background-color: RGB(47, 137, 252);
   color: white;
+}
+.services_front {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 25rem;
+}
+
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+  .services_front {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .services_front {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
 }
 </style>
