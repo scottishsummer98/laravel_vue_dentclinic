@@ -1,16 +1,7 @@
 <template>
-  <div
-    class="card"
-    style="
-      width: 51%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 1rem;
-      padding: 3rem;
-    "
-  >
-    <div class="row">
-      <div class="col-md-6">
+  <div class="card">
+    <div class="misvis_front">
+      <div class="col1_misvis_front">
         <h3>OUR MISSION</h3>
         <h4>
           <i class="fa-solid fa-piggy-bank text-primary"></i>
@@ -48,7 +39,7 @@
           ethical and informed care.
         </p>
       </div>
-      <div class="col-md-6">
+      <div class="col2_misvis_front">
         <h3>OUR VISION</h3>
         <h4>
           <i class="fa-solid fa-trophy text-primary"></i>
@@ -88,4 +79,48 @@
   </div>
 </template>
 
-<script></script>
+<style>
+.misvis_front {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem 25rem;
+}
+.col1_misvis_front,
+.col2_misvis_front {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+  .misvis_front {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .col1_misvis_front,
+  .col2_misvis_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .misvis_front {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+  }
+  .col1_misvis_front,
+  .col2_misvis_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+</style>

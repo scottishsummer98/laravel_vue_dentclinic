@@ -45,7 +45,7 @@
       </div>
       <div>
         <img
-          class="responsive1"
+          class="article_image_home_front"
           src="../../../../public/images/Article_img.jpeg"
           alt=""
         />
@@ -101,7 +101,7 @@
       </div>
       <div>
         <img
-          class="responsive1"
+          class="intro_image_home_front"
           src="../../../../public/images/Dr-Nasir_uddin.png"
           alt=""
         />
@@ -442,12 +442,9 @@ export default {
     transform: translateY(0);
   }
 }
-.responsive1 {
+.article_image_home_front,
+.intro_image_home_front {
   width: 100%;
-  height: 90%;
-}
-.responsive2 {
-  width: 90%;
   height: 90%;
 }
 .btn-primary {
