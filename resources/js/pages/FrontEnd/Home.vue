@@ -111,7 +111,7 @@
 
   <!-- Services -->
   <div class="card sliderBottom">
-    <h3 class="text-uppercase mt-3" style="margin-left: 25%;">
+    <h3 class="text-uppercase mt-3" style="text-align: center;">
       OUR SERVICE & PRICE
     </h3>
     <div class="card-body" style="margin-left: auto; margin-right: auto;">
@@ -122,8 +122,8 @@
             style="background-color: RGB(47, 137, 252); color: white;"
           >
             <tr v-for="(item, index) in servicesListCol1" :key="index">
-              <th>{{ item.type }}</th>
-              <td>{{ item.price }}</td>
+              <th class="service_table_header_home_front">{{ item.type }}</th>
+              <td class="service_table_body_home_front">{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -133,8 +133,8 @@
             style="background-color: RGB(47, 137, 252); color: white;"
           >
             <tr v-for="(item, index) in servicesListCol2" :key="index">
-              <th>{{ item.type }}</th>
-              <td>{{ item.price }}</td>
+              <th class="service_table_header_home_front">{{ item.type }}</th>
+              <td class="service_table_body_home_front">{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -144,8 +144,8 @@
             style="background-color: RGB(47, 137, 252); color: white;"
           >
             <tr v-for="(item, index) in servicesListCol3" :key="index">
-              <th>{{ item.type }}</th>
-              <td>{{ item.price }}</td>
+              <th class="service_table_header_home_front">{{ item.type }}</th>
+              <td class="service_table_body_home_front">{{ item.price }}</td>
             </tr>
           </table>
         </div>
@@ -154,62 +154,67 @@
   </div>
 
   <!-- Why Choose Us -->
-  <div class="bg-image2 p-5">
-    <h3 class="text-uppercase m-5 sliderRight" style="padding-left: 12%;">
+  <div class="bg-image2 p-3">
+    <h3
+      class="text-center text-uppercase m-5 sliderRight"
+      style="padding-left: 12%;"
+    >
       WHY CHOOSE US?
     </h3>
-    <div class="container sliderLeft">
-      <div class="row mt-5 mb-5">
-        <div class="col-1" style="padding: 0;">
+    <div class="wcucol_home_front">
+      <div class="wcurow_home_front">
+        <div class="wcuitem_home_front">
           <i
-            class="fa fa-briefcase mt-3"
+            class="fa fa-briefcase"
             style="color: RGB(47, 137, 252); font-size: 60px;"
           ></i>
+          <div>
+            <p><b>FINANCE OPTION</b></p>
+            <p style="text-align: justify;">
+              There are many ways to get free financial help and information.
+            </p>
+          </div>
         </div>
-        <div class="col-3" style="padding: 0;">
-          <p class="mb-3"><b>FINANCE OPTION</b></p>
-          <p>There are many ways to get free financial help and information.</p>
-        </div>
-        <div class="col-1" style="padding: 0;">
+        <div class="wcuitem_home_front">
           <i
-            class="fa-regular fa-face-smile mt-3"
+            class="fa fa-users"
             style="color: RGB(47, 137, 252); font-size: 60px;"
           ></i>
-        </div>
-        <div class="col-3" style="padding: 0;">
-          <p class="mb-3"><b>CREATING SMILES</b></p>
-          <p>
-            Prof Dr Nasir Uddin creates beautiful smiles on your faces with
-            painless treatment.
-          </p>
+          <div>
+            <p><b>QUALIFIED STAFF</b></p>
+            <p style="text-align: justify;">
+              Prof Dr Nasir Uddin has qualified and very caring Dentist doctors
+              for you.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="row mt-5 mb-5">
-        <div class="col-1" style="padding: 0;">
+      <div class="wcurow_home_front">
+        <div class="wcuitem_home_front">
           <i
-            class="fa fa-users mt-3"
+            class="fa-regular fa-face-smile"
             style="color: RGB(47, 137, 252); font-size: 60px;"
           ></i>
+          <div>
+            <p><b>CREATING SMILES</b></p>
+            <p style="text-align: justify;">
+              Prof Dr Nasir Uddin creates beautiful smiles on your faces with
+              painless treatment.
+            </p>
+          </div>
         </div>
-        <div class="col-3" style="padding: 0;">
-          <p class="mb-3"><b>QUALIFIED STAFF</b></p>
-          <p>
-            Prof Dr Nasir Uddin has qualified and very caring Dentist doctors
-            for you.
-          </p>
-        </div>
-        <div class="col-1" style="padding: 0;">
+        <div class="wcuitem_home_front">
           <i
-            class="fa fa-magic mt-3"
+            class="fa fa-magic"
             style="color: RGB(47, 137, 252); font-size: 60px;"
           ></i>
-        </div>
-        <div class="col-3" style="padding: 0;">
-          <p class="mb-3"><b>LATEST TECHNOLOGY</b></p>
-          <p>
-            Prof Dr Nasir Uddin using latest technologies for giving you the
-            best services.
-          </p>
+          <div>
+            <p class="mb-3"><b>LATEST TECHNOLOGY</b></p>
+            <p style="text-align: justify;">
+              Prof Dr Nasir Uddin using latest technologies for giving you the
+              best services.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -217,11 +222,18 @@
 
   <!-- Treatment -->
   <div class="card p-2 mb-5 sliderBottom">
-    <h3 class="text-uppercase m-4" style="padding-left: 12%;">
+    <h3 class="text-center text-uppercase m-4">
       Treatment Blog
     </h3>
     <div class="container">
-      <swiper :slides-per-view="4" :space-between="10">
+      <swiper
+        :space-between="10"
+        :breakpoints="{
+          300: { slidesPerView: 1 },
+          600: { slidesPerView: 2 },
+          900: { slidesPerView: 4 },
+        }"
+      >
         <swiper-slide v-for="(item, index) in treatmentsList" :key="index">
           <div class="blog-list-widget">
             <div class="list-group">
@@ -230,12 +242,14 @@
                 class="list-group-item list-group-item-action flex-column align-items-start"
                 style="height: 20rem;"
               >
-                <img
-                  :src="`../storage/${item.beforeOperationImage}`"
-                  class="img-fluid ImageSlider mb-1"
-                />
-                <h5 class="mb-1" style="height: 4rem;">{{ item.name }}</h5>
-                <h6>
+                <div class="treatmentitem_home_front">
+                  <img
+                    :src="`../storage/${item.beforeOperationImage}`"
+                    class="img-fluid ImageSlider mb-1"
+                  />
+                  <h5 class="mb-1">{{ item.name }}</h5>
+                </div>
+                <h6 style="position: absolute; bottom: 0;">
                   <i class="fa-solid fa-clock"></i>
                   {{ dateFormat(item.updated_at) }}
                 </h6>
@@ -260,42 +274,41 @@
 
   <!-- Video Gallery -->
   <div class="card p-5 m-3 sliderBottom">
-    <h3 class="text-uppercase m-4" style="padding-left: 14%;">Video Gallery</h3>
+    <h3 class="text-center text-uppercase m-4">Video Gallery</h3>
     <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              class="embed-responsive-item"
-              src="https://www.youtube.com/embed/1fIiPErBxkY"
-            ></iframe>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              class="embed-responsive-item"
-              src="https://www.youtube.com/embed/2mgDmvYRUPg"
-            ></iframe>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              class="embed-responsive-item"
-              src="https://www.youtube.com/embed/1fIiPErBxkY"
-            ></iframe>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              class="embed-responsive-item"
-              src="https://www.youtube.com/embed/1fIiPErBxkY"
-            ></iframe>
-          </div>
-        </div>
-      </div>
+      <swiper
+        :space-between="10"
+        :breakpoints="{
+          300: { slidesPerView: 1 },
+          600: { slidesPerView: 1 },
+          900: { slidesPerView: 3 },
+        }"
+      >
+        <swiper-slide>
+          <iframe
+            class="videogall_home_front"
+            src="https://www.youtube.com/embed/2mgDmvYRUPg"
+          ></iframe>
+        </swiper-slide>
+        <swiper-slide>
+          <iframe
+            class="videogall_home_front"
+            src="https://www.youtube.com/embed/1fIiPErBxkY"
+          ></iframe>
+        </swiper-slide>
+        <swiper-slide>
+          <iframe
+            class="videogall_home_front"
+            src="https://www.youtube.com/embed/1fIiPErBxkY"
+          ></iframe>
+        </swiper-slide>
+        <swiper-slide>
+          <iframe
+            class="videogall_home_front"
+            src="https://www.youtube.com/embed/1fIiPErBxkY"
+          ></iframe>
+        </swiper-slide>
+      </swiper>
     </div>
     <div class="text-center mt-4">
       <p>
@@ -490,6 +503,33 @@ export default {
 .introSectioncol1 {
   width: 30%;
 }
+.wcuitem_home_front {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  width: 60%;
+}
+.wcurow_home_front {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.wcucol_home_front {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+}
+.treatmentitem_home_front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.videogall_home_front {
+  width: 25rem;
+  height: 23rem;
+}
 /* Media Queries Medium Devices*/
 @media screen and (max-width: 1024px) {
   .MainSlider {
@@ -511,6 +551,23 @@ export default {
   }
   .introSectioncol1 {
     width: 100%;
+  }
+  .service_table_header_home_front {
+    width: 65%;
+  }
+  .service_table_body_home_front {
+    width: 35%;
+  }
+  .wcuitem_home_front {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+  }
+  .videogall_home_front {
+    width: 43rem;
+    height: 30rem;
   }
 }
 
@@ -535,6 +592,20 @@ export default {
   }
   .introSectioncol1 {
     width: 100%;
+  }
+  .service_table_header_home_front {
+    width: 70%;
+  }
+  .service_table_body_home_front {
+    width: 30%;
+  }
+  .wcucol_home_front {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .videogall_home_front {
+    width: 17rem;
+    height: 10rem;
   }
 }
 </style>
