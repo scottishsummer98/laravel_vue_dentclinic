@@ -1,11 +1,11 @@
 <template>
   <div
-    class="nav1"
+    class="nav1_header_front"
     v-for="(item, index) in settingsList"
     :key="index"
     style="background-color: RGB(47, 137, 252);"
   >
-    <img class="nav1logo" :src="`storage/${item.logo}`" alt="" />
+    <img class="nav1_logo_header_front" :src="`storage/${item.logo}`" alt="" />
     <a
       style="
         color: white;
@@ -40,7 +40,11 @@
       <i class="fa-brands fa-youtube" aria-hidden="true"></i>
     </a>
   </div>
-  <div class="nav2" v-for="(item, index) in settingsList" :key="index">
+  <div
+    class="nav2_header_front"
+    v-for="(item, index) in settingsList"
+    :key="index"
+  >
     <img
       class="nav2logo"
       :src="`storage/${item.logo}`"
@@ -48,7 +52,7 @@
       style="width: 120px; height: 80px;"
     />
     <a
-      class="nav2addressicon"
+      class="nav2_addressicon_header_front"
       style="color: RGB(47, 137, 252); font-size: 30px;"
     >
       <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
@@ -71,7 +75,7 @@
       <span>{{ item.address2 }}</span>
     </a>
     <a
-      class="nav2envelopeicon"
+      class="nav2_envelopeicon_header_front"
       style="color: RGB(47, 137, 252); font-size: 30px;"
     >
       <i class="fa-solid fa-envelope" aria-hidden="true"></i>
@@ -345,7 +349,7 @@ export default {
   transform-origin: bottom top;
 }
 
-.nav1 {
+.nav1_header_front {
   display: flex;
   flex-direction: row;
   gap: 5rem;
@@ -353,12 +357,12 @@ export default {
   padding: 1rem;
   align-items: center;
 }
-.nav1logo {
+.nav1_logo_header_front {
   width: 3rem;
   height: 2rem;
   display: none;
 }
-.nav2 {
+.nav2_header_front {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -366,49 +370,49 @@ export default {
   gap: 0.5rem;
   align-items: center;
 }
-.nav2addressicon {
+.nav2_addressicon_header_front {
   margin-left: 5rem;
 }
-.nav2envelopeicon {
+.nav2_envelopeicon_header_front {
   margin-left: 5rem;
 }
 
 /* Media Queries Medium Devices*/
 @media screen and (max-width: 1024px) {
-  .nav1 {
+  .nav1_header_front {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 3rem;
     padding: 1rem;
   }
-  .nav2 {
+  .nav2_header_front {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
-  .nav2addressicon {
+  .nav2_addressicon_header_front {
     margin-left: 1rem;
   }
-  .nav2envelopeicon {
+  .nav2_envelopeicon_header_front {
     margin-left: 1rem;
   }
 }
 
 /* Media Queries Small Devices*/
 @media screen and (max-width: 600px) {
-  .nav1 {
+  .nav1_header_front {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
   }
-  .nav1logo {
+  .nav1_logo_header_front {
     display: block;
   }
-  .nav2 {
+  .nav2_header_front {
     display: none;
   }
 }
