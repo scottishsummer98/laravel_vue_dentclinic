@@ -77,12 +77,33 @@ export default {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  margin-top: auto;
 }
 /* Media Queries Medium Devices*/
 @media screen and (max-width: 1024px) {
+  .image_team_front {
+    width: 13rem;
+    height: 13rem;
+  }
+  .team_front {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2rem;
+  }
 }
 
 /* Media Queries Small Devices*/
 @media screen and (max-width: 600px) {
+  .image_team_front {
+    width: 21rem;
+    height: 21rem;
+  }
+  .team_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
 }
 </style>
