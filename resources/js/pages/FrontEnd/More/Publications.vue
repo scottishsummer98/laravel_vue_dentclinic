@@ -1,25 +1,19 @@
 <template>
-  <div
-    style="
-      width: 50%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    "
-  >
-    <h4 style="padding-bottom: 2rem;">
-      PUBLICATIONS: NATIONAL AND INTERNATIONAL JOURNALS
-    </h4>
-    <p
-      class="mb-3"
-      v-for="(item, index) in moreTopicList"
-      :key="index"
-      style="text-align: justify;"
-    >
-      <i class="fa-brands fa-squarespace pr-2"></i>
-      {{ item.topic }}
-    </p>
+  <div class="card">
+    <div class="more_public_front">
+      <h4>
+        PUBLICATIONS: NATIONAL AND INTERNATIONAL JOURNALS
+      </h4>
+      <p
+        class="mb-3"
+        v-for="(item, index) in moreTopicList"
+        :key="index"
+        style="text-align: justify;"
+      >
+        <i class="fa-brands fa-squarespace pr-2"></i>
+        {{ item.topic }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -49,4 +43,30 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.more_public_front {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 25rem;
+}
+/* Media Queries Medium Devices*/
+@media screen and (max-width: 1024px) {
+  .more_public_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+}
+
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .more_public_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+}
+</style>
