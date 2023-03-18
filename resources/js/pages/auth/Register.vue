@@ -1,4 +1,4 @@
-<template class="hold-transition register-page">
+<template>
   <div class="register-box">
     <div class="card card-outline">
       <div class="card-header text-center">
@@ -63,15 +63,14 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-8"></div>
-          <div class="col-4">
-            <button type="submit" class="btn btn-success" @click="registerUser">
-              Register
-            </button>
-          </div>
-        </div>
         <div class="social-auth-links text-center">
+          <button
+            type="submit"
+            class="btn btn-block btn-success"
+            @click="registerUser"
+          >
+            Register
+          </button>
           <button class="btn btn-block btn-primary" @click="redirect">
             Already Registered?
           </button>
@@ -117,5 +116,12 @@ export default {
 }
 .card-outline {
   color: darkgreen;
+}
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .register-box {
+    margin: auto;
+    width: 100%;
+  }
 }
 </style>

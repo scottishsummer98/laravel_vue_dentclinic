@@ -1,4 +1,4 @@
-<template class="hold-transition register-page">
+<template>
   <div class="login-box">
     <div class="card card-outline">
       <div class="card-header text-center">
@@ -102,5 +102,11 @@ export default {
 }
 .card-outline {
   color: darkgreen;
+}
+/* Media Queries Small Devices*/
+@media screen and (max-width: 600px) {
+  .login-box {
+    margin: auto;
+  }
 }
 </style>
