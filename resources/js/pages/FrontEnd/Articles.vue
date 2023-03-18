@@ -1,91 +1,89 @@
 <template>
-  <section class="section" style="margin-top: 15px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-          <div class="page-wrapper">
-            <div class="blog-list clearfix">
-              <div
-                class="blog-box row"
-                v-for="(item, index) in articlesList.data"
-                :key="index"
-              >
-                <div class="blog-meta big-meta">
-                  <img
-                    :src="`storage/${item.articleImage}`"
-                    style="width: 55rem; height: 27rem;"
-                    class="img-fluid ArticleImage"
-                  />
-                  <h4>
-                    <router-link :to="`/articles/${item.id}`">
-                      {{ item.title }}
-                    </router-link>
-                  </h4>
-                  <h6>
-                    <i class="fa-solid fa-user"></i>
-                    {{ item.author }}
-                    <i class="fa-solid fa-clock"></i>
-                    {{ dateFormat(item.created_at) }}
-                  </h6>
-                </div>
-                <hr class="invis" />
-              </div>
-              <pagination
-                :data="articlesList"
-                :align="'right'"
-                :limit="0"
-                @pagination-change-page="getArticlesList"
-              >
-                <template #prev-nav>
-                  <span>Previous</span>
-                </template>
-                <template #next-nav>
-                  <span>Next</span>
-                </template>
-              </pagination>
-            </div>
+  <div class="article_front">
+    <div class="col1_article_front">
+      <div>
+        <div class="searchbar_col1_article_front">
+          <input
+            v-model="searchKey"
+            @input="typing = true"
+            class="app-search__input form-control"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div
+          style="border-bottom: 2px solid black; margin-bottom: 2rem;"
+          v-for="(item, index) in articlesList.data"
+          :key="index"
+        >
+          <div class="blog-meta big-meta">
+            <img
+              class="articleimage_col1_article_front"
+              :src="`storage/${item.articleImage}`"
+            />
+            <h4>
+              <router-link :to="`/articles/${item.id}`">
+                {{ item.title }}
+              </router-link>
+            </h4>
+            <h6>
+              <i class="fa-solid fa-user"></i>
+              {{ item.author }}
+              <i class="fa-solid fa-clock"></i>
+              {{ dateFormat(item.created_at) }}
+            </h6>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="sidebar">
-            <div class="widget">
-              <input
-                v-model="searchKey"
-                @input="typing = true"
-                class="app-search__input form-control"
-                type="search"
-                placeholder="Search"
-              />
-            </div>
-            <div class="widget">
-              <h2 class="widget-title">Popular Posts</h2>
-              <div class="blog-list-widget">
-                <div
-                  class="list-group"
-                  v-for="(item, index) in articlesListLatest"
-                  :key="index"
-                >
-                  <router-link
-                    :to="`/articles/${item.id}`"
-                    class="list-group-item list-group-item-action flex-column align-items-start"
-                  >
-                    <div class="w-100 justify-content-between">
-                      <h5 class="mb-1">{{ item.title }}</h5>
-                      <h6>
-                        <i class="fa-solid fa-clock"></i>
-                        {{ dateFormat(item.updated_at) }}
-                      </h6>
-                    </div>
-                  </router-link>
-                </div>
+        <pagination
+          :data="articlesList"
+          :align="'right'"
+          :limit="0"
+          @pagination-change-page="getArticlesList"
+        >
+          <template #prev-nav>
+            <span>Previous</span>
+          </template>
+          <template #next-nav>
+            <span>Next</span>
+          </template>
+        </pagination>
+      </div>
+    </div>
+    <div class="col2_article_front">
+      <div class="searchbar_col2_article_front">
+        <input
+          v-model="searchKey"
+          @input="typing = true"
+          class="app-search__input form-control"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+      <div class="items_col2_article_front widget">
+        <h2 class="widget-title">Popular Posts</h2>
+        <div class="blog-list-widget">
+          <div
+            class="list-group"
+            v-for="(item, index) in articlesListLatest"
+            :key="index"
+          >
+            <router-link
+              :to="`/articles/${item.id}`"
+              class="list-group-item list-group-item-action flex-column align-items-start"
+            >
+              <div class="w-100 justify-content-between">
+                <h5 class="mb-1">{{ item.title }}</h5>
+                <h6>
+                  <i class="fa-solid fa-clock"></i>
+                  {{ dateFormat(item.updated_at) }}
+                </h6>
               </div>
-            </div>
+            </router-link>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -144,17 +142,80 @@ export default {
 </script>
 
 <style>
-.ArticleImage {
-  padding: 15px;
-  border: 1px solid #ededed;
-  width: 30rem;
-  width: 30rem;
+.articleimage_col1_article_front {
+  width: 40rem;
+  height: 20rem;
+}
+.article_front {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem 25rem;
+}
+.col1_article_front {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 65%;
+}
+.searchbar_col1_article_front {
+  margin-bottom: 1rem;
+  display: none;
+}
+.col2_article_front {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 35%;
+}
+.items_col2_article_front {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 /* Media Queries Medium Devices*/
 @media screen and (max-width: 1024px) {
+  .articleimage_col1_article_front {
+    width: 25rem;
+    height: 13rem;
+  }
+  .article_front {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2.5rem;
+  }
+  .col1_article_front {
+    width: 55%;
+  }
+  .col2_article_front {
+    width: 45%;
+  }
 }
 
 /* Media Queries Small Devices*/
 @media screen and (max-width: 600px) {
+  .articleimage_col1_article_front {
+    width: 21.5rem;
+    height: 13rem;
+  }
+  .article_front {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .col1_article_front {
+    width: 100%;
+  }
+  .col2_article_front {
+    width: 100%;
+  }
+  .searchbar_col1_article_front {
+    display: block;
+  }
+  .searchbar_col2_article_front {
+    display: none;
+  }
 }
 </style>
