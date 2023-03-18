@@ -152,7 +152,7 @@
     </form>
   </div>
   <div class="card">
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped table-responsive">
       <tr>
         <th style="text-align: center;">SL No.</th>
         <th style="text-align: center;">Doctor Name</th>

@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import { showSuccess, showError } from '../../helper'
 export default {
   data() {
     return {
@@ -101,9 +102,10 @@ export default {
         .post('api/register-user', this.formData)
         .then(() => {
           window.location.href = '/admin'
+          showSuccess('Registration Completed')
         })
         .catch((error) => {
-          window.alert('Registration Failed')
+          showError('Unable to Register this User')
         })
     },
   },

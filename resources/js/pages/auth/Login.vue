@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { showSuccess, showError } from '../../helper'
 export default {
   data() {
     return {
@@ -80,9 +81,10 @@ export default {
         .post('api/login-user', this.formData)
         .then(() => {
           window.location.href = '/admin'
+          showSuccess('Logged In Successfully')
         })
         .catch((error) => {
-          window.alert('Login Failed')
+          showError('Incorrect Email or Password')
           this.clear()
         })
     },
