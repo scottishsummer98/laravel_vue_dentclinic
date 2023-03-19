@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DataProviderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::post('api/login-user', [AuthController::class, 'login']);
+
+Route::post('api/register-user', [AuthController::class, 'register']);
+
+Route::post('api/logout-user', [AuthController::class, 'logout']);
 
 Route::get('/admin', [
     App\Http\Controllers\HomeController::class,
@@ -126,6 +133,18 @@ Route::post('/delete-settings', [
 ]);
 Route::post('/show-settings', [DataProviderController::class, 'showsettings']);
 
+
 Route::get('/{vue_capture?}', function () {
-    return redirect('/');
+    if(Auth::check()){
+        return view('admin');
+    }else{
+        return view('welcome');
+    }
+    return view('index');
 })->where('vue_capture', '[\/\w\.-]*');
+
+
+// Route::get('/{vue_capture?}', function () {
+//     return redirect('/');
+// })->where('vue_capture', '[\/\w\.-]*');
+
