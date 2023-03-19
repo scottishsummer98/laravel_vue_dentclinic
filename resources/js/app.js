@@ -74,27 +74,9 @@ const routes = [
     component: require('./pages/FrontEnd/ArticleSingle').default,
   },
   {
-    path: '/login',
-    component: require('./pages/Auth/Login').default,
-  },
-  {
-    path: '/register',
-    component: require('./pages/Auth/Register').default,
-  },
-  {
     path: '/admin',
     component: require('./pages/BackEnd/DashBoard').default,
     name: 'Admin',
-    beforeEnter: (to, form, next) => {
-      axios
-        .get('/api/authenticiated')
-        .then(() => {
-          next()
-        })
-        .catch(() => {
-          window.location.href = '/login'
-        })
-    },
   },
   {
     path: '/admin-about/team',
